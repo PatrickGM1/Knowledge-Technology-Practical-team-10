@@ -6,5 +6,5 @@ Our project ideea:
 
 ## Team Members
 Ana Maria Izbas - S5575974  
-George Radu Tutui - S5515610
+George Radu Tutui - S5515610  
 Mihai Patrick Gheba - S5560535
