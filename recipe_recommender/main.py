@@ -10,4 +10,3 @@ st.divider()
 st.write("Welcome to the Recipe Recommender System!")
 
 
-st.write("#TO DO: Everything XD")
