@@ -2,6 +2,7 @@ import streamlit as st
 import sys
 from pathlib import Path
 
+# Import models from parent directory
 sys.path.append(str(Path(__file__).parent.parent))
 
 from models import (
@@ -16,34 +17,44 @@ st.title("🔍 Find Your Perfect Recipe")
 st.write("Answer the questions one at a time to find recipes that match your preferences!")
 st.divider()
 
+# All quiz questions (text, category, value, question type)
 QUESTIONS = [
+    # Diet - once answered, skip to next section
     ("Are you Vegan?", "diet", Diet.VEGAN, "single"),
     ("Are you Vegetarian?", "diet", Diet.VEGETARIAN, "single"),
     ("Are you Pescatarian?", "diet", Diet.PESCATARIAN, "single"),
     
+    # Dietary restrictions - can select multiple
     ("Are you Lactose Intolerant?", "restrictions", DietRestriction.LACTOSE_INTOLERANT, "multiple"),
     ("Are you Gluten Intolerant?", "restrictions", DietRestriction.GLUTEN_INTOLERANT, "multiple"),
     ("Do you have Nut Allergies?", "restrictions", DietRestriction.NUTS_ALLERGIES, "multiple"),
     ("Do you have Diabetes?", "restrictions", DietRestriction.DIABETES, "multiple"),
     
+    # Cooking time - special three-button layout
     ("Do you have 15 to 45 minutes to cook?", "cooking_time", CookingTime.BETWEEN_15_45, "time"),
     
+    # Skill level - special three-button layout
     ("What's your cooking skill level?", "skill", Skill.MEDIUM, "skill"),
     
+    # Cooking methods - can select multiple
     ("Do you want to use a Pan?", "cooking_methods", CookingMethod.PAN, "multiple"),
     ("Do you want to use an Oven?", "cooking_methods", CookingMethod.OVEN, "multiple"),
     ("Do you want to use a Grill?", "cooking_methods", CookingMethod.GRILL, "multiple"),
     
+    # Budget - special three-button layout
     ("What's your budget?", "budget", Budget.BUDGET_FRIENDLY, "budget"),
     
+    # Meal type - special five-button layout
     ("What meal are you looking for?", "meal", Meal.LUNCH, "meal"),
     
+    # Nutritional preferences - can select multiple
     ("Do you want High Protein recipes?", "macros", Macros.HIGH_PROTEIN, "multiple"),
     ("Do you want Low Fat recipes?", "macros", Macros.LOW_FATS, "multiple"),
     ("Do you want Low Carb recipes?", "macros", Macros.LOW_CARBS, "multiple"),
     ("Do you want Low Sugar recipes?", "macros", Macros.LOW_SUGARS, "multiple"),
 ]
 
+# Track quiz progress
 if 'current_question' not in st.session_state:
     st.session_state.current_question = 0
     
@@ -70,6 +81,7 @@ def answer_question(answer, custom_value=None):
     question_text, category, value, q_type = QUESTIONS[st.session_state.current_question]
     
     if custom_value is not None:
+        # Time question uses custom value
         if answer:
             st.session_state.answers[category].append(custom_value)
     else:
@@ -78,24 +90,30 @@ def answer_question(answer, custom_value=None):
     
     st.session_state.current_question += 1
     
+    # Skip remaining questions in this category if single-choice and answered yes
     if q_type == "single" and answer:
         while (st.session_state.current_question < len(QUESTIONS) and 
                QUESTIONS[st.session_state.current_question][1] == category):
             st.session_state.current_question += 1
     
+    # Apply defaults when moving to a new category
     if st.session_state.current_question < len(QUESTIONS):
         prev_category = category
         next_category = QUESTIONS[st.session_state.current_question][1]
         
+        # No diet selected? Default to omnivore
         if prev_category == "diet" and next_category != "diet":
             if not st.session_state.answers["diet"]:
                 st.session_state.answers["diet"].append(Diet.OMNIVORE)
         
+        # No restrictions selected? Default to none
         if prev_category == "restrictions" and next_category != "restrictions":
             if not st.session_state.answers["restrictions"]:
                 st.session_state.answers["restrictions"].append(DietRestriction.NONE)
     
+    # Quiz finished?
     if st.session_state.current_question >= len(QUESTIONS):
+        # Apply any missing defaults
         if not st.session_state.answers["diet"]:
             st.session_state.answers["diet"].append(Diet.OMNIVORE)
         if not st.session_state.answers["restrictions"]:
@@ -118,6 +136,7 @@ def reset_quiz():
     }
     st.session_state.quiz_complete = False
 
+# Show quiz questions
 if not st.session_state.quiz_complete:
     progress = st.session_state.current_question / len(QUESTIONS)
     st.progress(progress)
@@ -128,6 +147,7 @@ if not st.session_state.quiz_complete:
     question_text, category, value, q_type = QUESTIONS[st.session_state.current_question]
     st.subheader(question_text)
     
+    # Time question gets three buttons instead of yes/no
     if q_type == "time":
         st.markdown("""
             <style>
@@ -171,6 +191,7 @@ if not st.session_state.quiz_complete:
                 answer_question(True, CookingTime.MORE_THAN_45)
                 st.rerun()
     
+    # Skill question gets three buttons: Beginner/Intermediate/Experienced
     elif q_type == "skill":
         st.markdown("""
             <style>
@@ -224,6 +245,7 @@ if not st.session_state.quiz_complete:
                 answer_question(True, Skill.EXPERIENCED)
                 st.rerun()
     
+    # Budget question gets three buttons: Student Life/Budget Friendly/Gourmet
     elif q_type == "budget":
         st.markdown("""
             <style>
@@ -277,6 +299,7 @@ if not st.session_state.quiz_complete:
                 answer_question(True, Budget.GOURMET)
                 st.rerun()
     
+    # Meal type question gets five buttons
     elif q_type == "meal":
         st.markdown("""
             <style>
@@ -331,6 +354,7 @@ if not st.session_state.quiz_complete:
                 st.rerun()
     
     else:
+        # Yes/No buttons with custom styling
         st.markdown("""
             <style>
                 div.stButton > button[kind="primary"] {
@@ -375,6 +399,7 @@ if not st.session_state.quiz_complete:
         st.rerun()
 
 else:
+    # Show summary of selected preferences
     st.success("✅ All questions answered!")
     
     st.subheader("Your Preferences")
