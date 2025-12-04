@@ -65,8 +65,7 @@ The Recipe Recommender is an intelligent system that helps users find recipes ma
 
 ---
 
-## System Architecture- [Development](#development)
-
+## System Architecture
 
 ### Data Models
 The system uses enum-based data models for type safety and clarity:
@@ -176,8 +175,8 @@ recipe_recommender/
 │   ├── __init__.py        # Model exports
 │   └── recipe.py          # Recipe and enum data models
 ├── data/
-│   └──__init__.py
-│ 
+│   ├── __init__.py
+│   └── sample_recipes.py  # Sample recipe data and filtering logic
 ├── pages/
 │   └── 1_Team_Info.py     # Team information page
 └── system/
@@ -188,6 +187,7 @@ recipe_recommender/
 
 - **`main.py`**: Contains the complete quiz interface with all 20 questions, button styling, and result display
 - **`models/recipe.py`**: Defines all data models using Python enums for type safety
+- **`data/sample_recipes.py`**: Contains sample recipes and the `filter_recipes()` function
 - **`pages/1_Team_Info.py`**: Supplementary page with team member information
 
 ---
