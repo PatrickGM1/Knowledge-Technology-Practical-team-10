@@ -188,7 +188,6 @@ recipe_recommender/
 
 - **`main.py`**: Contains the complete quiz interface with all 20 questions, button styling, and result display
 - **`models/recipe.py`**: Defines all data models using Python enums for type safety
-- **`data/sample_recipes.py`**: Contains sample recipes and the `filter_recipes()` function
 - **`pages/1_Team_Info.py`**: Supplementary page with team member information
 
 ---
