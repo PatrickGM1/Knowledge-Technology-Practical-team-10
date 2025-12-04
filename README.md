@@ -176,8 +176,8 @@ recipe_recommender/
 │   ├── __init__.py        # Model exports
 │   └── recipe.py          # Recipe and enum data models
 ├── data/
-│   ├── __init__.py
-│   └── sample_recipes.py  # Sample recipe data and filtering logic
+│   └──__init__.py
+│ 
 ├── pages/
 │   └── 1_Team_Info.py     # Team information page
 └── system/
