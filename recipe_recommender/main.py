@@ -3,6 +3,7 @@ from models import (
     Recipe, Diet, DietRestriction, CookingTime, 
     Skill, CookingMethod, Budget, Meal, Macros
 )
+from data.sample_recipes import filter_recipes
 
 st.set_page_config(
     page_title="Recipe Recommender",
@@ -444,9 +445,53 @@ else:
     
     st.divider()
     
-    st.session_state.preferences = st.session_state.answers
+    # Filter and display matching recipes
+    st.subheader("🍳 Your Recipe Matches")
     
-    st.info("💡 Once recipes are added to the system, they will be filtered based on your preferences!")
+    # Convert answers to the format expected by filter_recipes
+    preferences = {
+        'diet': st.session_state.answers['diet'],
+        'diet_restrictions': st.session_state.answers['restrictions'],
+        'cooking_time': st.session_state.answers['cooking_time'],
+        'skill': st.session_state.answers['skill'],
+        'cooking_methods': st.session_state.answers['cooking_methods'],
+        'budget': st.session_state.answers['budget'],
+        'meal': st.session_state.answers['meal'],
+        'macros': st.session_state.answers['macros']
+    }
+    
+    matching_recipes = filter_recipes(preferences)
+    
+    if matching_recipes:
+        st.success(f"Found {len(matching_recipes)} recipe(s) that match your preferences!")
+        
+        for i, recipe in enumerate(matching_recipes, 1):
+            with st.expander(f"🍽️ {recipe.name}", expanded=(i == 1)):
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.write(f"**Diet:** {recipe.diet.value.title()}")
+                    st.write(f"**Cooking Time:** {recipe.cooking_time.value.title()}")
+                    st.write(f"**Skill Level:** {recipe.skill.value.title()}")
+                    st.write(f"**Budget:** {recipe.budget.value.title()}")
+                
+                with col2:
+                    st.write(f"**Meal Type:** {recipe.meal.value.title()}")
+                    
+                    restrictions = [r.value.title() for r in recipe.diet_restrictions if r != DietRestriction.NONE]
+                    if restrictions:
+                        st.write(f"**Suitable for:** {', '.join(restrictions)}")
+                    
+                    methods = [m.value.title() for m in recipe.cooking_methods]
+                    st.write(f"**Cooking Methods:** {', '.join(methods)}")
+                    
+                    macros = [m.value.title() for m in recipe.macros]
+                    st.write(f"**Nutritional:** {', '.join(macros)}")
+    else:
+        st.warning("😔 No recipes match all your preferences. Try adjusting your criteria!")
+        st.info("💡 Tip: You can reset the quiz and try different options to find matching recipes.")
+    
+    st.divider()
     
     if st.button("🔄 Start Over", use_container_width=True):
         reset_quiz()
