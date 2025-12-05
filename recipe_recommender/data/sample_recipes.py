@@ -7,57 +7,57 @@ from models import (
 # Sample recipes for the recommender system
 SAMPLE_RECIPES = [
     Recipe(
-        name="Quick Vegan Stir-Fry",
-        diet=Diet.VEGAN,
-        diet_restrictions=[DietRestriction.LACTOSE_INTOLERANT, DietRestriction.NONE],
+        name="Cacio e pepe",
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.NONE],
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
         cooking_methods=[CookingMethod.PAN],
         budget=Budget.STUDENT_LIFE,
-        meal=Meal.DINNER,
-        macros=[Macros.LOW_FATS, Macros.HIGH_PROTEIN]
+        meal=Meal.LUNCH,
+        macros=[Macros.LOW_FATS]
     ),
     
     Recipe(
-        name="Classic Chicken Parmesan",
-        diet=Diet.OMNIVORE,
-        diet_restrictions=[DietRestriction.GLUTEN_INTOLERANT, DietRestriction.NONE],
+        name="Risotto allo zafferano",
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.NONE],
         cooking_time=CookingTime.BETWEEN_15_45,
         skill=Skill.MEDIUM,
-        cooking_methods=[CookingMethod.PAN, CookingMethod.OVEN],
-        budget=Budget.BUDGET_FRIENDLY,
-        meal=Meal.DINNER,
-        macros=[Macros.HIGH_PROTEIN, Macros.LOW_CARBS]
-    ),
-    
-    Recipe(
-        name="Protein Pancakes",
-        diet=Diet.VEGETARIAN,
-        diet_restrictions=[DietRestriction.NUTS_ALLERGIES, DietRestriction.NONE],
-        cooking_time=CookingTime.LESS_THAN_15,
-        skill=Skill.EASY,
         cooking_methods=[CookingMethod.PAN],
         budget=Budget.BUDGET_FRIENDLY,
-        meal=Meal.BREAKFAST,
-        macros=[Macros.HIGH_PROTEIN, Macros.LOW_SUGARS]
+        meal=Meal.DINNER,
+        macros=[Macros.LOW_SUGARS]
     ),
     
     Recipe(
-        name="Grilled Salmon with Asparagus",
-        diet=Diet.PESCATARIAN,
-        diet_restrictions=[DietRestriction.LACTOSE_INTOLERANT, DietRestriction.GLUTEN_INTOLERANT, DietRestriction.NONE],
-        cooking_time=CookingTime.BETWEEN_15_45,
-        skill=Skill.MEDIUM,
-        cooking_methods=[CookingMethod.GRILL, CookingMethod.OVEN],
-        budget=Budget.GOURMET,
-        meal=Meal.DINNER,
+        name="Saltimbocca alla romana",
+        diet=Diet.OMNIVORE,
+        diet_restrictions=[DietRestriction.NUTS_ALLERGIES, DietRestriction.LACTOSE_INTOLERANT, DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.PAN, CookingMethod.OVEN],
+        budget=Budget.BUDGET_FRIENDLY,
+        meal=Meal.LUNCH,
         macros=[Macros.HIGH_PROTEIN, Macros.LOW_CARBS, Macros.LOW_SUGARS]
     ),
     
     Recipe(
+        name="Fritta di patate",
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.PAN],
+        budget=Budget.GOURMET,
+        meal=Meal.SNACK,
+        macros=[Macros.HIGH_PROTEIN, Macros.LOW_SUGARS]
+    ),
+    
+    Recipe(
         name="Dark Chocolate Energy Bites",
-        diet=Diet.VEGAN,
-        diet_restrictions=[DietRestriction.LACTOSE_INTOLERANT, DietRestriction.GLUTEN_INTOLERANT, DietRestriction.DIABETES],
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.GLUTEN_INTOLERANT, DietRestriction.DIABETES],
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
         cooking_methods=[CookingMethod.PAN],
