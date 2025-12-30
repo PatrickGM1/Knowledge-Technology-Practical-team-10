@@ -12,3 +12,6 @@ venv/
 
 # OS
 .DS_Store
+
+# Lecture PDFs
+*.pdf
