@@ -9,6 +9,11 @@ from .recipe import (
     Meal,
     Macros
 )
+from .user import User
+from .ingredient import Ingredient, INGREDIENT_CATEGORIES
+from .equipment import Equipment, EQUIPMENT_CATEGORIES, EQUIPMENT_SUBSTITUTIONS
+from .cooking_method import CookingMethodClass, COOKING_METHOD_CATEGORIES, COMMON_COOKING_METHODS
+from .nutritional_info import NutritionalInfo
 
 __all__ = [
     'Recipe',
@@ -19,5 +24,15 @@ __all__ = [
     'CookingMethod',
     'Budget',
     'Meal',
-    'Macros'
+    'Macros',
+    'User',
+    'Ingredient',
+    'INGREDIENT_CATEGORIES',
+    'Equipment',
+    'EQUIPMENT_CATEGORIES',
+    'EQUIPMENT_SUBSTITUTIONS',
+    'CookingMethodClass',
+    'COOKING_METHOD_CATEGORIES',
+    'COMMON_COOKING_METHODS',
+    'NutritionalInfo'
 ]
