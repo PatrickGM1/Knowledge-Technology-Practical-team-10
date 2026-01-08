@@ -18,11 +18,7 @@ These are our **main roles**, but we will **collaborate and support each other**
 
 ## 📚 Documentation
 
-**Quick Links:**
-- **[Quick Start Guide](recipe_recommender/QUICK_START.md)** - Get up and running in 5 minutes
-- **[Knowledge Base Documentation](recipe_recommender/KNOWLEDGE_BASE_README.md)** - Complete system architecture and API reference
-- **[Implementation Summary](recipe_recommender/IMPLEMENTATION_SUMMARY.md)** - What was built and how
-- **[Feedback Checklist](recipe_recommender/FEEDBACK_CHECKLIST.md)** - Verification of all requirements
+**Note**: The documentation files referenced below (QUICK_START.md, KNOWLEDGE_BASE_README.md, etc.) do not currently exist in the repository. The main documentation is in this README.
 
 ---
 
@@ -86,46 +82,29 @@ streamlit run main.py --server.port=8505
 
 Open browser to: **http://localhost:8505**
 
-For detailed setup, see [Quick Start Guide](recipe_recommender/QUICK_START.md)
-
 ---
 
 ## Features
 
 ### 🎨 Interactive Quiz Interface
 - **Step-by-step questionnaire**: Guided questions to capture user preferences
+### 🎨 Interactive Quiz Interface
+- **Step-by-step questionnaire**: Guided questions to capture user preferences
 - **Progress tracking**: Visual progress bar showing quiz completion
 - **Smart question flow**: Questions adapt based on previous answers
 - **Multiple question types**: Yes/No, multi-choice buttons, and option selectors
-### Recipe Filtering & Scoring
-- **Multi-criteria filtering**: 11 rules for allergies, diet, time, skill, equipment, cuisine, health goals
-- **Intelligent scoring**: 7 rules to rank recipes by relevance (cuisine match, health goals, speed, etc.)
+- **Custom styling**: Color-coded buttons for intuitive user experience
+
+### Recipe Filtering & Scoringules to rank recipes by relevance (cuisine match, health goals, speed, etc.)
 - **Substitution suggestions**: 7 rules for ingredient/method alternatives (dairy, meat, gluten, equipment)
 - **Priority-based execution**: Rules processed by priority (highest first)
-- **Reason explanations**: Every filter/score includes human-readable explanationethods and macros
-- **Dietary restriction enforcement**: Ensures recipes are safe for user allergies/restrictions
-- **Preference summary**: Clear display of all selected preferences
+- **Reason explanations**: Every filter/score includes human-readable explanation
+
 ### User Experience
 - **Clean, modern UI**: Built with Streamlit for responsive web interface
 - **Detailed results**: Each recipe shows score, ranking reasons, and substitution suggestions
 - **Real-time recommendations**: Inference engine processes rules instantly
 - **Reset functionality**: Easy quiz restart for trying different preferences
-- **Mobile-friendly**: Responsive design works on various screen sizes
-
----
-
-## Documentation & Diagrams
-
-### LaTeX Diagrams
-- **`system_diagram_content.tex`**: Problem-solving model diagram (monitoring → diagnosis → action)
-- **`state_machine_diagram.tex`**: Complete state machine showing workflow from quiz to results
-- **`project_documentation.tex`**: Comprehensive technical documentation with architecture, code samples, testing
-
-### Markdown Documentation  
-- **[Quick Start Guide](recipe_recommender/QUICK_START.md)**: Setup in 5 minutes
-- **[Knowledge Base Documentation](recipe_recommender/KNOWLEDGE_BASE_README.md)**: Full system architecture
-- **[Implementation Summary](recipe_recommender/IMPLEMENTATION_SUMMARY.md)**: Development overview
-- **[Feedback Checklist](recipe_recommender/FEEDBACK_CHECKLIST.md)**: Requirements verificationquestions
 - **Mobile-friendly**: Responsive design works on various screen sizes
 
 ---
@@ -169,8 +148,6 @@ User Quiz → User Object → Inference Engine → Knowledge Base
                              ↓
             Ranked Recommendations + Alternatives
 ```
-
-For detailed architecture, see [Knowledge Base Documentation](recipe_recommender/KNOWLEDGE_BASE_README.md)
 
 ### Filtering Logic
 The recommendation engine uses declarative rule-based filtering with priority execution:
@@ -240,6 +217,24 @@ The recommendation engine uses declarative rule-based filtering with priority ex
 
 **Budget**:
 - "Student Life": Lowest cost recipes
+- "Budget Friendly": Moderate cost recipes
+- "Gourmet": Premium ingredient recipes
+
+**Meal Type**:
+- Choose from: Breakfast, Lunch, Dinner, Snack, Dessert
+
+### Viewing Results
+- After completing all questions, view your preference summary
+- See all selected criteria organized by category
+- View recommended recipes with scores, reasons, and substitution suggestions
+- Use "Start Over" to reset and try different preferences
+
+### Resetting
+- Click "Reset Quiz" at any time to start fresh
+- All answers will be cleared and quiz returns to question 1
+
+---
+
 ## Project Structure
 
 ```
@@ -247,16 +242,13 @@ recipe_recommender/
 ├── main.py                          # Streamlit app with quiz interface
 ├── requirements.txt                 # Python dependencies (streamlit, pyyaml)
 ├── knowledge_base.yaml              # 25 declarative rules for inference engine
-├── project_documentation.tex        # Complete LaTeX documentation
-├── system_diagram_content.tex       # Problem-solving model diagram
-├── state_machine_diagram.tex        # State machine diagram
 ├── models/
 │   ├── __init__.py                 # Model exports
 │   ├── user.py                     # User class with preferences/constraints
-│   ├── recipe.py                   # Recipe class with all attributes
+│   ├── recipe.py                   # Recipe class + enums (Diet, Skill, etc.)
 │   ├── ingredient.py               # Ingredient class
 │   ├── equipment.py                # Equipment class
-│   ├── cooking_method.py           # DetailedCookingMethod class
+│   ├── cooking_method.py           # CookingMethod class
 │   └── nutritional_info.py         # NutritionalInfo class
 ├── data/
 │   ├── __init__.py
@@ -268,6 +260,18 @@ recipe_recommender/
 └── pages/
     └── 1_Team_Info.py              # Team information page
 ```
+
+### Key Files
+
+- **`main.py`**: Streamlit interface with quiz flow and result display
+- **`knowledge_base.yaml`**: 25 rules (11 filtering, 7 scoring, 7 substitution)
+- **`system/inference_engine.py`**: Core engine with Rule and InferenceEngine classes
+- **`models/recipe.py`**: Recipe class + 8 enums (Diet, DietRestriction, CookingTime, Skill, CookingMethod enum, Budget, Meal, Macros)
+- **`models/cooking_method.py`**: CookingMethod class with properties, alternatives, skill matching
+- **`data/sample_recipes.py`**: 5 sample recipes with full details
+
+---
+
 ## Technologies Used
 
 - **[Python 3.13](https://www.python.org/)**: Core programming language
@@ -314,26 +318,9 @@ user = User(name='Test', dietary_restrictions=['vegan'])
 results = engine.apply_rules(user, recipes)
 print(f'Filtered recipes: {len(results)}')
 "
-``` └── 1_Team_Info.py     # Team information page
-└── system/
-    └── __init__.py        # System utilities
 ```
 
-### Key Files
-
-- **`main.py`**: Contains the complete quiz interface with all 20 questions, button styling, and result display
-- **`models/recipe.py`**: Defines all data models using Python enums for type safety
-- **`data/sample_recipes.py`**: Contains sample recipes and the `filter_recipes()` function
-- **`pages/1_Team_Info.py`**: Supplementary page with team member information
-
 ---
-
-## Technologies Used
-
-- **[Python 3.x](https://www.python.org/)**: Core programming language
-- **[Streamlit](https://streamlit.io/)**: Web application framework for ML/data science
-- **[Python Enums](https://docs.python.org/3/library/enum.html)**: Type-safe enumeration for recipe attributes
-- **HTML/CSS**: Custom styling for buttons and UI elements
 
 ### Dependencies
 ```
