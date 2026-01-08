@@ -1,0 +1,498 @@
+# Knowledge Base for Recipe Recommendation System
+# Contains rules for filtering, scoring, and substitution
+
+rules:
+  # ============================================================================
+  # FILTERING RULES - Determine if a recipe is suitable for a user
+  # ============================================================================
+  
+  - id: filter_allergy_nuts
+    name: Filter recipes with nut allergens
+    description: Exclude recipes containing nuts if user is allergic
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: nuts
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [nuts]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains nuts (allergen)
+  
+  - id: filter_allergy_dairy
+    name: Filter recipes with dairy allergens
+    description: Exclude recipes containing dairy if user is allergic
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: dairy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [dairy]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains dairy (allergen)
+  
+  - id: filter_diet_vegan
+    name: Filter non-vegan recipes for vegan users
+    description: Exclude non-vegan recipes if user is vegan
+    priority: 90
+    category: filtering
+    conditions:
+      - object: user
+        attribute: dietary_restrictions
+        operator: contains
+        value: vegan
+      - object: recipe
+        attribute: diet
+        operator: "!="
+        value: vegan
+    action:
+      type: filter
+      result: false
+      reason: Recipe is not vegan
+  
+  - id: filter_diet_vegetarian
+    name: Filter non-vegetarian recipes for vegetarian users
+    description: Exclude non-vegetarian recipes if user is vegetarian
+    priority: 90
+    category: filtering
+    conditions:
+      - object: user
+        attribute: dietary_restrictions
+        operator: contains
+        value: vegetarian
+      - object: recipe
+        attribute: diet
+        operator: not_in
+        value: [vegan, vegetarian]
+    action:
+      type: filter
+      result: false
+      reason: Recipe is not vegetarian
+  
+  - id: filter_disliked_ingredients
+    name: Filter recipes with disliked ingredients
+    description: Exclude recipes containing ingredients the user dislikes
+    priority: 85
+    category: filtering
+    conditions:
+      - object: user
+        attribute: disliked_ingredients
+        operator: method_call
+        method: dislikes_ingredient
+        args: [ingredient_name]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains disliked ingredients
+  
+  - id: filter_cooking_time
+    name: Filter recipes exceeding time constraint
+    description: Exclude recipes that take longer than user's available time
+    priority: 80
+    category: filtering
+    conditions:
+      - object: user
+        attribute: max_cooking_time
+        operator: not_method_call
+        method: within_time_constraint
+        args: [prep_time]
+    action:
+      type: filter
+      result: false
+      reason: Recipe takes too long to prepare
+  
+  - id: filter_skill_level
+    name: Filter recipes above user skill level
+    description: Exclude recipes requiring higher skill than user has
+    priority: 75
+    category: filtering
+    conditions:
+      - object: user
+        attribute: skill_level
+        operator: not_method_call
+        method: can_cook_complexity
+        args: [recipe_skill]
+    action:
+      type: filter
+      result: false
+      reason: Recipe complexity exceeds user skill level
+  
+  - id: filter_missing_equipment
+    name: Filter recipes requiring unavailable equipment
+    description: Exclude recipes needing essential equipment user doesn't have
+    priority: 70
+    category: filtering
+    conditions:
+      - object: recipe
+        attribute: equipment
+        operator: method_call
+        method: requires_equipment
+        args: [equipment_name]
+      - object: user
+        attribute: available_equipment
+        operator: method_call
+        method: has_equipment
+        args: [equipment_name]
+    action:
+      type: filter
+      result: false
+      reason: Recipe requires equipment you don't have
+  
+  - id: filter_cuisine_preference
+    name: Filter non-preferred cuisines
+    description: Exclude recipes from cuisines not in user preferences
+    priority: 60
+    category: filtering
+    conditions:
+      - object: user
+        attribute: cuisine_preferences
+        operator: not_method_call
+        method: prefers_cuisine
+        args: [cuisine]
+    action:
+      type: filter
+      result: false
+      reason: Cuisine not in your preferences
+  
+  - id: filter_health_goals
+    name: Filter recipes not matching health goals
+    description: Exclude recipes that don't fit user's health goals
+    priority: 65
+    category: filtering
+    conditions:
+      - object: user
+        attribute: health_goals
+        operator: contains
+        value: low-carb
+      - object: recipe
+        attribute: nutritional_info.carbohydrates
+        operator: ">"
+        value: 30
+    action:
+      type: filter
+      result: false
+      reason: Recipe doesn't match low-carb health goal
+  
+  - id: filter_calorie_target
+    name: Filter recipes exceeding calorie target
+    description: Exclude recipes with too many calories
+    priority: 65
+    category: filtering
+    conditions:
+      - object: user
+        attribute: calorie_target
+        operator: "!="
+        value: null
+      - object: recipe
+        attribute: nutritional_info.calories
+        operator: ">"
+        value: 800
+    action:
+      type: filter
+      result: false
+      reason: Recipe exceeds calorie target
+  
+  # ============================================================================
+  # SCORING RULES - Rank suitable recipes
+  # ============================================================================
+  
+  - id: score_cuisine_match
+    name: Boost score for preferred cuisine
+    description: Increase score if recipe matches user's preferred cuisine
+    priority: 50
+    category: scoring
+    conditions:
+      - object: user
+        attribute: cuisine_preferences
+        operator: method_call
+        method: prefers_cuisine
+        args: [cuisine]
+    action:
+      type: score
+      score_delta: 10
+      reason: Matches your preferred cuisine
+  
+  - id: score_health_goal_match
+    name: Boost score for health goal alignment
+    description: Increase score if recipe aligns with health goals
+    priority: 45
+    category: scoring
+    conditions:
+      - object: user
+        attribute: health_goals
+        operator: contains
+        value: high-protein
+      - object: recipe
+        attribute: nutritional_info
+        operator: method_call
+        method: is_high_protein
+        args: []
+    action:
+      type: score
+      score_delta: 15
+      reason: High protein (matches your health goal)
+  
+  - id: score_quick_recipe
+    name: Boost score for quick recipes
+    description: Increase score for recipes under 15 minutes
+    priority: 40
+    category: scoring
+    conditions:
+      - object: recipe
+        attribute: cooking_time
+        operator: "=="
+        value: less_than_15
+    action:
+      type: score
+      score_delta: 5
+      reason: Quick and easy to prepare
+  
+  - id: score_beginner_friendly
+    name: Boost score for beginner recipes
+    description: Increase score for easy recipes for beginners
+    priority: 40
+    category: scoring
+    conditions:
+      - object: user
+        attribute: skill_level
+        operator: "=="
+        value: beginner
+      - object: recipe
+        attribute: skill
+        operator: "=="
+        value: easy
+    action:
+      type: score
+      score_delta: 8
+      reason: Perfect for beginners
+  
+  - id: score_budget_friendly
+    name: Boost score for budget-friendly recipes
+    description: Increase score for affordable recipes
+    priority: 35
+    category: scoring
+    conditions:
+      - object: recipe
+        attribute: budget
+        operator: in
+        value: [student_life, budget_friendly]
+    action:
+      type: score
+      score_delta: 5
+      reason: Budget-friendly option
+  
+  - id: score_low_calorie
+    name: Boost score for low-calorie recipes
+    description: Increase score for healthy low-calorie options
+    priority: 35
+    category: scoring
+    conditions:
+      - object: recipe
+        attribute: nutritional_info
+        operator: method_call
+        method: is_low_calorie
+        args: []
+    action:
+      type: score
+      score_delta: 7
+      reason: Low calorie and healthy
+  
+  - id: score_high_fiber
+    name: Boost score for high-fiber recipes
+    description: Increase score for recipes with good fiber content
+    priority: 30
+    category: scoring
+    conditions:
+      - object: recipe
+        attribute: nutritional_info
+        operator: method_call
+        method: is_high_fiber
+        args: []
+    action:
+      type: score
+      score_delta: 6
+      reason: High in fiber
+  
+  # ============================================================================
+  # SUBSTITUTION RULES - Suggest alternatives for ingredients and methods
+  # ============================================================================
+  
+  - id: sub_dairy_vegan
+    name: Substitute dairy for vegan users
+    description: Suggest vegan alternatives for dairy ingredients
+    priority: 90
+    category: substitution
+    conditions:
+      - object: user
+        attribute: dietary_restrictions
+        operator: contains
+        value: vegan
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [milk]
+    action:
+      type: substitute
+      substitutions:
+        ingredient:
+          milk: [almond milk, soy milk, oat milk]
+          butter: [vegan butter, coconut oil]
+          cheese: [vegan cheese, nutritional yeast]
+          yogurt: [coconut yogurt, almond yogurt]
+      reason: Vegan alternatives for dairy products
+  
+  - id: sub_meat_vegetarian
+    name: Substitute meat for vegetarian users
+    description: Suggest vegetarian alternatives for meat
+    priority: 90
+    category: substitution
+    conditions:
+      - object: user
+        attribute: dietary_restrictions
+        operator: contains
+        value: vegetarian
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [chicken]
+    action:
+      type: substitute
+      substitutions:
+        ingredient:
+          chicken: [tofu, tempeh, seitan, mushrooms]
+          beef: [lentils, beans, plant-based meat]
+          pork: [jackfruit, tempeh]
+          fish: [tofu, hearts of palm]
+      reason: Vegetarian protein alternatives
+  
+  - id: sub_gluten_free
+    name: Substitute gluten-containing ingredients
+    description: Suggest gluten-free alternatives
+    priority: 85
+    category: substitution
+    conditions:
+      - object: user
+        attribute: dietary_restrictions
+        operator: contains
+        value: gluten-free
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [flour]
+    action:
+      type: substitute
+      substitutions:
+        ingredient:
+          flour: [rice flour, almond flour, gluten-free flour]
+          pasta: [rice pasta, corn pasta, zucchini noodles]
+          bread: [gluten-free bread, lettuce wraps]
+          soy sauce: [tamari, coconut aminos]
+      reason: Gluten-free alternatives
+  
+  - id: sub_cooking_method_oven_to_airfryer
+    name: Substitute oven with air fryer
+    description: Suggest air fryer as healthier alternative to oven
+    priority: 60
+    category: substitution
+    conditions:
+      - object: recipe
+        attribute: uses_cooking_method
+        operator: method_call
+        method: uses_cooking_method
+        args: [baking]
+      - object: user
+        attribute: has_equipment
+        operator: method_call
+        method: has_equipment
+        args: [air fryer]
+    action:
+      type: substitute
+      substitutions:
+        cooking_method:
+          baking: [air frying (reduce temp by 25°F, reduce time by 20%)]
+          roasting: [air frying]
+      reason: Air fryer available for healthier cooking
+  
+  - id: sub_cooking_method_grill_to_pan
+    name: Substitute grill with grill pan
+    description: Indoor alternative for grilling
+    priority: 55
+    category: substitution
+    conditions:
+      - object: recipe
+        attribute: uses_cooking_method
+        operator: method_call
+        method: uses_cooking_method
+        args: [grilling]
+      - object: user
+        attribute: has_equipment
+        operator: not_contains
+        value: grill
+    action:
+      type: substitute
+      substitutions:
+        cooking_method:
+          grilling: [grill pan on stove, broiling in oven]
+      reason: Indoor alternatives for grilling
+  
+  - id: sub_equipment_food_processor
+    name: Substitute food processor
+    description: Suggest alternatives when food processor unavailable
+    priority: 50
+    category: substitution
+    conditions:
+      - object: recipe
+        attribute: requires_equipment
+        operator: method_call
+        method: requires_equipment
+        args: [food processor]
+      - object: user
+        attribute: has_equipment
+        operator: not_contains
+        value: food processor
+    action:
+      type: substitute
+      substitutions:
+        equipment:
+          food processor: [blender, hand chopper, knife and cutting board]
+      reason: Alternative equipment for food processing
+  
+  - id: sub_equipment_stand_mixer
+    name: Substitute stand mixer
+    description: Suggest alternatives when stand mixer unavailable
+    priority: 50
+    category: substitution
+    conditions:
+      - object: recipe
+        attribute: requires_equipment
+        operator: method_call
+        method: requires_equipment
+        args: [stand mixer]
+      - object: user
+        attribute: has_equipment
+        operator: not_contains
+        value: stand mixer
+    action:
+      type: substitute
+      substitutions:
+        equipment:
+          stand mixer: [hand mixer, whisk and bowl (requires more effort)]
+      reason: Alternative equipment for mixing

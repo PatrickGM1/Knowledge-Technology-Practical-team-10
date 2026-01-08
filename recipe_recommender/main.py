@@ -3,7 +3,8 @@ from models import (
     Recipe, Diet, DietRestriction, CookingTime, 
     Skill, CookingMethod, Budget, Meal, Macros
 )
-from data.sample_recipes import filter_recipes
+from data.sample_recipes import get_all_recipes
+from system import InferenceEngine, preferences_to_user
 
 st.set_page_config(
     page_title="Recipe Recommender",
@@ -448,7 +449,7 @@ else:
     # Filter and display matching recipes
     st.subheader("🍳 Your Recipe Matches")
     
-    # Convert answers to the format expected by filter_recipes
+    # Convert preferences to User object
     preferences = {
         'diet': st.session_state.answers['diet'],
         'diet_restrictions': st.session_state.answers['restrictions'],
@@ -460,34 +461,136 @@ else:
         'macros': st.session_state.answers['macros']
     }
     
-    matching_recipes = filter_recipes(preferences)
+    # Create User object from preferences
+    user = preferences_to_user(preferences)
     
-    if matching_recipes:
-        st.success(f"Found {len(matching_recipes)} recipe(s) that match your preferences!")
+    # Load inference engine and filter recipes
+    all_recipes = get_all_recipes()
+    
+    try:
+        engine = InferenceEngine('knowledge_base.yaml')
+        # Use inference engine to filter and score recipes
+        filtered_results = engine.filter_recipes(all_recipes, user)
+        matching_recipes = [recipe for recipe, score, reasons in filtered_results]
         
-        for i, recipe in enumerate(matching_recipes, 1):
-            with st.expander(f"🍽️ {recipe.name}", expanded=(i == 1)):
-                col1, col2 = st.columns(2)
+        if matching_recipes:
+            st.success(f"Found {len(matching_recipes)} recipe(s) that match your preferences!")
+            
+            # Display recipes with scores
+            for i, (recipe, score, reasons) in enumerate(filtered_results, 1):
+                score_emoji = "⭐" * min(5, max(1, int(score / 3) + 1))
+                with st.expander(f"🍽️ {recipe.name} {score_emoji}", expanded=(i == 1)):
+                    # Recipe description
+                    if recipe.description:
+                        st.markdown(f"*{recipe.description}*")
+                    
+                    # Show matching reasons if available
+                    if reasons:
+                        st.info("✨ " + " • ".join(reasons[:3]))
+                    
+                    st.divider()
+                
+                # Basic info
+                col1, col2, col3 = st.columns(3)
                 
                 with col1:
                     st.write(f"**Diet:** {recipe.diet.value.title()}")
-                    st.write(f"**Cooking Time:** {recipe.cooking_time.value.title()}")
                     st.write(f"**Skill Level:** {recipe.skill.value.title()}")
-                    st.write(f"**Budget:** {recipe.budget.value.title()}")
+                    if recipe.cuisine:
+                        st.write(f"**Cuisine:** {recipe.cuisine}")
                 
                 with col2:
+                    st.write(f"**Cooking Time:** {recipe.cooking_time.value.title()}")
+                    if recipe.prep_time:
+                        st.write(f"**Prep Time:** {recipe.prep_time} min")
+                    st.write(f"**Servings:** {recipe.servings}")
+                
+                with col3:
                     st.write(f"**Meal Type:** {recipe.meal.value.title()}")
-                    
-                    restrictions = [r.value.title() for r in recipe.diet_restrictions if r != DietRestriction.NONE]
-                    if restrictions:
-                        st.write(f"**Suitable for:** {', '.join(restrictions)}")
-                    
+                    st.write(f"**Budget:** {recipe.budget.value.title()}")
                     methods = [m.value.title() for m in recipe.cooking_methods]
-                    st.write(f"**Cooking Methods:** {', '.join(methods)}")
+                    st.write(f"**Methods:** {', '.join(methods)}")
+                
+                # Nutritional information
+                if recipe.nutritional_info and recipe.nutritional_info.calories > 0:
+                    st.divider()
+                    st.markdown("**📊 Nutrition (per serving)**")
+                    col1, col2, col3, col4 = st.columns(4)
+                    with col1:
+                        st.metric("Calories", f"{int(recipe.nutritional_info.calories)}")
+                    with col2:
+                        st.metric("Protein", f"{int(recipe.nutritional_info.protein)}g")
+                    with col3:
+                        st.metric("Carbs", f"{int(recipe.nutritional_info.carbohydrates)}g")
+                    with col4:
+                        st.metric("Fat", f"{int(recipe.nutritional_info.fat)}g")
+                
+                # Ingredients
+                if recipe.ingredients:
+                    st.divider()
+                    st.markdown("**🥘 Ingredients**")
+                    for ingredient in recipe.ingredients:
+                        st.write(f"• {ingredient}")
+                
+                # Equipment
+                if recipe.equipment:
+                    st.divider()
+                    st.markdown("**🔪 Equipment Needed**")
+                    equip_list = [eq.name.title() for eq in recipe.equipment]
+                    st.write(", ".join(equip_list))
+                
+                # Instructions
+                if recipe.instructions:
+                    st.divider()
+                    st.markdown("**👩‍🍳 Instructions**")
+                    for idx, instruction in enumerate(recipe.instructions, 1):
+                        st.write(f"{idx}. {instruction}")
+                
+                # Dietary info
+                restrictions = [r.value.title() for r in recipe.diet_restrictions if r != DietRestriction.NONE]
+                if restrictions or recipe.macros:
+                    st.divider()
+                    if restrictions:
+                        st.write(f"✅ **Suitable for:** {', '.join(restrictions)}")
+                    if recipe.macros:
+                        macros = [m.value.title() for m in recipe.macros]
+                        st.write(f"💪 **Health benefits:** {', '.join(macros)}")
+                
+                # Substitution suggestions
+                try:
+                    substitutions = engine.get_substitutions(recipe, user)
+                    has_subs = any(substitutions.values())
                     
-                    macros = [m.value.title() for m in recipe.macros]
-                    st.write(f"**Nutritional:** {', '.join(macros)}")
-    else:
+                    if has_subs:
+                        st.divider()
+                        st.markdown("**🔄 Substitution Suggestions**")
+                        
+                        if substitutions.get('ingredients'):
+                            st.markdown("*Ingredient alternatives:*")
+                            for original, alternatives in substitutions['ingredients'].items():
+                                if alternatives:
+                                    st.write(f"• {original.title()} → {', '.join(alternatives)}")
+                        
+                        if substitutions.get('cooking_methods'):
+                            st.markdown("*Cooking method alternatives:*")
+                            for original, alternatives in substitutions['cooking_methods'].items():
+                                if alternatives:
+                                    st.write(f"• {original.title()} → {', '.join(alternatives)}")
+                        
+                        if substitutions.get('equipment'):
+                            st.markdown("*Equipment alternatives:*")
+                            for original, alternatives in substitutions['equipment'].items():
+                                if alternatives:
+                                    st.write(f"• {original.title()} → {', '.join(alternatives)}")
+                except Exception:
+                    pass  # Skip substitutions if there's an error
+    
+    except Exception as e:
+        st.error(f"Error using inference engine: {e}")
+        st.info("Please try adjusting your preferences and try again.")
+        matching_recipes = []
+    
+    if not matching_recipes:
         st.warning("😔 No recipes match all your preferences. Try adjusting your criteria!")
         st.info("💡 Tip: You can reset the quiz and try different options to find matching recipes.")
     
