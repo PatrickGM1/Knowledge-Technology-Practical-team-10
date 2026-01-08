@@ -3,7 +3,7 @@ from typing import List, Optional, Dict
 from .ingredient import Ingredient
 from .equipment import Equipment
 from .nutritional_info import NutritionalInfo
-from .cooking_method import CookingMethod as CookingMethodClass
+from .cooking_method import CookingMethod as DetailedCookingMethod
 
 
 class Diet(Enum):
@@ -89,7 +89,7 @@ class Recipe:
         macros: List[Macros],
         ingredients: Optional[List[Ingredient]] = None,
         equipment: Optional[List[Equipment]] = None,
-        detailed_cooking_methods: Optional[List[CookingMethodClass]] = None,
+        detailed_cooking_methods: Optional[List[DetailedCookingMethod]] = None,
         nutritional_info: Optional[NutritionalInfo] = None,
         instructions: Optional[List[str]] = None,
         servings: int = 4,

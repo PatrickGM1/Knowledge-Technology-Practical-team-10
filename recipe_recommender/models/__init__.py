@@ -12,7 +12,7 @@ from .recipe import (
 from .user import User
 from .ingredient import Ingredient, INGREDIENT_CATEGORIES
 from .equipment import Equipment, EQUIPMENT_CATEGORIES, EQUIPMENT_SUBSTITUTIONS
-from .cooking_method import CookingMethodClass, COOKING_METHOD_CATEGORIES, COMMON_COOKING_METHODS
+from .cooking_method import CookingMethod as DetailedCookingMethod, COOKING_METHOD_CATEGORIES, COMMON_COOKING_METHODS
 from .nutritional_info import NutritionalInfo
 
 __all__ = [
@@ -31,7 +31,7 @@ __all__ = [
     'Equipment',
     'EQUIPMENT_CATEGORIES',
     'EQUIPMENT_SUBSTITUTIONS',
-    'CookingMethodClass',
+    'DetailedCookingMethod',
     'COOKING_METHOD_CATEGORIES',
     'COMMON_COOKING_METHODS',
     'NutritionalInfo'

@@ -5,7 +5,7 @@ It includes project files, code, and documentation related to the course.
 
 ## Project Idea
 **Recipe Recommendation System**  
-A system that recommends recipes based on user preferences, available ingredients, and expert chef knowledge.
+A knowledge-based system that recommends recipes using an inference engine with modular rules, hierarchical domain model, and declarative knowledge base.
 
 ## Team Members
 - **Ana Maria Izbas** – S5575974 – *Analyst / Documentation Lead*  
@@ -16,10 +16,21 @@ These are our **main roles**, but we will **collaborate and support each other**
 
 ---
 
+## 📚 Documentation
+
+**Quick Links:**
+- **[Quick Start Guide](recipe_recommender/QUICK_START.md)** - Get up and running in 5 minutes
+- **[Knowledge Base Documentation](recipe_recommender/KNOWLEDGE_BASE_README.md)** - Complete system architecture and API reference
+- **[Implementation Summary](recipe_recommender/IMPLEMENTATION_SUMMARY.md)** - What was built and how
+- **[Feedback Checklist](recipe_recommender/FEEDBACK_CHECKLIST.md)** - Verification of all requirements
+
+---
+
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
 - [System Architecture](#system-architecture)
+- [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
@@ -29,23 +40,58 @@ These are our **main roles**, but we will **collaborate and support each other**
 
 ## Overview
 
-The Recipe Recommender is an intelligent system that helps users find recipes matching their dietary preferences, restrictions, cooking skills, and available time. The system uses a knowledge-based approach to filter and recommend recipes based on multiple criteria including:
+The Recipe Recommender is an intelligent knowledge-based system that helps users find recipes matching their preferences using a sophisticated inference engine. The system features:
 
+**🏗️ Hierarchical Domain Model** (6 classes)
+- User profiles with constraints and preferences
+- Recipes with ingredients, equipment, and cooking methods
+- Nutritional information with health goal alignment
+- Ingredient substitutions for dietary needs
+- Equipment alternatives for kitchen constraints
+- Detailed cooking method variations
+
+**🧠 Inference Engine**
+- 25 modular rules in YAML knowledge base
+- Priority-based rule execution
+- Declarative condition evaluation
+- Filtering, scoring, and substitution actions
+- Context-aware reasoning
+
+**🎯 Smart Recommendations**
 - Dietary preferences (Vegan, Vegetarian, Pescatarian, Omnivore)
-- Dietary restrictions (Lactose intolerance, Gluten intolerance, Nut allergies, Diabetes)
-- Cooking time availability
-- Skill level (Beginner, Intermediate, Experienced)
-- Cooking methods (Pan, Oven, Grill)
-- Budget constraints (Student Life, Budget Friendly, Gourmet)
-- Meal type (Breakfast, Lunch, Dinner, Snack, Dessert)
-- Nutritional goals (High Protein, Low Fat, Low Carb, Low Sugar)
+- Dietary restrictions & allergies (Lactose, Gluten, Nuts, etc.)
+- Cooking time constraints
+- Skill level matching (Beginner, Intermediate, Advanced)
+- Cuisine preferences (Italian, American, etc.)
+- Health goals (High Protein, Low Carb, etc.)
+- Equipment availability
+- Ingredient substitutions
+
+---
+
+## Quick Start
+
+```bash
+# Navigate to project
+cd recipe_recommender
+
+# Install dependencies (if needed)
+pip install streamlit pyyaml
+
+# Run the app
+streamlit run main.py --server.port=8505
+```
+
+Open browser to: **http://localhost:8505**
+
+For detailed setup, see [Quick Start Guide](recipe_recommender/QUICK_START.md)
 
 ---
 
 ## Features
 
-### Interactive Quiz Interface
-- **Step-by-step questionnaire**: 20 guided questions to capture user preferences
+### 🎨 Interactive Quiz Interface
+- **Step-by-step questionnaire**: Guided questions to capture user preferences
 - **Progress tracking**: Visual progress bar showing quiz completion
 - **Smart question flow**: Questions adapt based on previous answers
 - **Multiple question types**: Yes/No, multi-choice buttons, and option selectors
