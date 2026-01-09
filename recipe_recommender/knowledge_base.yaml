@@ -290,7 +290,7 @@ rules:
       - object: recipe
         attribute: budget
         operator: in
-        value: [student_life, budget_friendly]
+        value: [budget, moderate]
     action:
       type: score
       score_delta: 5

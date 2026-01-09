@@ -29,7 +29,7 @@ QUESTIONS = [
     ("Do you have Diabetes?", "restrictions", DietRestriction.DIABETES, "multiple"),
     
     # Cooking time - special three-button layout
-    ("Do you have 15 to 45 minutes to cook?", "cooking_time", CookingTime.BETWEEN_15_45, "time"),
+    ("How much time do you have to cook?", "cooking_time", CookingTime.BETWEEN_15_45, "time"),
     
     # Skill level - special three-button layout
     ("What's your cooking skill level?", "skill", Skill.MEDIUM, "skill"),
@@ -173,17 +173,17 @@ if not st.session_state.quiz_complete:
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("Less", key="time_less", use_container_width=True, type="secondary"):
+            if st.button("< 15 min", key="time_less", use_container_width=True, type="secondary"):
                 answer_question(True, CookingTime.LESS_THAN_15)
                 st.rerun()
         
         with col2:
-            if st.button("Yes", key="time_yes", use_container_width=True, type="primary"):
+            if st.button("15-45 min", key="time_yes", use_container_width=True, type="primary"):
                 answer_question(True, CookingTime.BETWEEN_15_45)
                 st.rerun()
         
         with col3:
-            if st.button("More", key="time_more", use_container_width=True, type="secondary"):
+            if st.button("> 45 min", key="time_more", use_container_width=True, type="secondary"):
                 answer_question(True, CookingTime.MORE_THAN_45)
                 st.rerun()
     
@@ -281,18 +281,18 @@ if not st.session_state.quiz_complete:
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("Student Life", key="budget_student", use_container_width=True, type="secondary"):
-                answer_question(True, Budget.STUDENT_LIFE)
+            if st.button("Budget", key="budget_student", use_container_width=True, type="secondary"):
+                answer_question(True, Budget.BUDGET)
                 st.rerun()
         
         with col2:
-            if st.button("Budget Friendly", key="budget_friendly", use_container_width=True, type="primary"):
-                answer_question(True, Budget.BUDGET_FRIENDLY)
+            if st.button("Moderate", key="budget_friendly", use_container_width=True, type="primary"):
+                answer_question(True, Budget.MODERATE)
                 st.rerun()
         
         with col3:
-            if st.button("Gourmet", key="budget_gourmet", use_container_width=True, type="tertiary"):
-                answer_question(True, Budget.GOURMET)
+            if st.button("Premium", key="budget_gourmet", use_container_width=True, type="tertiary"):
+                answer_question(True, Budget.PREMIUM)
                 st.rerun()
     
     # Meal type question gets five buttons

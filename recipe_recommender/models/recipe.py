@@ -46,9 +46,9 @@ class CookingMethod(Enum):
 
 class Budget(Enum):
     """Budget categories"""
-    STUDENT_LIFE = "student life"
-    BUDGET_FRIENDLY = "budget friendly"
-    GOURMET = "gourmet"
+    BUDGET = "budget"
+    MODERATE = "moderate"
+    PREMIUM = "premium"
 
 
 class Meal(Enum):
