@@ -1,4 +1,5 @@
 import streamlit as st
+from pathlib import Path
 from models import (
     Recipe, Diet, DietRestriction, CookingTime, 
     Skill, CookingMethod, Budget, Meal, Macros
@@ -40,7 +41,7 @@ QUESTIONS = [
     ("Do you want to use a Grill?", "cooking_methods", CookingMethod.GRILL, "multiple"),
     
     # Budget - special three-button layout
-    ("What's your budget?", "budget", Budget.BUDGET_FRIENDLY, "budget"),
+    ("What's your budget?", "budget", Budget.MODERATE, "budget"),
     
     # Meal type - special five-button layout
     ("What meal are you looking for?", "meal", Meal.LUNCH, "meal"),
@@ -173,17 +174,17 @@ if not st.session_state.quiz_complete:
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("< 15 min", key="time_less", use_container_width=True, type="secondary"):
+            if st.button("< 15 min", key=f"time_less_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(True, CookingTime.LESS_THAN_15)
                 st.rerun()
         
         with col2:
-            if st.button("15-45 min", key="time_yes", use_container_width=True, type="primary"):
+            if st.button("15-45 min", key=f"time_yes_{st.session_state.current_question}", use_container_width=True, type="primary"):
                 answer_question(True, CookingTime.BETWEEN_15_45)
                 st.rerun()
         
         with col3:
-            if st.button("> 45 min", key="time_more", use_container_width=True, type="secondary"):
+            if st.button("> 45 min", key=f"time_more_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(True, CookingTime.MORE_THAN_45)
                 st.rerun()
     
@@ -227,17 +228,17 @@ if not st.session_state.quiz_complete:
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("Beginner", key="skill_easy", use_container_width=True, type="secondary"):
+            if st.button("Beginner", key=f"skill_easy_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(True, Skill.EASY)
                 st.rerun()
         
         with col2:
-            if st.button("Intermediate", key="skill_medium", use_container_width=True, type="primary"):
+            if st.button("Intermediate", key=f"skill_medium_{st.session_state.current_question}", use_container_width=True, type="primary"):
                 answer_question(True, Skill.MEDIUM)
                 st.rerun()
         
         with col3:
-            if st.button("Experienced", key="skill_exp", use_container_width=True, type="tertiary"):
+            if st.button("Experienced", key=f"skill_exp_{st.session_state.current_question}", use_container_width=True, type="tertiary"):
                 answer_question(True, Skill.EXPERIENCED)
                 st.rerun()
     
@@ -281,17 +282,17 @@ if not st.session_state.quiz_complete:
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("Budget", key="budget_student", use_container_width=True, type="secondary"):
+            if st.button("Budget", key=f"budget_student_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(True, Budget.BUDGET)
                 st.rerun()
         
         with col2:
-            if st.button("Moderate", key="budget_friendly", use_container_width=True, type="primary"):
+            if st.button("Moderate", key=f"budget_friendly_{st.session_state.current_question}", use_container_width=True, type="primary"):
                 answer_question(True, Budget.MODERATE)
                 st.rerun()
         
         with col3:
-            if st.button("Premium", key="budget_gourmet", use_container_width=True, type="tertiary"):
+            if st.button("Premium", key=f"budget_gourmet_{st.session_state.current_question}", use_container_width=True, type="tertiary"):
                 answer_question(True, Budget.PREMIUM)
                 st.rerun()
     
@@ -325,27 +326,27 @@ if not st.session_state.quiz_complete:
         col1, col2, col3, col4, col5 = st.columns(5)
         
         with col1:
-            if st.button("Breakfast", key="meal_breakfast", use_container_width=True, type="secondary"):
+            if st.button("Breakfast", key=f"meal_breakfast_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(True, Meal.BREAKFAST)
                 st.rerun()
         
         with col2:
-            if st.button("Lunch", key="meal_lunch", use_container_width=True, type="secondary"):
+            if st.button("Lunch", key=f"meal_lunch_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(True, Meal.LUNCH)
                 st.rerun()
         
         with col3:
-            if st.button("Dinner", key="meal_dinner", use_container_width=True, type="secondary"):
+            if st.button("Dinner", key=f"meal_dinner_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(True, Meal.DINNER)
                 st.rerun()
         
         with col4:
-            if st.button("Snack", key="meal_snack", use_container_width=True, type="secondary"):
+            if st.button("Snack", key=f"meal_snack_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(True, Meal.SNACK)
                 st.rerun()
         
         with col5:
-            if st.button("Dessert", key="meal_dessert", use_container_width=True, type="secondary"):
+            if st.button("Dessert", key=f"meal_dessert_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(True, Meal.DESSERT)
                 st.rerun()
     
@@ -379,18 +380,18 @@ if not st.session_state.quiz_complete:
         col1, col2 = st.columns(2)
         
         with col1:
-            if st.button("Yes", key="yes_btn", use_container_width=True, type="primary"):
+            if st.button("Yes", key=f"yes_btn_{st.session_state.current_question}", use_container_width=True, type="primary"):
                 answer_question(True)
                 st.rerun()
         
         with col2:
-            if st.button("No", key="no_btn", use_container_width=True, type="secondary"):
+            if st.button("No", key=f"no_btn_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(False)
                 st.rerun()
     
     st.divider()
     
-    if st.button("🔄 Reset Quiz", key="reset_btn", use_container_width=False):
+    if st.button("🔄 Reset Quiz", key=f"reset_btn_{st.session_state.current_question}", use_container_width=False):
         reset_quiz()
         st.rerun()
 
@@ -467,8 +468,11 @@ else:
     # Load inference engine and filter recipes
     all_recipes = get_all_recipes()
     
+    # Get the knowledge base path relative to this file
+    kb_path = Path(__file__).parent / 'knowledge_base.yaml'
+    
     try:
-        engine = InferenceEngine('knowledge_base.yaml')
+        engine = InferenceEngine(str(kb_path))
         # Use inference engine to filter and score recipes
         filtered_results = engine.filter_recipes(all_recipes, user)
         matching_recipes = [recipe for recipe, score, reasons in filtered_results]
