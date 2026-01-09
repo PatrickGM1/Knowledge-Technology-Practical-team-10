@@ -16,7 +16,7 @@ These are our **main roles**, but we will **collaborate and support each other**
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 **Note**: The documentation files referenced below (QUICK_START.md, KNOWLEDGE_BASE_README.md, etc.) do not currently exist in the repository. The main documentation is in this README.
 
@@ -38,7 +38,7 @@ These are our **main roles**, but we will **collaborate and support each other**
 
 The Recipe Recommender is an intelligent knowledge-based system that helps users find recipes matching their preferences using a sophisticated inference engine. The system features:
 
-**🏗️ Hierarchical Domain Model** (6 classes)
+**Hierarchical Domain Model** (6 classes)
 - **User**: Profiles with dietary restrictions, allergies, skill level, equipment, time constraints, health goals
 - **Recipe**: Recipes with ingredients, equipment, cooking methods, nutritional info
 - **Ingredient**: Ingredients with category, nutritional properties, allergen information
@@ -46,7 +46,7 @@ The Recipe Recommender is an intelligent knowledge-based system that helps users
 - **DetailedCookingMethod**: Cooking methods with temperature, duration, substitutions
 - **NutritionalInfo**: Nutritional data with health goal evaluation (high protein, low calorie, high fiber)
 
-**🧠 Inference Engine**
+**Inference Engine**
 - **25 modular rules** in YAML knowledge base (declarative, separate from code)
 - **11 Filtering Rules**: Exclude recipes based on allergies, diet, time, skill, equipment, cuisine
 - **7 Scoring Rules**: Rank recipes by cuisine match, health goals, speed, difficulty, budget, nutrition
@@ -55,7 +55,7 @@ The Recipe Recommender is an intelligent knowledge-based system that helps users
 - **Declarative conditions**: Operators include ==, !=, >, <, in, contains, method_call
 - **Context-aware reasoning**: Rules operate on User and Recipe domain objects
 
-**🎯 Smart Recommendations**
+**Smart Recommendations**
 - Dietary preferences (Vegan, Vegetarian, Pescatarian, Omnivore)
 - Dietary restrictions & allergies (Lactose, Gluten, Nuts, etc.)
 - Cooking time constraints
@@ -86,16 +86,16 @@ Open browser to: **http://localhost:8505**
 
 ## Features
 
-### 🎨 Interactive Quiz Interface
-- **Step-by-step questionnaire**: Guided questions to capture user preferences
-### 🎨 Interactive Quiz Interface
+### Interactive Quiz Interface
 - **Step-by-step questionnaire**: Guided questions to capture user preferences
 - **Progress tracking**: Visual progress bar showing quiz completion
 - **Smart question flow**: Questions adapt based on previous answers
 - **Multiple question types**: Yes/No, multi-choice buttons, and option selectors
 - **Custom styling**: Color-coded buttons for intuitive user experience
 
-### Recipe Filtering & Scoringules to rank recipes by relevance (cuisine match, health goals, speed, etc.)
+### Recipe Filtering & Scoring
+- **Filtering rules**: 11 rules to exclude recipes based on allergies, diet, time, skill, equipment
+- **Scoring rules**: 7 rules to rank recipes by relevance (cuisine match, health goals, speed, etc.)
 - **Substitution suggestions**: 7 rules for ingredient/method alternatives (dairy, meat, gluten, equipment)
 - **Priority-based execution**: Rules processed by priority (highest first)
 - **Reason explanations**: Every filter/score includes human-readable explanation
@@ -333,3 +333,4 @@ streamlit run main.py
 ```
 
 ---
+
