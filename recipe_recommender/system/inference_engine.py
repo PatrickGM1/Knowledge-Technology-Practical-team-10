@@ -1,6 +1,6 @@
-"""Inference engine for applying knowledge base rules to domain objects"""
+"""Inference engine for applying knowledge base rules to domain objects using forward-chaining"""
 
-from typing import List, Dict, Any, Optional, Callable
+from typing import List, Dict, Any, Optional, Tuple
 import yaml
 import json
 from pathlib import Path
@@ -17,17 +17,19 @@ class Rule:
         self.conditions = rule_dict.get('conditions', [])
         self.action = rule_dict.get('action', {})
         self.category = rule_dict.get('category', 'general')
+        self.fired_count = 0  # Track how many times this rule fired
     
     def __repr__(self):
         return f"Rule(id='{self.id}', name='{self.name}', priority={self.priority})"
 
 
 class InferenceEngine:
-    """Applies rules from knowledge base to domain objects"""
+    """Applies rules to domain objects using forward-chaining inference"""
     
     def __init__(self, kb_path: Optional[str] = None):
         self.rules: List[Rule] = []
         self.facts: Dict[str, Any] = {}
+        self.fired_rules: List[str] = []  # Track which rules have fired
         
         if kb_path:
             self.load_knowledge_base(kb_path)
@@ -287,3 +289,134 @@ class InferenceEngine:
                         substitutions['equipment'].update(value)
         
         return substitutions
+    
+    # ============================================================================
+    # FORWARD-CHAINING METHODS (New approach)
+    # ============================================================================
+    
+    def initialize_recipe_states(self, recipes: List[Any]):
+        """Initialize all recipe states to default values for forward-chaining"""
+        for recipe in recipes:
+            recipe.suitable_for_user = True
+            recipe.affordable = True
+            recipe.can_prepare = True
+            recipe.skill_appropriate = True
+            recipe.exclusion_reasons = []
+            recipe.recommendation_score = 0.0
+            recipe.substitution_suggestions = {}
+    
+    def forward_chain(self, person: Any, kitchen: Any, recipes: List[Any], max_iterations: int = 10) -> List[Any]:
+        """
+        Apply forward-chaining inference to recipes.
+        Rules modify recipe states iteratively until no changes occur.
+        
+        Args:
+            person: User/Person object with preferences
+            kitchen: Kitchen object with equipment
+            recipes: List of Recipe objects
+            max_iterations: Maximum iterations to prevent infinite loops
+            
+        Returns:
+            List of recommended recipes (those with suitable_for_user=True, etc.)
+        """
+        # Reset tracking
+        self.fired_rules = []
+        for rule in self.rules:
+            rule.fired_count = 0
+        
+        # Initialize all recipe states
+        self.initialize_recipe_states(recipes)
+        
+        # Forward-chaining loop
+        iteration = 0
+        changed = True
+        
+        while changed and iteration < max_iterations:
+            changed = False
+            iteration += 1
+            
+            # Apply rules to each recipe
+            for recipe in recipes:
+                context = {'user': person, 'person': person, 'kitchen': kitchen, 'recipe': recipe}
+                
+                # Check each rule
+                for rule in self.rules:
+                    # Evaluate conditions
+                    if self.evaluate_conditions(rule.conditions, context):
+                        # Execute action - this modifies recipe state
+                        action_result = self.execute_forward_action(rule, recipe, context)
+                        
+                        if action_result:
+                            changed = True
+                            rule.fired_count += 1
+                            if rule.id not in self.fired_rules:
+                                self.fired_rules.append(rule.id)
+        
+        return self.get_recommended_recipes(recipes)
+    
+    def execute_forward_action(self, rule: Rule, recipe: Any, context: Dict[str, Any]) -> bool:
+        """
+        Execute rule action by modifying recipe state attributes.
+        Returns True if state was changed, False otherwise.
+        """
+        action = rule.action
+        action_type = action.get('type', 'filter')
+        changed = False
+        
+        if action_type == 'filter':
+            result = action.get('result', False)
+            reason = action.get('reason', '')
+            
+            if not result:  # Recipe should be excluded
+                if recipe.suitable_for_user:  # Only change if currently suitable
+                    recipe.suitable_for_user = False
+                    if reason and reason not in recipe.exclusion_reasons:
+                        recipe.exclusion_reasons.append(reason)
+                    changed = True
+        
+        elif action_type == 'score':
+            score_delta = action.get('score_delta', 0)
+            reason = action.get('reason', '')
+            
+            if score_delta != 0:
+                recipe.recommendation_score += score_delta
+                changed = True
+        
+        elif action_type == 'substitute':
+            substitutions = action.get('substitutions', {})
+            reason = action.get('reason', '')
+            
+            for sub_type, sub_items in substitutions.items():
+                if sub_type not in recipe.substitution_suggestions:
+                    recipe.substitution_suggestions[sub_type] = {}
+                recipe.substitution_suggestions[sub_type].update(sub_items)
+                changed = True
+        
+        return changed
+    
+    def get_recommended_recipes(self, recipes: List[Any]) -> List[Tuple[Any, float, List[str]]]:
+        """
+        Get recommended recipes based on final states.
+        Returns recipes that are suitable, affordable, can be prepared, and skill-appropriate.
+        """
+        recommended = []
+        
+        for recipe in recipes:
+            # Check if recipe passes all state checks
+            if (recipe.suitable_for_user and 
+                recipe.affordable and 
+                recipe.can_prepare and 
+                recipe.skill_appropriate):
+                
+                # Create reasons list from positive scoring
+                reasons = []
+                if hasattr(recipe, 'recommendation_score') and recipe.recommendation_score > 0:
+                    reasons.append(f"Score: {recipe.recommendation_score}")
+                
+                recommended.append((recipe, recipe.recommendation_score, reasons))
+        
+        # Sort by score (highest first)
+        recommended.sort(key=lambda x: x[1], reverse=True)
+        
+        return recommended
+
