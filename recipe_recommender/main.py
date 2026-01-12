@@ -465,7 +465,7 @@ else:
     # Create User object from preferences
     user = preferences_to_user(preferences)
     
-    # Load inference engine and filter recipes
+    # Load inference engine and apply forward-chaining
     all_recipes = get_all_recipes()
     
     # Get the knowledge base path relative to this file
@@ -473,24 +473,32 @@ else:
     
     try:
         engine = InferenceEngine(str(kb_path))
-        # Use inference engine to filter and score recipes
-        filtered_results = engine.filter_recipes(all_recipes, user)
-        matching_recipes = [recipe for recipe, score, reasons in filtered_results]
+        # Use forward-chaining inference to determine suitable recipes
+        engine.forward_chain(user, user.kitchen, all_recipes)
         
-        if matching_recipes:
-            st.success(f"Found {len(matching_recipes)} recipe(s) that match your preferences!")
+        # Get recommended recipes sorted by score
+        recommended_recipes = engine.get_recommended_recipes(all_recipes)
+        
+        if recommended_recipes:
+            st.success(f"Found {len(recommended_recipes)} recipe(s) that match your preferences!")
             
             # Display recipes with scores
-            for i, (recipe, score, reasons) in enumerate(filtered_results, 1):
+            for i, recipe in enumerate(recommended_recipes, 1):
+                score = recipe.recommendation_score
                 score_emoji = "⭐" * min(5, max(1, int(score / 3) + 1))
                 with st.expander(f"🍽️ {recipe.name} {score_emoji}", expanded=(i == 1)):
                     # Recipe description
                     if recipe.description:
                         st.markdown(f"*{recipe.description}*")
                     
-                    # Show matching reasons if available
-                    if reasons:
-                        st.info("✨ " + " • ".join(reasons[:3]))
+                    # Show match score
+                    st.info(f"✨ Match Score: {score:.1f}/15")
+                    
+                    # Show substitution suggestions if any
+                    if recipe.substitution_suggestions:
+                        st.warning("💡 Suggested substitutions:")
+                        for allergen, substitutes in recipe.substitution_suggestions.items():
+                            st.write(f"  • Replace {allergen}: {', '.join(substitutes)}")
                     
                     st.divider()
                 
