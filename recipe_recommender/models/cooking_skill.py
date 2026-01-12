@@ -100,7 +100,7 @@ class CookingSkill:
         return skill_map.get(self.level.lower(), 1)
     
     def __str__(self) -> str:
-        return f"{self.level.title()} cook ({self.years_experience} years)"
+        return f"{self.level.title()} cook"
     
     def __repr__(self) -> str:
         return f"CookingSkill(level='{self.level}', years_experience={self.years_experience})"
