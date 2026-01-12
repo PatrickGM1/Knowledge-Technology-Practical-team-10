@@ -1,7 +1,11 @@
 """Utility functions for the recipe recommender system"""
 
 from typing import Dict, List
-from models import User, Diet, DietRestriction, Skill, CookingTime, CookingMethod, Macros
+from models import (
+    User, Diet, DietRestriction, Skill, CookingTime, CookingMethod, Macros, Budget,
+    Allergy, BudgetConstraint, CookingSkill, TimeConstraint, 
+    DietaryPreference, HealthGoal, Kitchen
+)
 
 
 def preferences_to_user(preferences: Dict[str, List]) -> User:
@@ -83,6 +87,57 @@ def preferences_to_user(preferences: Dict[str, List]) -> User:
         elif macro == Macros.LOW_SUGARS:
             health_goals.append('low-sugar')
     
+    # Create domain objects
+    allergies_list = [Allergy(allergen_name=a, severity='moderate') for a in allergies]
+    
+    skill_obj = CookingSkill(level=skill_level, years_experience=0)
+    
+    time_constraint_obj = TimeConstraint(
+        available_minutes=max_time if max_time else 120,
+        includes_prep=True,
+        flexibility=False
+    ) if max_time else None
+    
+    # Create dietary preference
+    diet_type = 'omnivore'
+    for diet in preferences.get('diet', []):
+        if diet == Diet.VEGAN:
+            diet_type = 'vegan'
+            break
+        elif diet == Diet.VEGETARIAN:
+            diet_type = 'vegetarian'
+            break
+        elif diet == Diet.PESCATARIAN:
+            diet_type = 'pescatarian'
+            break
+    
+    dietary_pref = DietaryPreference(
+        type=diet_type,
+        restrictions=dietary_restrictions,
+        preferred_cuisines=[]
+    )
+    
+    # Create health goals
+    health_goals_list = [HealthGoal(goal_type=goal, priority='medium') for goal in health_goals]
+    
+    # Create budget constraint
+    budget_pref = 'moderate'
+    if preferences.get('budget'):
+        budget_enum = preferences['budget'][0]
+        if budget_enum == Budget.BUDGET:
+            budget_pref = 'budget'
+        elif budget_enum == Budget.PREMIUM:
+            budget_pref = 'premium'
+    
+    budget_obj = BudgetConstraint(preferred_range=budget_pref, flexibility='flexible')
+    
+    # Create kitchen
+    kitchen_obj = Kitchen(
+        available_equipment=list(set(available_equipment)),
+        available_utensils=[],
+        space_size='medium'
+    )
+    
     return User(
         name="User",
         dietary_restrictions=list(set(dietary_restrictions)),
@@ -90,5 +145,14 @@ def preferences_to_user(preferences: Dict[str, List]) -> User:
         skill_level=skill_level,
         available_equipment=list(set(available_equipment)),
         max_cooking_time=max_time,
-        health_goals=health_goals
+        health_goals=health_goals,
+        # Domain objects
+        allergies_list=allergies_list,
+        budget=budget_obj,
+        skill=skill_obj,
+        time_constraint=time_constraint_obj,
+        dietary_preference=dietary_pref,
+        health_goals_list=health_goals_list,
+        kitchen=kitchen_obj
     )
+
