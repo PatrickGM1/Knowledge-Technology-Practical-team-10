@@ -143,6 +143,15 @@ class Recipe:
         self.cuisine = cuisine
         self.description = description
         self.tags = tags or []
+        
+        # State attributes for forward-chaining inference
+        self.suitable_for_user: bool = True
+        self.affordable: bool = True
+        self.can_prepare: bool = True
+        self.skill_appropriate: bool = True
+        self.exclusion_reasons: List[str] = []
+        self.recommendation_score: float = 0.0
+        self.substitution_suggestions: Dict = {}
     
     def __repr__(self) -> str:
         return f"Recipe(name='{self.name}', diet={self.diet.value}, meal={self.meal.value})"
