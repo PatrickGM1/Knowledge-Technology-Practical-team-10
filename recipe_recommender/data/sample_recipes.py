@@ -48,7 +48,8 @@ SAMPLE_RECIPES = [
         servings=2,
         prep_time=5,
         cuisine="Italian",
-        description="Classic Roman pasta dish with cheese and black pepper"
+        description="Classic Roman pasta dish with cheese and black pepper",
+        cost=3.5  # Budget-friendly
     ),
     
     Recipe(
@@ -97,7 +98,8 @@ SAMPLE_RECIPES = [
         servings=4,
         prep_time=10,
         cuisine="Italian",
-        description="Creamy saffron risotto from Milan"
+        description="Creamy saffron risotto from Milan",
+        cost=6.5  # Moderate due to saffron
     ),
     
     Recipe(
@@ -146,7 +148,8 @@ SAMPLE_RECIPES = [
         servings=4,
         prep_time=10,
         cuisine="Italian",
-        description="Roman veal cutlets with prosciutto and sage"
+        description="Roman veal cutlets with prosciutto and sage",
+        cost=5.5  # Moderate with veal and prosciutto
     ),
     
     Recipe(
@@ -193,7 +196,8 @@ SAMPLE_RECIPES = [
         servings=4,
         prep_time=8,
         cuisine="Italian",
-        description="Italian potato frittata"
+        description="Italian potato frittata",
+        cost=9.0  # Premium category
     ),
     
     Recipe(
@@ -239,7 +243,8 @@ SAMPLE_RECIPES = [
         servings=12,
         prep_time=10,
         cuisine="American",
-        description="Healthy no-bake energy bites with dark chocolate"
+        description="Healthy no-bake energy bites with dark chocolate",
+        cost=4.5  # Moderate with specialty ingredients
     )
 ]
 
