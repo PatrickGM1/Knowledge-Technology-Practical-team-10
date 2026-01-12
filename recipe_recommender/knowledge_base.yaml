@@ -510,3 +510,44 @@ rules:
         equipment:
           stand mixer: [hand mixer, whisk and bowl (requires more effort)]
       reason: Alternative equipment for mixing
+
+  # ============================================================================
+  # CASCADE RULES - Rules that fire based on state changes (Forward-chaining)
+  # ============================================================================
+  
+  - id: cascade_unsuitable_no_score
+    name: Don't score unsuitable recipes
+    description: If recipe is unsuitable, reset its score to 0
+    priority: 10
+    category: scoring
+    conditions:
+      - object: recipe
+        attribute: suitable_for_user
+        operator: "=="
+        value: false
+    action:
+      type: score
+      score_delta: -1000
+      reason: Recipe is not suitable for user
+  
+  - id: cascade_suggest_alternative_for_excluded
+    name: Suggest alternatives when recipe excluded
+    description: When recipe excluded due to allergies, suggest similar recipes
+    priority: 5
+    category: substitution
+    conditions:
+      - object: recipe
+        attribute: suitable_for_user
+        operator: "=="
+        value: false
+      - object: recipe
+        attribute: exclusion_reasons
+        operator: contains
+        value: allergen
+    action:
+      type: substitute
+      substitutions:
+        ingredient:
+          general: [Check similar recipes without this allergen]
+      reason: Recipe excluded due to allergen - consider alternatives
+
