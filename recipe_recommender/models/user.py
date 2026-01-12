@@ -3,8 +3,17 @@ User model for recipe recommendation system.
 Represents a user with dietary preferences, restrictions, and cooking profile.
 """
 
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, TYPE_CHECKING
 from dataclasses import dataclass, field
+
+if TYPE_CHECKING:
+    from .allergy import Allergy
+    from .budget_constraint import BudgetConstraint
+    from .cooking_skill import CookingSkill
+    from .time_constraint import TimeConstraint
+    from .dietary_preference import DietaryPreference
+    from .health_goal import HealthGoal
+    from .kitchen import Kitchen
 
 
 @dataclass
@@ -33,6 +42,15 @@ class User:
     calorie_target: Optional[int] = None  # daily calorie target
     cuisine_preferences: List[str] = field(default_factory=list)
     health_goals: List[str] = field(default_factory=list)
+    
+    # New domain class attributes
+    allergies_list: Optional[List['Allergy']] = None
+    budget: Optional['BudgetConstraint'] = None
+    skill: Optional['CookingSkill'] = None
+    time_constraint: Optional['TimeConstraint'] = None
+    dietary_preference: Optional['DietaryPreference'] = None
+    health_goals_list: Optional[List['HealthGoal']] = None
+    kitchen: Optional['Kitchen'] = None
     
     def has_dietary_restriction(self, restriction: str) -> bool:
         """Check if user has a specific dietary restriction."""
