@@ -1,5 +1,19 @@
 # Knowledge Base for Recipe Recommendation System
-# Contains rules for filtering, scoring, and substitution
+# Contains rules for forward-chaining inference
+#
+# FORWARD-CHAINING APPROACH:
+# - Rules modify recipe state attributes (suitable_for_user, affordable, etc.)
+# - Rules fire iteratively until no changes occur
+# - Final recommendations based on recipe state checks
+#
+# State Attributes:
+# - suitable_for_user: bool (False if allergies, diet incompatible, etc.)
+# - affordable: bool (False if exceeds budget)
+# - can_prepare: bool (False if missing equipment)
+# - skill_appropriate: bool (False if too complex)
+# - recommendation_score: float (increased by positive scoring rules)
+# - exclusion_reasons: List[str] (reasons for exclusion)
+# - substitution_suggestions: Dict (ingredient/method alternatives)
 
 rules:
   # ============================================================================
