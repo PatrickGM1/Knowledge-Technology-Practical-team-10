@@ -97,6 +97,11 @@ class InferenceEngine:
                 return False
             attr_value = getattr(obj, attribute)
         
+        # Handle enum comparisons - compare enum.value with string
+        from enum import Enum
+        if isinstance(attr_value, Enum):
+            attr_value = attr_value.value
+        
         # Evaluate based on operator
         if operator == '==':
             return attr_value == value

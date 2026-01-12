@@ -29,16 +29,16 @@ rules:
       - object: user
         attribute: allergies
         operator: contains
-        value: nuts
+        value: Peanuts
       - object: recipe
         attribute: has_ingredient
         operator: method_call
         method: has_ingredient
-        args: [nuts]
+        args: [peanuts]
     action:
       type: filter
       result: false
-      reason: Recipe contains nuts (allergen)
+      reason: Recipe contains peanuts (allergen)
   
   - id: filter_allergy_dairy
     name: Filter recipes with dairy allergens
@@ -49,7 +49,7 @@ rules:
       - object: user
         attribute: allergies
         operator: contains
-        value: dairy
+        value: Dairy
       - object: recipe
         attribute: has_ingredient
         operator: method_call
@@ -59,6 +59,308 @@ rules:
       type: filter
       result: false
       reason: Recipe contains dairy (allergen)
+  
+  - id: filter_allergy_eggs
+    name: Filter recipes with egg allergens
+    description: Exclude recipes containing eggs if user is allergic
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Eggs
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [eggs]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains eggs (allergen)
+  
+  - id: filter_allergy_shellfish
+    name: Filter recipes with shellfish allergens
+    description: Exclude recipes containing shellfish if user is allergic
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Shellfish
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [shellfish]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains shellfish (allergen)
+  
+  - id: filter_allergy_fish
+    name: Filter recipes with fish allergens
+    description: Exclude recipes containing fish if user is allergic
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Fish
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [fish]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains fish (allergen)
+  
+  - id: filter_allergy_peanuts
+    name: Filter recipes with peanut allergens
+    description: Exclude recipes containing peanuts if user is allergic
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Peanuts
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [peanuts]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains peanuts (allergen)
+  
+  - id: filter_allergy_tree_nuts
+    name: Filter recipes with tree nut allergens
+    description: Exclude recipes containing tree nuts if user is allergic
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Tree Nuts
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [tree nuts]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains tree nuts (allergen)
+  
+  - id: filter_allergy_wheat
+    name: Filter recipes with wheat allergens
+    description: Exclude recipes containing wheat if user is allergic
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Wheat
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [wheat]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains wheat (allergen)
+  
+  - id: filter_allergy_wheat_pasta
+    name: Filter recipes with pasta (wheat allergy)
+    description: Exclude recipes with pasta if user has wheat allergy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Wheat
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [pasta]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains pasta (wheat allergen)
+  
+  - id: filter_allergy_wheat_flour
+    name: Filter recipes with flour (wheat allergy)
+    description: Exclude recipes with flour if user has wheat allergy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Wheat
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [flour]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains flour (wheat allergen)
+  
+  - id: filter_allergy_soy
+    name: Filter recipes with soy allergens
+    description: Exclude recipes containing soy if user is allergic
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Soy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [soy]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains soy (allergen)
+  
+  - id: filter_allergy_sesame
+    name: Filter recipes with sesame allergens
+    description: Exclude recipes containing sesame if user is allergic
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Sesame
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [sesame]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains sesame (allergen)
+  
+  # Additional dairy product filters
+  - id: filter_allergy_dairy_cheese
+    name: Filter recipes with cheese (dairy allergy)
+    description: Exclude recipes with cheese if user has dairy allergy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Dairy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [cheese]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains cheese (dairy allergen)
+  
+  - id: filter_allergy_dairy_butter
+    name: Filter recipes with butter (dairy allergy)
+    description: Exclude recipes with butter if user has dairy allergy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Dairy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [butter]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains butter (dairy allergen)
+  
+  - id: filter_allergy_dairy_parmesan
+    name: Filter recipes with parmesan (dairy allergy)
+    description: Exclude recipes with parmesan if user has dairy allergy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Dairy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [parmesan]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains parmesan (dairy allergen)
+  
+  - id: filter_allergy_dairy_pecorino
+    name: Filter recipes with pecorino (dairy allergy)
+    description: Exclude recipes with pecorino if user has dairy allergy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Dairy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [pecorino cheese]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains pecorino (dairy allergen)
+  
+  # Tree nut specific ingredients
+  - id: filter_allergy_almond_butter
+    name: Filter recipes with almond butter (tree nut allergy)
+    description: Exclude recipes with almond butter if user has tree nut allergy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Tree Nuts
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [almond butter]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains almond butter (tree nut allergen)
   
   - id: filter_diet_vegan
     name: Filter non-vegan recipes for vegan users
@@ -97,6 +399,82 @@ rules:
       type: filter
       result: false
       reason: Recipe is not vegetarian
+  
+  - id: filter_diet_pescatarian
+    name: Filter non-pescatarian recipes for pescatarian users
+    description: Exclude recipes with meat if user is pescatarian
+    priority: 90
+    category: filtering
+    conditions:
+      - object: user
+        attribute: dietary_restrictions
+        operator: contains
+        value: pescatarian
+      - object: recipe
+        attribute: diet
+        operator: "=="
+        value: omnivore
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains meat (not pescatarian-friendly)
+  
+  - id: filter_beginner_skill
+    name: Filter medium/experienced recipes for beginners
+    description: Beginners should only get easy recipes
+    priority: 85
+    category: filtering
+    conditions:
+      - object: user
+        attribute: skill_level
+        operator: "=="
+        value: beginner
+      - object: recipe
+        attribute: skill
+        operator: "!="
+        value: easy
+    action:
+      type: filter
+      result: false
+      reason: Recipe too difficult for beginner skill level
+  
+  - id: filter_time_15_minutes
+    name: Filter long recipes for 15-minute constraint
+    description: Users with 15 minutes should only get quick recipes
+    priority: 85
+    category: filtering
+    conditions:
+      - object: user
+        attribute: max_cooking_time
+        operator: "<="
+        value: 15
+      - object: recipe
+        attribute: cooking_time
+        operator: "!="
+        value: less than 15 minutes
+    action:
+      type: filter
+      result: false
+      reason: Recipe takes too long (over 15 minutes)
+  
+  - id: filter_time_30_minutes
+    name: Filter very long recipes for 30-minute constraint
+    description: Users with 30 minutes should exclude long recipes
+    priority: 85
+    category: filtering
+    conditions:
+      - object: user
+        attribute: max_cooking_time
+        operator: "<="
+        value: 30
+      - object: recipe
+        attribute: cooking_time
+        operator: "=="
+        value: more than 45 minutes
+    action:
+      type: filter
+      result: false
+      reason: Recipe takes too long (over 45 minutes)
   
   - id: filter_disliked_ingredients
     name: Filter recipes with disliked ingredients
