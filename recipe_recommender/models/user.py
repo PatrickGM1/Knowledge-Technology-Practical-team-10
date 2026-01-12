@@ -9,9 +9,20 @@ from dataclasses import dataclass, field
 
 @dataclass
 class User:
-    """Represents a user with dietary preferences and cooking profile"""
+    """Represents a user with dietary preferences and cooking profile
+    
+    DEPRECATED attributes (kept for backward compatibility):
+    - dietary_restrictions: Use dietary_preference instead
+    - allergies: Use allergies_list instead
+    - skill_level: Use skill instead
+    - available_equipment: Use kitchen instead
+    - max_cooking_time: Use time_constraint instead
+    - health_goals: Use health_goals_list instead
+    """
     
     name: str
+    
+    # Legacy attributes (deprecated but kept for compatibility)
     dietary_restrictions: List[str] = field(default_factory=list)
     allergies: List[str] = field(default_factory=list)
     preferences: Dict[str, bool] = field(default_factory=dict)
