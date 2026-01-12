@@ -600,9 +600,9 @@ else:
     except Exception as e:
         st.error(f"Error using inference engine: {e}")
         st.info("Please try adjusting your preferences and try again.")
-        matching_recipes = []
+        recommended_recipes = []
     
-    if not matching_recipes:
+    if not recommended_recipes:
         st.warning("😔 No recipes match all your preferences. Try adjusting your criteria!")
         st.info("💡 Tip: You can reset the quiz and try different options to find matching recipes.")
     

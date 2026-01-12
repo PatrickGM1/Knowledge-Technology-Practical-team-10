@@ -394,10 +394,11 @@ class InferenceEngine:
         
         return changed
     
-    def get_recommended_recipes(self, recipes: List[Any]) -> List[Tuple[Any, float, List[str]]]:
+    def get_recommended_recipes(self, recipes: List[Any]) -> List[Any]:
         """
         Get recommended recipes based on final states.
-        Returns recipes that are suitable, affordable, can be prepared, and skill-appropriate.
+        Returns recipes that are suitable, affordable, can be prepared, and skill-appropriate,
+        sorted by recommendation score (highest first).
         """
         recommended = []
         
@@ -408,15 +409,10 @@ class InferenceEngine:
                 recipe.can_prepare and 
                 recipe.skill_appropriate):
                 
-                # Create reasons list from positive scoring
-                reasons = []
-                if hasattr(recipe, 'recommendation_score') and recipe.recommendation_score > 0:
-                    reasons.append(f"Score: {recipe.recommendation_score}")
-                
-                recommended.append((recipe, recipe.recommendation_score, reasons))
+                recommended.append(recipe)
         
         # Sort by score (highest first)
-        recommended.sort(key=lambda x: x[1], reverse=True)
+        recommended.sort(key=lambda r: r.recommendation_score, reverse=True)
         
         return recommended
 

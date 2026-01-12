@@ -44,16 +44,23 @@ class CookingSkill:
         
         return techniques
     
-    def can_handle(self, recipe_complexity: str) -> bool:
+    def can_handle(self, recipe_or_complexity) -> bool:
         """
         Check if user's skill level can handle recipe complexity.
         
         Args:
-            recipe_complexity: Required skill level (beginner/easy, intermediate/medium, advanced/experienced)
+            recipe_or_complexity: Either a Recipe object or a complexity string 
+                                 (beginner/easy, intermediate/medium, advanced/experienced)
             
         Returns:
             True if user can handle the recipe, False otherwise
         """
+        # Extract complexity from Recipe object if needed
+        if hasattr(recipe_or_complexity, 'skill'):
+            recipe_complexity = recipe_or_complexity.skill.value if hasattr(recipe_or_complexity.skill, 'value') else str(recipe_or_complexity.skill)
+        else:
+            recipe_complexity = recipe_or_complexity
+        
         # Normalize complexity names
         complexity_map = {
             'easy': 'beginner',
