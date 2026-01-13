@@ -245,6 +245,246 @@ SAMPLE_RECIPES = [
         cuisine="American",
         description="Healthy no-bake energy bites with dark chocolate",
         cost=4.5  # Moderate with specialty ingredients
+    ),
+
+    # 1) Trout fillet marinated in sugar (snack)
+    Recipe(
+        name="Trout Fillet Marinated in Sugar",
+        diet=Diet.OMNIVORE,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.NONE],
+        budget=Budget.MODERATE,
+        meal=Meal.SNACK,
+        macros=[Macros.HIGH_PROTEIN, Macros.LOW_CARBS],
+        ingredients=[
+            Ingredient(name="trout fillet", quantity=250, unit="g", category="protein", preparation="skin removed"),
+            Ingredient(name="sugar", quantity=1, unit="tbsp", category="sweetener"),
+            Ingredient(name="salt", quantity=1, unit="tsp", category="spice"),
+        ],
+        equipment=[
+            Equipment(name="bowl", category="utensil"),
+            Equipment(name="sealed container", category="utensil", alternatives=["plate"]),
+        ],
+        nutritional_info=NutritionalInfo(
+            calories=280,
+            protein=42,
+            carbohydrates=4,
+            fat=10,
+            fiber=0,
+            sodium=600,
+            sugar=4
+        ),
+        instructions=[
+            "Use a cleaned trout fillet with skin removed",
+            "Rub the trout fillet with sugar and salt",
+            "Place the fillet in a sealed container",
+            "Marinate in the refrigerator for 2–3 hours",
+            "Ready to eat"
+        ],
+        servings=2,
+        prep_time=5,
+        cuisine="Romanian-inspired",
+        description="Snack: trout fillet marinated with sugar and salt for 2–3 hours, ready to eat",
+        cost=5.0
+    ),
+
+    # 2) American-style pico de gallo salad
+    Recipe(
+        name="American-Style Pico de Gallo Salad",
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.NONE],
+        budget=Budget.BUDGET,
+        meal=Meal.LUNCH,
+        macros=[Macros.LOW_SUGARS, Macros.LOW_FATS],
+        ingredients=[
+            Ingredient(name="tomatoes", quantity=2, unit="pieces", category="vegetable"),
+            Ingredient(name="red onion", quantity=0.5, unit="piece", category="vegetable"),
+            Ingredient(name="jalapeno", quantity=1, unit="piece", category="vegetable", is_optional=True),
+            Ingredient(name="lemon juice", quantity=1, unit="tbsp", category="other"),
+            Ingredient(name="salt", quantity=0.5, unit="tsp", category="spice"),
+            Ingredient(name="black pepper", quantity=0.5, unit="tsp", category="spice"),
+        ],
+        equipment=[
+            Equipment(name="knife", category="utensil"),
+            Equipment(name="bowl", category="utensil"),
+        ],
+        nutritional_info=NutritionalInfo(
+            calories=70,
+            protein=2,
+            carbohydrates=14,
+            fat=0.5,
+            fiber=3,
+            sodium=250,
+            sugar=7
+        ),
+        instructions=[
+            "Dice the tomatoes",
+            "Finely chop the red onion",
+            "Chop the jalapeno if using",
+            "Mix with lemon juice, salt, and black pepper to taste",
+            "Serve immediately"
+        ],
+        servings=2,
+        prep_time=10,
+        cuisine="American",
+        description="Fresh American-style pico de gallo made with tomatoes, red onion, optional jalapeno, lemon juice, salt, and pepper",
+        cost=2.0
+    ),
+
+    # 3) Flatbread taco with minced beef and red onion
+    Recipe(
+        name="Flatbread Taco with Minced Beef and Red Onion",
+        diet=Diet.OMNIVORE,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.NONE],
+        budget=Budget.BUDGET,
+        meal=Meal.SNACK,
+        macros=[Macros.HIGH_PROTEIN, Macros.LOW_SUGARS],
+        ingredients=[
+            Ingredient(name="flatbread", quantity=2, unit="pieces", category="grain"),
+            Ingredient(name="ground beef", quantity=250, unit="g", category="protein"),
+            Ingredient(name="red onion", quantity=1, unit="piece", category="vegetable", preparation="julienned"),
+            Ingredient(name="salt", quantity=0.5, unit="tsp", category="spice"),
+            Ingredient(name="black pepper", quantity=0.5, unit="tsp", category="spice"),
+            Ingredient(name="mixed spices", quantity=1, unit="tbsp", category="spice", is_optional=True),
+            Ingredient(name="seasoning", quantity=1, unit="tsp", category="spice", is_optional=True),
+        ],
+        equipment=[
+            Equipment(name="baking tray", category="bakeware", alternatives=["pan"]),
+            Equipment(name="knife", category="utensil"),
+        ],
+        nutritional_info=NutritionalInfo(
+            calories=520,
+            protein=33,
+            carbohydrates=45,
+            fat=22,
+            fiber=4,
+            sodium=650,
+            sugar=3
+        ),
+        instructions=[
+            "Spread the ground beef evenly over the flatbread",
+            "Add julienned red onion on top",
+            "Season with salt and black pepper",
+            "Add mixed spices and optional seasoning",
+            "Bake until the meat is fully cooked",
+            "Serve hot"
+        ],
+        servings=2,
+        prep_time=7,
+        cuisine="Mexican-inspired",
+        description="Quick flatbread taco with evenly spread minced beef, red onion, salt, pepper, and spices",
+        cost=4.0
+    ),
+
+    # 4) Cheddar-style chicken salad
+    Recipe(
+        name="Cheddar Chicken Salad",
+        diet=Diet.OMNIVORE,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.NONE],
+        budget=Budget.MODERATE,
+        meal=Meal.LUNCH,
+        macros=[Macros.HIGH_PROTEIN, Macros.LOW_SUGARS],
+        ingredients=[
+            Ingredient(name="green lettuce", quantity=150, unit="g", category="vegetable"),
+            Ingredient(name="chicken breast", quantity=200, unit="g", category="protein", preparation="pan-cooked"),
+            Ingredient(name="cherry tomatoes", quantity=150, unit="g", category="vegetable"),
+            Ingredient(name="boiled egg", quantity=1, unit="piece", category="protein", allergens=["eggs"]),
+            Ingredient(name="parmesan cheese", quantity=25, unit="g", category="dairy", allergens=["dairy"]),
+            Ingredient(name="croutons", quantity=30, unit="g", category="grain"),
+            Ingredient(name="mayonnaise sauce", quantity=2, unit="tbsp", category="other"),
+        ],
+        equipment=[
+            Equipment(name="pan", category="cookware"),
+            Equipment(name="bowl", category="utensil"),
+            Equipment(name="knife", category="utensil"),
+        ],
+        nutritional_info=NutritionalInfo(
+            calories=520,
+            protein=40,
+            carbohydrates=20,
+            fat=30,
+            fiber=4,
+            sodium=700,
+            sugar=5
+        ),
+        instructions=[
+            "Cook the chicken breast in a pan according to preference",
+            "Assemble the salad with lettuce, chicken, cherry tomatoes, boiled egg, parmesan, croutons, and mayonnaise sauce"
+        ],
+        servings=1,
+        prep_time=10,
+        cuisine="International",
+        description="Chicken salad with lettuce, pan-cooked chicken, cherry tomatoes, boiled egg, parmesan, croutons, and mayonnaise sauce",
+        cost=6.0
+    ),
+
+    # 5) Meal replacement protein shake
+    Recipe(
+        name="Meal Replacement Protein Shake",
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.NUTS_ALLERGIES],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.NONE],
+        budget=Budget.BUDGET,
+        meal=Meal.SNACK,
+        macros=[Macros.HIGH_PROTEIN, Macros.LOW_SUGARS],
+        ingredients=[
+            Ingredient(name="milk", quantity=300, unit="ml", category="dairy", allergens=["dairy"]),
+            Ingredient(name="protein powder", quantity=30, unit="g", category="protein"),
+            Ingredient(name="rolled oats", quantity=30, unit="g", category="grain"),
+            Ingredient(
+                name="peanut butter",
+                quantity=1,
+                unit="tbsp",
+                category="protein",
+                allergens=["nuts"],
+                substitutes={"sunflower seed butter": 1.0}
+            ),
+            Ingredient(name="banana", quantity=1, unit="piece", category="fruit"),
+            Ingredient(
+                name="flavoring",
+                quantity=1,
+                unit="tsp",
+                category="other",
+                is_optional=True,
+                description="artificial or natural (honey or maple syrup)",
+                substitutes={"honey": 1.0, "maple syrup": 1.0}
+            ),
+        ],
+        equipment=[
+            Equipment(name="blender", category="appliance"),
+        ],
+        nutritional_info=NutritionalInfo(
+            calories=480,
+            protein=35,
+            carbohydrates=58,
+            fat=14,
+            fiber=7,
+            sodium=220,
+            sugar=12
+        ),
+        instructions=[
+            "Add all ingredients to the blender",
+            "Blend until smooth",
+            "Serve immediately"
+        ],
+        servings=1,
+        prep_time=5,
+        cuisine="International",
+        description="High-protein meal replacement shake made with milk, protein powder, oats, peanut butter, banana, and optional flavoring",
+        cost=3.5
     )
 ]
 
