@@ -20,7 +20,7 @@ class BudgetConstraint:
         """Set cost ranges based on preferred range if not explicitly set"""
         if self.max_cost == float('inf') and self.min_cost == 0.0:
             ranges = {
-                'budget': (0.0, 15.0),
+                'low_cost': (0.0, 15.0),
                 'moderate': (10.0, 30.0),
                 'premium': (25.0, float('inf'))
             }

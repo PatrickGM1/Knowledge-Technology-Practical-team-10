@@ -124,8 +124,8 @@ def preferences_to_user(preferences: Dict[str, List]) -> User:
     budget_pref = 'moderate'
     if preferences.get('budget'):
         budget_enum = preferences['budget'][0]
-        if budget_enum == Budget.BUDGET:
-            budget_pref = 'budget'
+        if budget_enum == Budget.LOW_COST:
+            budget_pref = 'low_cost'
         elif budget_enum == Budget.PREMIUM:
             budget_pref = 'premium'
     

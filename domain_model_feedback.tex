@@ -108,7 +108,6 @@ class Kitchen:
 \begin{lstlisting}[style=pythonstyle]
 class Allergy:
     allergen_name: str
-    severity: str  # mild, moderate, severe
     ingredients_to_avoid: List[str]
     
     def is_safe(self, ingredient: Ingredient) -> bool:

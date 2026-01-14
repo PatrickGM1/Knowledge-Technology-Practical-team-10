@@ -26,7 +26,7 @@ Copy and paste this template for each new recipe:
         cooking_time=CookingTime.LESS_THAN_15,  # Options: LESS_THAN_15, BETWEEN_15_45, MORE_THAN_45
         skill=Skill.EASY,  # Options: EASY, MEDIUM, EXPERIENCED
         cooking_methods=[CookingMethod.PAN],  # Options: PAN, OVEN, GRILL (can have multiple)
-        budget=Budget.BUDGET,  # Options: BUDGET, MODERATE, PREMIUM
+        budget=Budget.LOW_COST,  # Options: LOW_COST, MODERATE, PREMIUM
         meal=Meal.LUNCH,  # Options: BREAKFAST, LUNCH, DINNER, SNACK, DESSERT
         macros=[Macros.HIGH_PROTEIN],  # Options: HIGH_PROTEIN, LOW_FATS, LOW_CARBS, LOW_SUGARS (can have multiple)
         ingredients=[

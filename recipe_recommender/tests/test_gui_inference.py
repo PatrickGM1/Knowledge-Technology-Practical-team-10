@@ -40,7 +40,7 @@ class TestAllergyFiltering:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Eggs", severity="moderate")],
+            allergies_list=[Allergy(allergen_name="Eggs")],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="omnivore"),
@@ -73,7 +73,7 @@ class TestAllergyFiltering:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Dairy", severity="moderate")],
+            allergies_list=[Allergy(allergen_name="Dairy")],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="omnivore"),
@@ -107,9 +107,9 @@ class TestAllergyFiltering:
             max_cooking_time=60,
             health_goals=[],
             allergies_list=[
-                Allergy(allergen_name="Eggs", severity="moderate"),
-                Allergy(allergen_name="Dairy", severity="moderate"),
-                Allergy(allergen_name="Peanuts", severity="moderate")
+                Allergy(allergen_name="Eggs"),
+                Allergy(allergen_name="Dairy"),
+                Allergy(allergen_name="Peanuts")
             ],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
@@ -140,7 +140,7 @@ class TestAllergyFiltering:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Tree Nuts", severity="moderate")],
+            allergies_list=[Allergy(allergen_name="Tree Nuts")],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="omnivore"),
@@ -262,7 +262,7 @@ class TestDietaryRestrictions:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Eggs", severity="moderate")],
+            allergies_list=[Allergy(allergen_name="Eggs")],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="vegan", restrictions=["vegan"]),
@@ -456,15 +456,15 @@ class TestEdgeCases:
             max_cooking_time=60,
             health_goals=[],
             allergies_list=[
-                Allergy(allergen_name="Dairy", severity="severe"),
-                Allergy(allergen_name="Eggs", severity="severe"),
-                Allergy(allergen_name="Shellfish", severity="severe"),
-                Allergy(allergen_name="Fish", severity="severe"),
-                Allergy(allergen_name="Peanuts", severity="severe"),
-                Allergy(allergen_name="Tree Nuts", severity="severe"),
-                Allergy(allergen_name="Wheat", severity="severe"),
-                Allergy(allergen_name="Soy", severity="severe"),
-                Allergy(allergen_name="Sesame", severity="severe"),
+                Allergy(allergen_name="Dairy"),
+                Allergy(allergen_name="Eggs"),
+                Allergy(allergen_name="Shellfish"),
+                Allergy(allergen_name="Fish"),
+                Allergy(allergen_name="Peanuts"),
+                Allergy(allergen_name="Tree Nuts"),
+                Allergy(allergen_name="Wheat"),
+                Allergy(allergen_name="Soy"),
+                Allergy(allergen_name="Sesame"),
             ],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
@@ -519,15 +519,14 @@ class TestDomainObjects:
     
     def test_allergy_creation(self):
         """Test Allergy domain object creation"""
-        allergy = Allergy(allergen_name="Eggs", severity="moderate")
+        allergy = Allergy(allergen_name="Eggs")
         assert allergy.allergen_name == "Eggs"
-        assert allergy.severity == "moderate"
         assert "Eggs" in str(allergy)
     
     def test_budget_constraint_creation(self):
         """Test BudgetConstraint domain object creation"""
-        budget = BudgetConstraint(preferred_range="budget", flexibility="flexible")
-        assert budget.preferred_range == "budget"
+        budget = BudgetConstraint(preferred_range="low_cost", flexibility="flexible")
+        assert budget.preferred_range == "low_cost"
         assert budget.flexibility == "flexible"
     
     def test_cooking_skill_creation(self):
@@ -577,8 +576,8 @@ class TestUserCreation:
             max_cooking_time=45,
             health_goals=["weight-loss", "energy-boost"],
             allergies_list=[
-                Allergy(allergen_name="Eggs", severity="moderate"),
-                Allergy(allergen_name="Dairy", severity="severe")
+                Allergy(allergen_name="Eggs"),
+                Allergy(allergen_name="Dairy")
             ],
             skill=CookingSkill(level="intermediate"),
             time_constraint=TimeConstraint(available_minutes=45),
@@ -638,9 +637,9 @@ class TestComplexCombinations:
             max_cooking_time=60,
             health_goals=[],
             allergies_list=[
-                Allergy(allergen_name="Dairy", severity="severe"),
-                Allergy(allergen_name="Tree Nuts", severity="severe"),
-                Allergy(allergen_name="Peanuts", severity="severe")
+                Allergy(allergen_name="Dairy"),
+                Allergy(allergen_name="Tree Nuts"),
+                Allergy(allergen_name="Peanuts")
             ],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
@@ -703,7 +702,7 @@ class TestComplexCombinations:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Eggs", severity="moderate")],
+            allergies_list=[Allergy(allergen_name="Eggs")],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="vegetarian", restrictions=["vegetarian"]),
@@ -733,8 +732,8 @@ class TestComplexCombinations:
             max_cooking_time=60,
             health_goals=[],
             allergies_list=[
-                Allergy(allergen_name="Wheat", severity="moderate"),
-                Allergy(allergen_name="Dairy", severity="moderate")
+                Allergy(allergen_name="Wheat"),
+                Allergy(allergen_name="Dairy")
             ],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
@@ -772,7 +771,7 @@ class TestAllergyEdgeCases:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Shellfish", severity="severe")],
+            allergies_list=[Allergy(allergen_name="Shellfish")],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="omnivore"),
@@ -803,7 +802,7 @@ class TestAllergyEdgeCases:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Fish", severity="severe")],
+            allergies_list=[Allergy(allergen_name="Fish")],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="omnivore"),
@@ -834,7 +833,7 @@ class TestAllergyEdgeCases:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Wheat", severity="severe")],
+            allergies_list=[Allergy(allergen_name="Wheat")],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="omnivore"),
@@ -865,7 +864,7 @@ class TestAllergyEdgeCases:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Soy", severity="moderate")],
+            allergies_list=[Allergy(allergen_name="Soy")],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="omnivore"),
@@ -896,7 +895,7 @@ class TestAllergyEdgeCases:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Sesame", severity="moderate")],
+            allergies_list=[Allergy(allergen_name="Sesame")],
             skill=CookingSkill(level="intermediate"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="omnivore"),
@@ -1113,7 +1112,7 @@ class TestInferenceEngineRobustness:
             available_equipment=[],
             max_cooking_time=30,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Eggs", severity="moderate")],
+            allergies_list=[Allergy(allergen_name="Eggs")],
             skill=CookingSkill(level="beginner"),
             time_constraint=TimeConstraint(available_minutes=30),
             dietary_preference=DietaryPreference(type="vegan", restrictions=["vegan"]),
@@ -1222,7 +1221,7 @@ class TestNewRecipes:
         assert pico.skill == Skill.EASY, "Pico de Gallo should be easy skill"
         assert CookingMethod.BOWL in pico.cooking_methods, "Pico de Gallo should use BOWL method"
         assert pico.meal == Meal.LUNCH, "Pico de Gallo should be lunch"
-        assert pico.budget == Budget.BUDGET, "Pico de Gallo should be budget-friendly"
+        assert pico.budget == Budget.LOW_COST, "Pico de Gallo should be low-cost"
     
     def test_flatbread_taco_recipe_exists(self):
         """Test Flatbread Taco with Minced Beef and Red Onion recipe"""
@@ -1347,8 +1346,8 @@ class TestNewRecipesWithFiltering:
             max_cooking_time=60,
             health_goals=[],
             allergies_list=[
-                Allergy(allergen_name="Peanuts", severity="severe"),
-                Allergy(allergen_name="Tree Nuts", severity="severe")
+                Allergy(allergen_name="Peanuts"),
+                Allergy(allergen_name="Tree Nuts")
             ],
             skill=CookingSkill(level="beginner"),
             time_constraint=None,
@@ -1380,7 +1379,7 @@ class TestNewRecipesWithFiltering:
             available_equipment=[],
             max_cooking_time=60,
             health_goals=[],
-            allergies_list=[Allergy(allergen_name="Wheat", severity="moderate")],
+            allergies_list=[Allergy(allergen_name="Wheat")],
             skill=CookingSkill(level="beginner"),
             time_constraint=None,
             dietary_preference=DietaryPreference(type="vegetarian", restrictions=["gluten-free"]),

@@ -29,7 +29,7 @@ def test_allergy_domain_object():
     print("\n=== Testing Allergy Domain Object ===")
     
     # Create allergy
-    dairy_allergy = Allergy(allergen_name="dairy", severity="severe")
+    dairy_allergy = Allergy(allergen_name="dairy")
     
     # Test ingredient with dairy
     cheese = Ingredient(name="cheese", quantity=100, unit="g", category="dairy", allergens=["dairy"])
@@ -48,7 +48,7 @@ def test_allergy_domain_object():
     print("✓ Allergy auto-populates ingredients to avoid")
     
     # Test nuts allergy
-    nuts_allergy = Allergy(allergen_name="nuts", severity="moderate")
+    nuts_allergy = Allergy(allergen_name="nuts")
     almond = Ingredient(name="almonds", quantity=50, unit="g", category="protein", allergens=["nuts"])
     assert not nuts_allergy.is_safe(almond), "Almonds should not be safe for nuts allergy"
     print("✓ Nuts allergy correctly identifies unsafe ingredient")
@@ -59,7 +59,7 @@ def test_budget_constraint():
     print("\n=== Testing BudgetConstraint Domain Object ===")
     
     # Budget range
-    budget = BudgetConstraint(preferred_range="budget", flexibility="strict")
+    budget = BudgetConstraint(preferred_range="low_cost", flexibility="strict")
     
     # Create cheap recipe
     cheap_recipe = Recipe(
@@ -69,7 +69,7 @@ def test_budget_constraint():
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
         cooking_methods=[CookingMethod.PAN],
-        budget=Budget.BUDGET,
+        budget=Budget.LOW_COST,
         meal=Meal.LUNCH,
         macros=[],
         cost=3.0
@@ -96,7 +96,7 @@ def test_budget_constraint():
     print("✓ Budget constraint rejects expensive recipe")
     
     # Test flexible budget
-    flexible_budget = BudgetConstraint(preferred_range="budget", flexibility="flexible")
+    flexible_budget = BudgetConstraint(preferred_range="low_cost", flexibility="flexible")
     moderately_expensive = Recipe(
         name="Mid-Range Meal",
         diet=Diet.OMNIVORE,
@@ -139,7 +139,7 @@ def test_cooking_skill():
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
         cooking_methods=[CookingMethod.PAN],
-        budget=Budget.BUDGET,
+        budget=Budget.LOW_COST,
         meal=Meal.BREAKFAST,
         macros=[]
     )
@@ -206,7 +206,7 @@ def test_time_constraint():
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
         cooking_methods=[CookingMethod.PAN],
-        budget=Budget.BUDGET,
+        budget=Budget.LOW_COST,
         meal=Meal.LUNCH,
         macros=[],
         prep_time=10
@@ -220,7 +220,7 @@ def test_time_constraint():
         cooking_time=CookingTime.BETWEEN_15_45,
         skill=Skill.EASY,
         cooking_methods=[CookingMethod.PAN],
-        budget=Budget.BUDGET,
+        budget=Budget.LOW_COST,
         meal=Meal.LUNCH,
         macros=[],
         prep_time=20
@@ -276,7 +276,7 @@ def test_dietary_preferences():
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
         cooking_methods=[CookingMethod.PAN],
-        budget=Budget.BUDGET,
+        budget=Budget.LOW_COST,
         meal=Meal.LUNCH,
         macros=[]
     )
@@ -394,7 +394,7 @@ def test_kitchen_equipment():
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
         cooking_methods=[CookingMethod.PAN],
-        budget=Budget.BUDGET,
+        budget=Budget.LOW_COST,
         meal=Meal.DINNER,
         macros=[],
         equipment=[Equipment(name="pan", category="cookware")]
@@ -576,7 +576,7 @@ def test_budget_options():
     print("\n=== Testing Budget Options from Quiz ===")
     
     # Test budget
-    budget_prefs = {'budget': [Budget.BUDGET]}
+    budget_prefs = {'budget': [Budget.LOW_COST]}
     user = preferences_to_user(budget_prefs)
     assert user.budget.preferred_range == "budget", "Should be budget range"
     print("✓ Budget option")
@@ -662,7 +662,7 @@ def test_forward_chaining_initialization():
             cooking_time=CookingTime.LESS_THAN_15,
             skill=Skill.EASY,
             cooking_methods=[CookingMethod.PAN],
-            budget=Budget.BUDGET,
+            budget=Budget.LOW_COST,
             meal=Meal.LUNCH,
             macros=[],
             cost=3.0
@@ -693,7 +693,7 @@ def test_forward_chaining_with_sample_recipes():
         max_cooking_time=30,
         health_goals=["high-protein"],
         allergies_list=[],
-        budget=BudgetConstraint(preferred_range="budget", flexibility="strict"),
+        budget=BudgetConstraint(preferred_range="low_cost", flexibility="strict"),
         skill=CookingSkill(level="beginner", years_experience=1),
         time_constraint=TimeConstraint(available_minutes=30, includes_prep=True, flexibility=False),
         dietary_preference=DietaryPreference(type="vegetarian", restrictions=[], preferred_cuisines=[]),
@@ -737,8 +737,8 @@ def test_user_with_all_domain_objects():
         max_cooking_time=30,
         health_goals=["high-protein"],
         # Domain objects
-        allergies_list=[Allergy(allergen_name="dairy", severity="moderate")],
-        budget=BudgetConstraint(preferred_range="budget", flexibility="flexible"),
+        allergies_list=[Allergy(allergen_name="dairy")],
+        budget=BudgetConstraint(preferred_range="low_cost", flexibility="flexible"),
         skill=CookingSkill(level="beginner", years_experience=0),
         time_constraint=TimeConstraint(available_minutes=30, includes_prep=True, flexibility=False),
         dietary_preference=DietaryPreference(type="vegetarian", restrictions=["dairy"], preferred_cuisines=[]),
@@ -784,7 +784,7 @@ def test_complete_user_flow():
         'cooking_time': [CookingTime.LESS_THAN_15],
         'skill': [Skill.EASY],
         'cooking_methods': [CookingMethod.PAN],
-        'budget': [Budget.BUDGET],
+        'budget': [Budget.LOW_COST],
         'meal': [Meal.LUNCH],
         'macros': [Macros.HIGH_PROTEIN, Macros.LOW_FATS]
     }

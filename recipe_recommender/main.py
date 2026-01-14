@@ -77,7 +77,7 @@ if 'current_question' not in st.session_state:
     
 if 'answers' not in st.session_state:
     st.session_state.answers = {
-        'allergens': [],  # List of tuples: (allergen_name, severity)
+        'allergens': [],  # List of allergen names
         'budget': [],  # Will have 1 item: (min, max)
         'skill': [],  # Will have 1 item: SkillLevel
         'time': [],  # Will have 1 item: minutes
@@ -100,12 +100,7 @@ def answer_question(answer, custom_value=None):
             st.session_state.answers[category].append(custom_value)
     else:
         if answer:
-            # For allergens, also need severity
-            if category == "allergens":
-                severity = "moderate"  # Default severity: mild, moderate, or severe
-                st.session_state.answers[category].append((value, severity))
-            else:
-                st.session_state.answers[category].append(value)
+            st.session_state.answers[category].append(value)
     
     st.session_state.current_question += 1
     
@@ -347,7 +342,7 @@ else:
     from system.inference_engine import InferenceEngine
     
     # Create domain objects for User
-    allergies_list = [Allergy(allergen_name=a, severity=s) for a, s in st.session_state.answers['allergens']]
+    allergies_list = [Allergy(allergen_name=a) for a in st.session_state.answers.get('allergens', [])]
     
     skill_obj = CookingSkill(level=st.session_state.answers['skill'][0] if st.session_state.answers['skill'] else 'beginner')
     

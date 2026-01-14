@@ -1,6 +1,6 @@
 """
 Allergy domain class for recipe recommendation system.
-Represents a user's allergy with severity and unsafe ingredients.
+Represents a user's allergy with unsafe ingredients.
 """
 
 from typing import List
@@ -12,7 +12,6 @@ class Allergy:
     """Represents an allergy with associated unsafe ingredients"""
     
     allergen_name: str
-    severity: str = "moderate"  # mild, moderate, severe
     ingredients_to_avoid: List[str] = field(default_factory=list)
     
     def __post_init__(self):
@@ -64,13 +63,8 @@ class Allergy:
         
         return True
     
-    def get_severity_level(self) -> int:
-        """Get numeric severity level (1=mild, 2=moderate, 3=severe)"""
-        severity_map = {'mild': 1, 'moderate': 2, 'severe': 3}
-        return severity_map.get(self.severity.lower(), 2)
-    
     def __str__(self) -> str:
-        return f"{self.allergen_name} allergy ({self.severity})"
+        return f"{self.allergen_name} allergy"
     
     def __repr__(self) -> str:
-        return f"Allergy(allergen_name='{self.allergen_name}', severity='{self.severity}')"
+        return f"Allergy(allergen_name='{self.allergen_name}')"
