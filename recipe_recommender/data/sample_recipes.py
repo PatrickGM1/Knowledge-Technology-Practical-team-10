@@ -5,6 +5,254 @@ from models import (
 )
 
 
+def get_chef_sorin_recipes():
+    """Chef Sorin's handwritten recipes"""
+    
+    # Recipe 1: Crème Brûlée
+    creme_brulee = Recipe(
+        name="Crème Brûlée",
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.MORE_THAN_45,
+        skill=Skill.MEDIUM,
+        cooking_methods=[CookingMethod.OVEN],
+        budget=Budget.MODERATE,
+        meal=Meal.DINNER,
+        macros=[Macros.LOW_FATS],
+        ingredients=[
+            Ingredient(name="egg yolks", quantity=6, unit="pieces", category="protein", allergens=["eggs"]),
+            Ingredient(name="heavy cream", quantity=500, unit="ml", category="dairy", allergens=["dairy"]),
+            Ingredient(name="sugar", quantity=100, unit="g", category="other"),
+            Ingredient(name="vanilla extract", quantity=1, unit="tsp", category="spice"),
+        ],
+        equipment=[
+            Equipment(name="bowl", category="cookware"),
+            Equipment(name="whisk", category="utensil"),
+            Equipment(name="ramekins", category="cookware"),
+            Equipment(name="oven", category="appliance"),
+            Equipment(name="baking tray", category="cookware"),
+        ],
+        instructions=[
+            "In a bowl, whisk egg yolks and sugar until well combined",
+            "Add the heavy cream and vanilla extract to the mixture",
+            "Pour mixture into individual ramekins",
+            "Place ramekins in a baking tray filled with water (bain-marie)",
+            "Bake in oven at 120°C (no fan) for 1 hour to 1 hour 10 minutes",
+            "Leave in oven to cool gradually",
+            "Before serving, sprinkle sugar on top and caramelize with a torch",
+        ],
+        servings=6,
+        prep_time=15,
+        nutritional_info=NutritionalInfo(
+            calories=320,
+            protein=6,
+            carbohydrates=28,
+            fat=21,
+            fiber=0,
+            sodium=50,
+        ),
+        tags=["french", "dessert", "classic", "elegant"],
+        cost=4.50,
+        cuisine="French",
+    )
+    
+    # Recipe 2: Clarified Butter Hollandaise (Sos blender - sauce)
+    hollandaise = Recipe(
+        name="Clarified Butter Hollandaise",
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.MEDIUM,
+        cooking_methods=[CookingMethod.PAN],
+        budget=Budget.MODERATE,
+        meal=Meal.LUNCH,
+        macros=[Macros.LOW_CARBS],
+        ingredients=[
+            Ingredient(name="butter", quantity=200, unit="g", category="dairy", allergens=["dairy"]),
+            Ingredient(name="egg yolk", quantity=3, unit="pieces", category="protein", allergens=["eggs"]),
+            Ingredient(name="lemon juice", quantity=1, unit="tbsp", category="other"),
+            Ingredient(name="white wine vinegar", quantity=1, unit="tbsp", category="other"),
+            Ingredient(name="salt", quantity=0.5, unit="tsp", category="spice"),
+            Ingredient(name="pepper", quantity=0.25, unit="tsp", category="spice"),
+        ],
+        equipment=[
+            Equipment(name="sauce pan", category="cookware"),
+            Equipment(name="bowl", category="cookware"),
+            Equipment(name="whisk", category="utensil"),
+            Equipment(name="sieve", category="utensil"),
+        ],
+        instructions=[
+            "Melt the butter in a pan",
+            "Skim the foam from the top with a spoon",
+            "Filter the melted butter through a sieve to get clear golden liquid",
+            "Discard impurities that settled on the bottom",
+            "In a sauce pan with boiling water, place a bowl on top",
+            "Add egg yolks, lemon juice, and vinegar to the bowl",
+            "Whisk while slowly adding the clarified butter",
+            "Turn heat on and off to prevent eggs from overcooking",
+            "Continue whisking until sauce is thick and emulsified",
+        ],
+        servings=4,
+        prep_time=15,
+        nutritional_info=NutritionalInfo(
+            calories=280,
+            protein=3,
+            carbohydrates=2,
+            fat=30,
+            fiber=0,
+            sodium=180,
+        ),
+        tags=["sauce", "french", "classic"],
+        cost=3.00,
+        cuisine="French",
+    )
+    
+    # Recipe 3: Avocado Toast with Poached Eggs
+    avocado_toast = Recipe(
+        name="Avocado Toast with Poached Eggs",
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.PAN],
+        budget=Budget.MODERATE,
+        meal=Meal.BREAKFAST,
+        macros=[Macros.HIGH_PROTEIN, Macros.LOW_SUGARS],
+        ingredients=[
+            Ingredient(name="toasted bread", quantity=2, unit="slices", category="grain", allergens=["gluten"]),
+            Ingredient(name="avocado", quantity=1, unit="piece", category="vegetable"),
+            Ingredient(name="green onion", quantity=1, unit="piece", category="vegetable"),
+            Ingredient(name="red onion", quantity=0.25, unit="piece", category="vegetable"),
+            Ingredient(name="tomato", quantity=0.5, unit="piece", category="vegetable"),
+            Ingredient(name="lime juice", quantity=1, unit="tbsp", category="other"),
+            Ingredient(name="eggs", quantity=2, unit="pieces", category="protein", allergens=["eggs"]),
+            Ingredient(name="white wine vinegar", quantity=100, unit="ml", category="other"),
+            Ingredient(name="salt", quantity=0.5, unit="tsp", category="spice"),
+            Ingredient(name="pepper", quantity=0.25, unit="tsp", category="spice"),
+        ],
+        equipment=[
+            Equipment(name="pot", category="cookware"),
+            Equipment(name="bowl", category="cookware"),
+            Equipment(name="spatula", category="utensil"),
+        ],
+        instructions=[
+            "Make guacamole: mash avocado with green onion, red onion, tomato, salt, pepper, and lime juice",
+            "For poached eggs: bring 2L water with 100ml white wine vinegar to boil",
+            "Create a vortex in the water with a spatula",
+            "Crack egg into the vortex",
+            "Cook for 3-4 minutes",
+            "Toast the bread slices",
+            "Spread guacamole on toasted bread",
+            "Top with poached egg",
+        ],
+        servings=2,
+        prep_time=13,
+        nutritional_info=NutritionalInfo(
+            calories=340,
+            protein=14,
+            carbohydrates=28,
+            fat=20,
+            fiber=8,
+            sodium=320,
+        ),
+        tags=["breakfast", "healthy", "quick", "modern"],
+        cost=4.00,
+        cuisine="American",
+    )
+    
+    # Recipe 4: Fried Rice with Eggs and Shrimp
+    fried_rice = Recipe(
+        name="Fried Rice with Eggs and Shrimp",
+        diet=Diet.PESCATARIAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.PAN],
+        budget=Budget.MODERATE,
+        meal=Meal.LUNCH,
+        macros=[Macros.HIGH_PROTEIN],
+        ingredients=[
+            Ingredient(name="cooked rice", quantity=300, unit="g", category="grain"),
+            Ingredient(name="eggs", quantity=2, unit="pieces", category="protein", allergens=["eggs"]),
+            Ingredient(name="shrimp", quantity=200, unit="g", category="protein", allergens=["shellfish"]),
+            Ingredient(name="spring onion", quantity=2, unit="pieces", category="vegetable", preparation="julienned"),
+            Ingredient(name="soy sauce", quantity=2, unit="tbsp", category="other", allergens=["soy"]),
+            Ingredient(name="oil", quantity=2, unit="tbsp", category="other"),
+            Ingredient(name="butter", quantity=1, unit="tbsp", category="dairy", allergens=["dairy"]),
+        ],
+        equipment=[
+            Equipment(name="wok or large pan", category="cookware"),
+            Equipment(name="spatula", category="utensil"),
+        ],
+        instructions=[
+            "Cook the rice if not already cooked (steam method preferred)",
+            "Heat oil in a hot pan or wok",
+            "Add eggs and scramble",
+            "Add the spring onion julienne and cook briefly",
+            "Add the shrimp and cook until brown",
+            "Add the cooked rice and stir-fry",
+            "Add soy sauce and let rice absorb the flavor",
+            "Finish with butter and egg, mixing well",
+        ],
+        servings=2,
+        prep_time=15,
+        nutritional_info=NutritionalInfo(
+            calories=450,
+            protein=28,
+            carbohydrates=52,
+            fat=14,
+            fiber=2,
+            sodium=680,
+        ),
+        tags=["asian", "quick", "easy", "seafood"],
+        cost=6.00,
+        cuisine="Asian",
+    )
+    
+    # Recipe 5: Simple Vinaigrette
+    vinaigrette = Recipe(
+        name="Simple Vinaigrette",
+        diet=Diet.VEGAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.BLENDER],
+        budget=Budget.LOW_COST,
+        meal=Meal.LUNCH,
+        macros=[Macros.LOW_CARBS, Macros.LOW_SUGARS],
+        ingredients=[
+            Ingredient(name="olive oil", quantity=3, unit="tbsp", category="other"),
+            Ingredient(name="white wine vinegar", quantity=1, unit="tbsp", category="other"),
+            Ingredient(name="salt", quantity=0.25, unit="tsp", category="spice"),
+            Ingredient(name="pepper", quantity=0.25, unit="tsp", category="spice"),
+        ],
+        equipment=[
+            Equipment(name="blender", category="appliance"),
+            Equipment(name="bowl", category="cookware"),
+        ],
+        instructions=[
+            "Add olive oil, white wine vinegar, salt, and pepper to blender",
+            "Blend until everything is fully incorporated",
+            "Serve with any salad",
+        ],
+        servings=4,
+        prep_time=3,
+        nutritional_info=NutritionalInfo(
+            calories=90,
+            protein=0,
+            carbohydrates=0,
+            fat=10,
+            fiber=0,
+            sodium=60,
+        ),
+        tags=["simple", "quick", "vegan", "salad", "dressing"],
+        cost=1.00,
+        cuisine="French",
+    )
+    
+    return [creme_brulee, hollandaise, avocado_toast, fried_rice, vinaigrette]
+
+
 # Sample recipes for the recommender system
 SAMPLE_RECIPES = [
     Recipe(
@@ -485,8 +733,11 @@ SAMPLE_RECIPES = [
         cuisine="International",
         description="High-protein meal replacement shake made with milk, protein powder, oats, peanut butter, banana, and optional flavoring",
         cost=3.5
-    )
+    ),
 ]
+
+# Add Chef Sorin's recipes
+SAMPLE_RECIPES.extend(get_chef_sorin_recipes())
 
 
 def get_all_recipes():

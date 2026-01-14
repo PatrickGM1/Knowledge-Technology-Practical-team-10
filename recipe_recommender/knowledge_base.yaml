@@ -200,6 +200,26 @@ rules:
       result: false
       reason: Recipe contains shellfish (allergen)
   
+  - id: filter_allergy_shrimp
+    name: Filter recipes with shrimp
+    description: Exclude recipes containing shrimp if user is allergic to shellfish
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Shellfish
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [shrimp]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains shrimp (shellfish allergen)
+  
   - id: filter_allergy_fish
     name: Filter recipes with fish allergens
     description: Exclude recipes containing fish if user is allergic
@@ -339,6 +359,26 @@ rules:
       type: filter
       result: false
       reason: Recipe contains soy (allergen)
+  
+  - id: filter_allergy_soy_sauce
+    name: Filter recipes with soy sauce
+    description: Exclude recipes containing soy sauce if user is allergic to soy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Soy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [soy sauce]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains soy sauce (soy allergen)
   
   - id: filter_allergy_sesame
     name: Filter recipes with sesame allergens
