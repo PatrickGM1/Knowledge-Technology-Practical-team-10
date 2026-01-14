@@ -36,7 +36,7 @@ QUESTIONS = [
     ("Are you allergic to Sesame?", "allergens", "Sesame", "multiple"),
     
     # Budget - special three-button layout
-    ("What's your budget for ingredients?", "budget", "budget", "budget"),
+    ("What's your budget for ingredients?", "budget", "low_cost", "budget"),
     
     # Skill level - special three-button layout
     ("What's your cooking experience?", "skill", "intermediate", "skill"),
