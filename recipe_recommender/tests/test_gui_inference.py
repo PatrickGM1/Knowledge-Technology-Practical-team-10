@@ -1206,7 +1206,7 @@ class TestNewRecipes:
         trout = next((r for r in recipes if r.name == "Trout Fillet Marinated in Sugar"), None)
         
         assert trout is not None, "Trout Fillet recipe should exist"
-        assert trout.diet == Diet.OMNIVORE, "Trout should be omnivore diet"
+        assert trout.diet == Diet.PESCATARIAN, "Trout should be pescatarian diet"
         assert trout.skill == Skill.EASY, "Trout should be easy skill"
         assert CookingMethod.MARINATED in trout.cooking_methods, "Trout should use MARINATED method"
         assert trout.meal == Meal.SNACK, "Trout should be a snack"

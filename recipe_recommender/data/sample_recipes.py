@@ -250,7 +250,7 @@ SAMPLE_RECIPES = [
     # 1) Trout fillet marinated in sugar (snack)
     Recipe(
         name="Trout Fillet Marinated in Sugar",
-        diet=Diet.OMNIVORE,
+        diet=Diet.PESCATARIAN,
         diet_restrictions=[DietRestriction.NONE],
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
