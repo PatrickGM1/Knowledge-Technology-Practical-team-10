@@ -336,8 +336,75 @@ if not st.session_state.quiz_complete:
         st.rerun()
 
 else:
-    # Quiz complete - show recipe recommendations
-    st.success("✅ Quiz Complete! Let's find your perfect recipes!")
+    # Quiz complete - show all created domain objects
+    st.success("✅ Quiz Complete! Here are all your domain objects:")
+    st.divider()
+    
+    # Display all created domain objects
+    st.subheader("📋 Created Domain Objects")
+    
+    # Allergies
+    if st.session_state.answers['allergens']:
+        st.markdown("### 🚫 Allergies")
+        for allergen_name, severity in st.session_state.answers['allergens']:
+            st.write(f"- {allergen_name}")
+    else:
+        st.info("No allergies selected")
+    
+    # Budget Constraint
+    if st.session_state.answers['budget']:
+        st.markdown("### 💰 Budget Constraint")
+        budget_pref = st.session_state.answers['budget'][0]
+        budget = BudgetConstraint(preferred_range=budget_pref, flexibility='flexible')
+        st.write(f"- {budget}")
+    else:
+        st.info("No budget selected")
+    
+    # Cooking Skill
+    if st.session_state.answers['skill']:
+        st.markdown("### 👨‍🍳 Cooking Skill")
+        skill_level = st.session_state.answers['skill'][0]
+        skill = CookingSkill(skill_level)
+        st.write(f"- {skill}")
+    else:
+        st.info("No skill level selected")
+    
+    # Time Constraint
+    if st.session_state.answers['time']:
+        st.markdown("### ⏰ Time Constraint")
+        time_minutes = st.session_state.answers['time'][0]
+        time = TimeConstraint(time_minutes)
+        st.write(f"- {time}")
+    else:
+        st.info("No time constraint selected")
+    
+    # Dietary Preferences
+    if st.session_state.answers['dietary_prefs']:
+        st.markdown("### 🥗 Dietary Preferences")
+        for pref_type in st.session_state.answers['dietary_prefs']:
+            pref = DietaryPreference(type=pref_type)
+            st.write(f"- {pref}")
+    else:
+        st.info("No dietary preferences selected")
+    
+    # Health Goals
+    if st.session_state.answers['health_goals']:
+        st.markdown("### 🎯 Health Goals")
+        for goal_type in st.session_state.answers['health_goals']:
+            goal = HealthGoal(goal_type=goal_type)
+            st.write(f"- {goal}")
+    else:
+        st.info("No health goals selected")
+    
+    # Kitchen Equipment
+    if st.session_state.answers['equipment']:
+        st.markdown("### 🔧 Kitchen Equipment")
+        kitchen = Kitchen(st.session_state.answers['equipment'])
+        st.write(f"- {kitchen}")
+        st.write(f"  Available equipment: {', '.join(st.session_state.answers['equipment'])}")
+    else:
+        st.info("No equipment selected")
+    
     st.divider()
     
     # Create User object and get recipe recommendations
@@ -411,7 +478,7 @@ else:
     
     # Run inference engine with knowledge base
     from pathlib import Path
-    kb_path = Path(__file__).parent / 'knowledge_base.yaml'
+    kb_path = Path(__file__).parent.parent / 'knowledge_base.yaml'
     
     engine = InferenceEngine(str(kb_path))
     engine.forward_chain(user, kitchen_obj, all_recipes)
@@ -458,6 +525,10 @@ else:
         st.warning("No recipes match your criteria. Try adjusting your preferences!")
     
     st.divider()
+    
+    # Show raw session state for debugging
+    with st.expander("🔍 View Raw Session State"):
+        st.json(st.session_state.answers)
     
     # Reset button
     if st.button("🔄 Start Over", use_container_width=True, type="primary"):
