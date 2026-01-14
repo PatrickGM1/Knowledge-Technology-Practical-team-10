@@ -60,6 +60,106 @@ rules:
       result: false
       reason: Recipe contains dairy (allergen)
   
+  - id: filter_allergy_milk
+    name: Filter recipes with milk
+    description: Exclude recipes containing milk if user is allergic to dairy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Dairy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [milk]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains milk (dairy allergen)
+  
+  - id: filter_allergy_cheese
+    name: Filter recipes with cheese
+    description: Exclude recipes containing cheese if user is allergic to dairy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Dairy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [cheese]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains cheese (dairy allergen)
+  
+  - id: filter_allergy_butter
+    name: Filter recipes with butter
+    description: Exclude recipes containing butter if user is allergic to dairy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Dairy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [butter]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains butter (dairy allergen)
+  
+  - id: filter_allergy_cream
+    name: Filter recipes with cream
+    description: Exclude recipes containing cream if user is allergic to dairy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Dairy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [cream]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains cream (dairy allergen)
+  
+  - id: filter_allergy_yogurt
+    name: Filter recipes with yogurt
+    description: Exclude recipes containing yogurt if user is allergic to dairy
+    priority: 100
+    category: filtering
+    conditions:
+      - object: user
+        attribute: allergies
+        operator: contains
+        value: Dairy
+      - object: recipe
+        attribute: has_ingredient
+        operator: method_call
+        method: has_ingredient
+        args: [yogurt]
+    action:
+      type: filter
+      result: false
+      reason: Recipe contains yogurt (dairy allergen)
+  
   - id: filter_allergy_eggs
     name: Filter recipes with egg allergens
     description: Exclude recipes containing eggs if user is allergic

@@ -42,6 +42,9 @@ class CookingMethod(Enum):
     PAN = "pan"
     OVEN = "oven"
     GRILL = "grill"
+    MARINATED = "marinated"
+    BOWL = "bowl"
+    BLENDER = "blender"
 
 
 class Budget(Enum):

@@ -254,7 +254,7 @@ SAMPLE_RECIPES = [
         diet_restrictions=[DietRestriction.NONE],
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
-        cooking_methods=[CookingMethod.NONE],
+        cooking_methods=[CookingMethod.MARINATED],
         budget=Budget.MODERATE,
         meal=Meal.SNACK,
         macros=[Macros.HIGH_PROTEIN, Macros.LOW_CARBS],
@@ -297,7 +297,7 @@ SAMPLE_RECIPES = [
         diet_restrictions=[DietRestriction.NONE],
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
-        cooking_methods=[CookingMethod.NONE],
+        cooking_methods=[CookingMethod.BOWL],
         budget=Budget.BUDGET,
         meal=Meal.LUNCH,
         macros=[Macros.LOW_SUGARS, Macros.LOW_FATS],
@@ -343,7 +343,7 @@ SAMPLE_RECIPES = [
         diet_restrictions=[DietRestriction.NONE],
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
-        cooking_methods=[CookingMethod.NONE],
+        cooking_methods=[CookingMethod.PAN, CookingMethod.OVEN],
         budget=Budget.BUDGET,
         meal=Meal.SNACK,
         macros=[Macros.HIGH_PROTEIN, Macros.LOW_SUGARS],
@@ -384,14 +384,14 @@ SAMPLE_RECIPES = [
         cost=4.0
     ),
 
-    # 4) Cheddar-style chicken salad
+    # 4) Cessar-style chicken salad
     Recipe(
-        name="Cheddar Chicken Salad",
+        name="Cessar Chicken Salad",
         diet=Diet.OMNIVORE,
         diet_restrictions=[DietRestriction.NONE],
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
-        cooking_methods=[CookingMethod.NONE],
+        cooking_methods=[CookingMethod.BOWL, CookingMethod.PAN],
         budget=Budget.MODERATE,
         meal=Meal.LUNCH,
         macros=[Macros.HIGH_PROTEIN, Macros.LOW_SUGARS],
@@ -433,15 +433,16 @@ SAMPLE_RECIPES = [
     Recipe(
         name="Meal Replacement Protein Shake",
         diet=Diet.VEGETARIAN,
-        diet_restrictions=[DietRestriction.NUTS_ALLERGIES],
+        diet_restrictions=[DietRestriction.NUTS_ALLERGIES, DietRestriction.LACTOSE_INTOLERANT],
         cooking_time=CookingTime.LESS_THAN_15,
         skill=Skill.EASY,
-        cooking_methods=[CookingMethod.NONE],
+        cooking_methods=[CookingMethod.BLENDER],
         budget=Budget.BUDGET,
         meal=Meal.SNACK,
         macros=[Macros.HIGH_PROTEIN, Macros.LOW_SUGARS],
         ingredients=[
-            Ingredient(name="milk", quantity=300, unit="ml", category="dairy", allergens=["dairy"]),
+            Ingredient(name="milk", quantity=300, unit="ml", category="dairy", allergens=["dairy"],
+                      substitutes={"almond milk": 1.0, "soy milk": 1.0, "oat milk": 1.0}),
             Ingredient(name="protein powder", quantity=30, unit="g", category="protein"),
             Ingredient(name="rolled oats", quantity=30, unit="g", category="grain"),
             Ingredient(
@@ -459,7 +460,6 @@ SAMPLE_RECIPES = [
                 unit="tsp",
                 category="other",
                 is_optional=True,
-                description="artificial or natural (honey or maple syrup)",
                 substitutes={"honey": 1.0, "maple syrup": 1.0}
             ),
         ],
