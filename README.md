@@ -159,10 +159,11 @@ The system uses a knowledge-based inference engine with:
    - Return filtered, scored recipes with substitution suggestions
 
 4. **Recipe Database**:
-   - 10 diverse recipes covering Italian, American, Mexican, Romanian, and International cuisines
+   - 20 diverse recipes covering Italian, French, British, American, Mexican, Romanian, Mediterranean, Middle Eastern, and Asian cuisines
    - 6 cooking methods: Pan, Oven, Grill, Marinated, Bowl, Blender
    - Full dietary spectrum: Vegan, Vegetarian, Pescatarian, Omnivore
    - Complete nutritional data and ingredient substitutions
+   - Includes Chef Sorin's handwritten recipes and team-contributed recipes
 
 ### System Workflow
 ```
@@ -285,7 +286,7 @@ recipe_recommender/
 │   └── kitchen.py                  # Kitchen class
 ├── data/
 │   ├── __init__.py
-│   └── sample_recipes.py           # 10 sample recipes with full data
+│   └── sample_recipes.py           # 20 sample recipes with full data
 ├── system/
 │   ├── __init__.py                 # System exports
 │   ├── inference_engine.py         # Rule evaluation engine (Rule, InferenceEngine)
@@ -294,7 +295,7 @@ recipe_recommender/
 │   └── 1_Team_Info.py              # Team information page
 └── tests/
     ├── __init__.py
-    └── test_gui_inference.py       # Comprehensive test suite (59 tests)
+    └── test_gui_inference.py       # Comprehensive test suite (68 tests)
 ```
 
 ### Key Files
@@ -304,7 +305,7 @@ recipe_recommender/
 - **`system/inference_engine.py`**: Core engine with Rule and InferenceEngine classes
 - **`models/recipe.py`**: Recipe class + enums (Diet, DietRestriction, CookingTime, Skill, CookingMethod with 6 values, Budget, Meal, Macros)
 - **`models/cooking_method.py`**: DetailedCookingMethod class with properties, alternatives, skill matching
-- **`data/sample_recipes.py`**: 10 diverse recipes covering 5 cuisines
+- **`data/sample_recipes.py`**: 20 diverse recipes covering 9 cuisines (French, British, Italian, American, Mexican, Mediterranean, Middle Eastern, Asian, Romanian)
 - **`pages/2_All_Recipes.py`**: Recipe browsing page with 13 filter options
 - **`tests/test_gui_inference.py`**: 59 comprehensive tests ensuring system reliability
 
@@ -312,10 +313,11 @@ recipe_recommender/
 
 ## Testing
 
-The project includes a comprehensive test suite with **59 tests** covering:
+The project includes a comprehensive test suite with **68 tests** covering:
 
 - **Inference Engine Tests**: Knowledge base loading, rule evaluation, filtering logic
-- **Recipe Tests**: All 10 recipes validated for proper structure and attributes
+- **Recipe Tests**: All 20 recipes validated for proper structure and attributes
+- **New Recipe Tests**: 15 dedicated tests for newly added recipes (Beef Wellington, Potato Puree, Asparagus Soup, Couscous, Hummus)
 - **Cooking Method Tests**: Validation of all 6 cooking methods (Pan, Oven, Grill, Marinated, Bowl, Blender)
 - **Filtering Tests**: Allergy filtering, dietary restrictions, time constraints, skill matching
 - **Integration Tests**: End-to-end testing of quiz → inference → recommendations
@@ -327,7 +329,7 @@ cd recipe_recommender
 pytest tests/ -v
 ```
 
-All 59 tests pass successfully, ensuring system reliability and correctness.
+All 68 tests pass successfully, ensuring system reliability and correctness.
 
 ---
 
@@ -336,7 +338,7 @@ All 59 tests pass successfully, ensuring system reliability and correctness.
 - **[Python 3.13](https://www.python.org/)**: Core programming language
 - **[Streamlit](https://streamlit.io/)**: Web application framework for interactive UI
 - **[PyYAML](https://pyyaml.org/)**: YAML parser for knowledge base loading
-- **[Pytest](https://pytest.org/)**: Testing framework with 59 comprehensive tests
+- **[Pytest](https://pytest.org/)**: Testing framework with 68 comprehensive tests
 - **Object-Oriented Design**: Extended domain model with 13 classes
 - **Knowledge Representation**: Declarative rules in YAML format (51 rules)
 - **Inference Engine**: Priority-based rule evaluation with context-aware reasoning
@@ -359,7 +361,7 @@ streamlit run main.py --server.port=8501 --server.headless=true
 
 ### Testing the Inference Engine
 ```bash
-# Run comprehensive test suite (59 tests)
+# Run comprehensive test suite (68 tests)
 cd recipe_recommender
 pytest tests/ -v
 

@@ -5,11 +5,17 @@ from models import (
 )
 
 
-def get_chef_sorin_recipes():
-    """Chef Sorin's handwritten recipes"""
+# ============================================================================
+# SAMPLE RECIPES - Main recipe collection
+# ============================================================================
+
+SAMPLE_RECIPES = [
+    # ============================================================================
+    # CHEF SORIN'S RECIPES - Handwritten recipes
+    # ============================================================================
     
     # Recipe 1: Crème Brûlée
-    creme_brulee = Recipe(
+    Recipe(
         name="Crème Brûlée",
         diet=Diet.VEGETARIAN,
         diet_restrictions=[DietRestriction.NONE],
@@ -54,10 +60,10 @@ def get_chef_sorin_recipes():
         tags=["french", "dessert", "classic", "elegant"],
         cost=4.50,
         cuisine="French",
-    )
+    ),
     
     # Recipe 2: Clarified Butter Hollandaise (Sos blender - sauce)
-    hollandaise = Recipe(
+    Recipe(
         name="Clarified Butter Hollandaise",
         diet=Diet.VEGETARIAN,
         diet_restrictions=[DietRestriction.NONE],
@@ -105,10 +111,10 @@ def get_chef_sorin_recipes():
         tags=["sauce", "french", "classic"],
         cost=3.00,
         cuisine="French",
-    )
+    ),
     
     # Recipe 3: Avocado Toast with Poached Eggs
-    avocado_toast = Recipe(
+    Recipe(
         name="Avocado Toast with Poached Eggs",
         diet=Diet.VEGETARIAN,
         diet_restrictions=[DietRestriction.NONE],
@@ -158,10 +164,10 @@ def get_chef_sorin_recipes():
         tags=["breakfast", "healthy", "quick", "modern"],
         cost=4.00,
         cuisine="American",
-    )
+    ),
     
     # Recipe 4: Fried Rice with Eggs and Shrimp
-    fried_rice = Recipe(
+    Recipe(
         name="Fried Rice with Eggs and Shrimp",
         diet=Diet.PESCATARIAN,
         diet_restrictions=[DietRestriction.NONE],
@@ -207,10 +213,10 @@ def get_chef_sorin_recipes():
         tags=["asian", "quick", "easy", "seafood"],
         cost=6.00,
         cuisine="Asian",
-    )
+    ),
     
     # Recipe 5: Simple Vinaigrette
-    vinaigrette = Recipe(
+    Recipe(
         name="Simple Vinaigrette",
         diet=Diet.VEGAN,
         diet_restrictions=[DietRestriction.NONE],
@@ -248,13 +254,13 @@ def get_chef_sorin_recipes():
         tags=["simple", "quick", "vegan", "salad", "dressing"],
         cost=1.00,
         cuisine="French",
-    )
+    ),
     
-    return [creme_brulee, hollandaise, avocado_toast, fried_rice, vinaigrette]
-
-
-# Sample recipes for the recommender system
-SAMPLE_RECIPES = [
+    # ============================================================================
+    # OTHER SAMPLE RECIPES
+    # ============================================================================
+    
+    # Classic Italian pasta dishes
     Recipe(
         name="Cacio e pepe",
         diet=Diet.VEGETARIAN,
@@ -734,10 +740,290 @@ SAMPLE_RECIPES = [
         description="High-protein meal replacement shake made with milk, protein powder, oats, peanut butter, banana, and optional flavoring",
         cost=3.5
     ),
-]
+    
+    # ============================================================================
+    # NEWLY ADDED RECIPES - Handwritten recipes from team
+    # ============================================================================
+    
+    # Recipe 6: Beef Wellington
+    Recipe(
+        name="Beef Wellington",
+        diet=Diet.OMNIVORE,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.MORE_THAN_45,
+        skill=Skill.EXPERIENCED,
+        cooking_methods=[CookingMethod.PAN, CookingMethod.OVEN],
+        budget=Budget.PREMIUM,
+        meal=Meal.DINNER,
+        macros=[Macros.HIGH_PROTEIN, Macros.LOW_CARBS],
+        ingredients=[
+            Ingredient(name="beef fillet", quantity=800, unit="g", category="protein"),
+            Ingredient(name="mushroom champignon", quantity=400, unit="g", category="vegetable"),
+            Ingredient(name="crepes", quantity=4, unit="pieces", category="grain", allergens=["eggs"]),
+            Ingredient(name="spinach", quantity=150, unit="g", category="vegetable"),
+            Ingredient(name="prosciutto crudo", quantity=200, unit="g", category="protein"),
+            Ingredient(name="mustard", quantity=2, unit="tbsp", category="spice"),
+            Ingredient(name="puff pastry", quantity=500, unit="g", category="grain", allergens=["dairy"]),
+            Ingredient(name="onion", quantity=1, unit="piece", category="vegetable"),
+            Ingredient(name="olive oil", quantity=2, unit="tbsp", category="oil"),
+            Ingredient(name="egg", quantity=1, unit="piece", category="protein", allergens=["eggs"], is_optional=True),
+        ],
+        equipment=[
+            Equipment(name="pan", category="cookware"),
+            Equipment(name="oven", category="appliance"),
+            Equipment(name="knife", category="utensil"),
+            Equipment(name="plastic wrap", category="utensil"),
+            Equipment(name="baking tray", category="cookware"),
+        ],
+        nutritional_info=NutritionalInfo(
+            calories=620,
+            protein=45,
+            carbohydrates=35,
+            fat=32,
+            fiber=3,
+            sodium=850,
+        ),
+        instructions=[
+            "Cook the beef fillet for 1 minute on each side in a hot pan",
+            "Coat the beef with mustard and set aside to cool",
+            "Thinly slice onions and cook them in a pan until soft",
+            "Cube the mushrooms and add them to the pan with the onions",
+            "Cook the mushroom and onion mixture until all moisture evaporates",
+            "On a plastic wrap, place the prosciutto slices in a rectangular shape",
+            "Layer the crepes on top of the prosciutto",
+            "Spread the mushroom and onion mixture over the crepes",
+            "Add fresh spinach leaves on top",
+            "Place the beef fillet on top and roll everything tightly using the plastic wrap",
+            "Refrigerate for 3 hours to set",
+            "After 3 hours, remove the plastic wrap and wrap the beef in puff pastry",
+            "Optional: brush with beaten egg for golden color",
+            "Bake in oven at 185°C for 35 minutes",
+            "Let rest for 5 minutes before slicing and serving",
+        ],
+        servings=4,
+        prep_time=45,
+        cuisine="British",
+        description="Classic British beef Wellington with mushroom duxelles, prosciutto, and puff pastry",
+        cost=18.0
+    ),
 
-# Add Chef Sorin's recipes
-SAMPLE_RECIPES.extend(get_chef_sorin_recipes())
+    # Recipe 7: Simple Potato Puree
+    Recipe(
+        name="Simple Potato Puree",
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.BETWEEN_15_45,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.OVEN],
+        budget=Budget.LOW_COST,
+        meal=Meal.LUNCH,
+        macros=[Macros.LOW_FATS],
+        ingredients=[
+            Ingredient(name="potatoes", quantity=800, unit="g", category="vegetable"),
+            Ingredient(name="salt", quantity=100, unit="g", category="spice"),
+            Ingredient(name="butter", quantity=100, unit="g", category="dairy", allergens=["dairy"]),
+            Ingredient(name="warm milk", quantity=150, unit="ml", category="dairy", allergens=["dairy"]),
+        ],
+        equipment=[
+            Equipment(name="oven", category="appliance"),
+            Equipment(name="baking tray", category="cookware"),
+            Equipment(name="sieve", category="utensil"),
+            Equipment(name="spoon", category="utensil"),
+            Equipment(name="bowl", category="cookware"),
+        ],
+        nutritional_info=NutritionalInfo(
+            calories=280,
+            protein=5,
+            carbohydrates=38,
+            fat=12,
+            fiber=3,
+            sodium=650,
+        ),
+        instructions=[
+            "Preheat oven to 180°C",
+            "Spread salt on a baking tray to create a bed",
+            "Place whole skinned potatoes on the salt bed",
+            "Bake for 30-40 minutes until tender",
+            "While still hot, cut potatoes in half",
+            "Scoop out the potato flesh with a spoon",
+            "Pass the hot potato through a sieve for smooth texture",
+            "Add cold butter cubes to the sieved potato in a line",
+            "Add warm milk gradually while mixing",
+            "Continue mixing until smooth and creamy",
+            "Serve immediately while hot",
+        ],
+        servings=4,
+        prep_time=10,
+        cuisine="French",
+        description="Silky smooth potato puree made by baking potatoes on salt, then mixing with butter and warm milk",
+        cost=3.0
+    ),
+
+    # Recipe 8: Asparagus Cream Soup
+    Recipe(
+        name="Asparagus Cream Soup",
+        diet=Diet.VEGETARIAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.BETWEEN_15_45,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.PAN, CookingMethod.BLENDER],
+        budget=Budget.MODERATE,
+        meal=Meal.LUNCH,
+        macros=[Macros.LOW_CARBS, Macros.LOW_SUGARS],
+        ingredients=[
+            Ingredient(name="asparagus", quantity=500, unit="g", category="vegetable"),
+            Ingredient(name="onion", quantity=1, unit="piece", category="vegetable"),
+            Ingredient(name="potatoes", quantity=300, unit="g", category="vegetable"),
+            Ingredient(name="olive oil", quantity=2, unit="tbsp", category="oil"),
+            Ingredient(name="water", quantity=1000, unit="ml", category="other"),
+            Ingredient(name="salt", quantity=1, unit="tsp", category="spice"),
+            Ingredient(name="pepper", quantity=0.5, unit="tsp", category="spice"),
+            Ingredient(name="butter", quantity=30, unit="g", category="dairy", allergens=["dairy"]),
+            Ingredient(name="cooking cream", quantity=100, unit="ml", category="dairy", allergens=["dairy"]),
+        ],
+        equipment=[
+            Equipment(name="sauce pan", category="cookware"),
+            Equipment(name="blender", category="appliance"),
+            Equipment(name="knife", category="utensil"),
+        ],
+        nutritional_info=NutritionalInfo(
+            calories=180,
+            protein=6,
+            carbohydrates=18,
+            fat=10,
+            fiber=4,
+            sodium=550,
+        ),
+        instructions=[
+            "Clean the asparagus and remove the hard woody parts at the bottom",
+            "Clean and cube the onion and potatoes",
+            "Heat olive oil in a sauce pan",
+            "Add the cubed onion and cook until softened",
+            "When the onion gets some color, add asparagus and potatoes",
+            "Add water until everything is covered",
+            "Boil until everything is soft (about 20-25 minutes)",
+            "Use a blender to blend everything until smooth",
+            "Add salt, pepper, butter, and cooking cream",
+            "Stir well and heat through without boiling",
+            "Serve hot",
+        ],
+        servings=4,
+        prep_time=15,
+        cuisine="French",
+        description="Creamy asparagus soup blended with potatoes, onions, and finished with cream and butter",
+        cost=5.5
+    ),
+
+    # Recipe 9: Couscous with Vegetables and Peas Cream
+    Recipe(
+        name="Couscous with Vegetables and Peas Cream",
+        diet=Diet.VEGAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.BETWEEN_15_45,
+        skill=Skill.MEDIUM,
+        cooking_methods=[CookingMethod.PAN, CookingMethod.BLENDER],
+        budget=Budget.LOW_COST,
+        meal=Meal.LUNCH,
+        macros=[Macros.HIGH_PROTEIN, Macros.LOW_FATS],
+        ingredients=[
+            Ingredient(name="carrot", quantity=2, unit="pieces", category="vegetable"),
+            Ingredient(name="zucchini", quantity=1, unit="piece", category="vegetable"),
+            Ingredient(name="tomatoes", quantity=3, unit="pieces", category="vegetable"),
+            Ingredient(name="onion", quantity=1, unit="piece", category="vegetable"),
+            Ingredient(name="vegetable stock", quantity=500, unit="ml", category="other"),
+            Ingredient(name="peas", quantity=300, unit="g", category="vegetable"),
+            Ingredient(name="couscous", quantity=250, unit="g", category="grain"),
+            Ingredient(name="olive oil", quantity=3, unit="tbsp", category="oil"),
+            Ingredient(name="salt", quantity=1, unit="tsp", category="spice"),
+            Ingredient(name="pepper", quantity=0.5, unit="tsp", category="spice"),
+        ],
+        equipment=[
+            Equipment(name="pan", category="cookware"),
+            Equipment(name="sauce pan", category="cookware"),
+            Equipment(name="blender", category="appliance"),
+            Equipment(name="knife", category="utensil"),
+            Equipment(name="bowl", category="cookware"),
+        ],
+        nutritional_info=NutritionalInfo(
+            calories=320,
+            protein=12,
+            carbohydrates=58,
+            fat=6,
+            fiber=8,
+            sodium=480,
+        ),
+        instructions=[
+            "Cube the carrot, zucchini, and dice the tomatoes (remove juice and seeds)",
+            "Cut the onion thinly",
+            "In a pan with boiling water, cook the cubed vegetables until tender",
+            "Bring vegetable stock to a boil and add the couscous (250g)",
+            "Cover and let the couscous absorb the liquid for 5 minutes",
+            "In another sauce pan, cook the thinly sliced onion in a bit of olive oil",
+            "Set the cooked onion aside",
+            "Boil the peas (300g) in water for 3-4 minutes",
+            "Transfer the peas immediately to iced water to stop cooking",
+            "Add the peas to the cooked onion",
+            "Blend the pea and onion mixture - if too thick, add some vegetable stock",
+            "Add olive oil to the blended pea cream",
+            "Season with salt and pepper to taste",
+            "Fluff the couscous with a fork",
+            "Mix the couscous with the cooked vegetables",
+            "Serve the couscous and vegetables with the pea cream on top or on the side",
+        ],
+        servings=4,
+        prep_time=20,
+        cuisine="Mediterranean",
+        description="Couscous with mixed vegetables served with a creamy pea sauce",
+        cost=4.5
+    ),
+
+    # Recipe 10: Hummus
+    Recipe(
+        name="Hummus",
+        diet=Diet.VEGAN,
+        diet_restrictions=[DietRestriction.NONE],
+        cooking_time=CookingTime.LESS_THAN_15,
+        skill=Skill.EASY,
+        cooking_methods=[CookingMethod.BLENDER],
+        budget=Budget.LOW_COST,
+        meal=Meal.SNACK,
+        macros=[Macros.HIGH_PROTEIN, Macros.LOW_SUGARS],
+        ingredients=[
+            Ingredient(name="chickpeas", quantity=400, unit="g", category="protein"),
+            Ingredient(name="olive oil", quantity=4, unit="tbsp", category="oil"),
+            Ingredient(name="lemon juice", quantity=3, unit="tbsp", category="other"),
+            Ingredient(name="water", quantity=50, unit="ml", category="other"),
+            Ingredient(name="garlic clove", quantity=2, unit="pieces", category="vegetable"),
+            Ingredient(name="tahini paste", quantity=3, unit="tbsp", category="other", allergens=["sesame"]),
+            Ingredient(name="salt", quantity=0.5, unit="tsp", category="spice"),
+        ],
+        equipment=[
+            Equipment(name="blender", category="appliance"),
+            Equipment(name="bowl", category="cookware"),
+        ],
+        nutritional_info=NutritionalInfo(
+            calories=220,
+            protein=8,
+            carbohydrates=20,
+            fat=14,
+            fiber=6,
+            sodium=280,
+        ),
+        instructions=[
+            "If using canned chickpeas, drain and rinse them",
+            "Add all ingredients to the blender: chickpeas, olive oil, lemon juice, water, garlic cloves, tahini paste, and salt",
+            "Blend until smooth and creamy",
+            "If too thick, add a bit more water or olive oil",
+            "Taste and adjust seasoning if needed",
+            "Serve with vegetables, pita bread, or crackers",
+        ],
+        servings=6,
+        prep_time=5,
+        cuisine="Middle Eastern",
+        description="Classic creamy hummus made with chickpeas, tahini, lemon, and garlic",
+        cost=2.5
+    ),
+]
 
 
 def get_all_recipes():
