@@ -1,5 +1,4 @@
 import streamlit as st
-from pathlib import Path
 from models import (
     Recipe, Diet, DietRestriction, CookingTime, 
     Skill, CookingMethod, Budget, Meal, Macros
@@ -11,7 +10,10 @@ from models.time_constraint import TimeConstraint
 from models.dietary_preference import DietaryPreference
 from models.health_goal import HealthGoal
 from models.kitchen import Kitchen
+from models.user import User
 from data.sample_recipes import get_all_recipes
+from system.inference_engine import InferenceEngine
+from pathlib import Path
 
 st.set_page_config(
     page_title="Recipe Recommender",
@@ -173,17 +175,17 @@ if not st.session_state.quiz_complete:
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("Budget\n(Low Cost)", key=f"budget_low_{st.session_state.current_question}", use_container_width=True, type="secondary"):
+            if st.button("Low Cost", key=f"budget_low_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(True, "budget")
                 st.rerun()
         
         with col2:
-            if st.button("Moderate\n(Average Cost)", key=f"budget_mid_{st.session_state.current_question}", use_container_width=True, type="primary"):
+            if st.button("Moderate", key=f"budget_mid_{st.session_state.current_question}", use_container_width=True, type="primary"):
                 answer_question(True, "moderate")
                 st.rerun()
         
         with col3:
-            if st.button("Premium\n(Higher Cost)", key=f"budget_high_{st.session_state.current_question}", use_container_width=True, type="tertiary"):
+            if st.button("Premium", key=f"budget_high_{st.session_state.current_question}", use_container_width=True, type="tertiary"):
                 answer_question(True, "premium")
                 st.rerun()
     
@@ -338,9 +340,6 @@ else:
     # Create User object and get recipe recommendations
     st.subheader("🍽️ Your Recipe Recommendations")
     
-    from models.user import User
-    from system.inference_engine import InferenceEngine
-    
     # Create domain objects for User
     allergies_list = [Allergy(allergen_name=a) for a in st.session_state.answers.get('allergens', [])]
     
@@ -387,7 +386,7 @@ else:
     user = User(
         name="Test User",
         dietary_restrictions=dietary_restrictions_list,
-        allergies=[a for a, _ in st.session_state.answers['allergens']],
+        allergies=st.session_state.answers.get('allergens', []),
         skill_level=st.session_state.answers['skill'][0] if st.session_state.answers['skill'] else 'beginner',
         available_equipment=st.session_state.answers['equipment'],
         max_cooking_time=st.session_state.answers['time'][0] if st.session_state.answers['time'] else 60,
@@ -405,7 +404,6 @@ else:
     all_recipes = get_all_recipes()
     
     # Run inference engine with knowledge base
-    from pathlib import Path
     kb_path = Path(__file__).parent / 'knowledge_base.yaml'
     
     engine = InferenceEngine(str(kb_path))
