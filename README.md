@@ -267,7 +267,6 @@ recipe_recommender/
 ├── main.py                          # Streamlit app with comprehensive quiz interface
 ├── requirements.txt                 # Python dependencies (streamlit, pyyaml, pytest)
 ├── knowledge_base.yaml              # 51 declarative rules for inference engine
-├── testGUI.py                       # Alternative GUI implementation
 ├── HOW_TO_ADD_RECIPES.md           # Guide for adding new recipes
 ├── models/
 │   ├── __init__.py                 # Model exports
@@ -292,10 +291,11 @@ recipe_recommender/
 │   ├── inference_engine.py         # Rule evaluation engine (Rule, InferenceEngine)
 │   └── utils.py                    # Utility functions (preferences_to_user)
 ├── pages/
-│   └── 1_Team_Info.py              # Team information page
+│   ├── 1_Team_Info.py              # Team information page
+│   └── 2_All_Recipes.py            # Recipe browsing page
 └── tests/
     ├── __init__.py
-    └── test_gui_inference.py       # Comprehensive test suite (68 tests)
+    └── test_recipe_recommender.py  # Comprehensive test suite (68 tests)
 ```
 
 ### Key Files
@@ -307,7 +307,7 @@ recipe_recommender/
 - **`models/cooking_method.py`**: DetailedCookingMethod class with properties, alternatives, skill matching
 - **`data/sample_recipes.py`**: 20 diverse recipes covering 9 cuisines (French, British, Italian, American, Mexican, Mediterranean, Middle Eastern, Asian, Romanian)
 - **`pages/2_All_Recipes.py`**: Recipe browsing page with 13 filter options
-- **`tests/test_gui_inference.py`**: 59 comprehensive tests ensuring system reliability
+- **`tests/test_recipe_recommender.py`**: 68 comprehensive tests ensuring system reliability
 
 ---
 
