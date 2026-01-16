@@ -42,13 +42,16 @@ class CookingMethod(Enum):
     PAN = "pan"
     OVEN = "oven"
     GRILL = "grill"
+    MARINATED = "marinated"
+    BOWL = "bowl"
+    BLENDER = "blender"
 
 
 class Budget(Enum):
     """Budget categories"""
-    STUDENT_LIFE = "student life"
-    BUDGET_FRIENDLY = "budget friendly"
-    GOURMET = "gourmet"
+    LOW_COST = "low_cost"
+    MODERATE = "moderate"
+    PREMIUM = "premium"
 
 
 class Meal(Enum):
@@ -96,7 +99,8 @@ class Recipe:
         prep_time: Optional[int] = None,  # in minutes
         cuisine: Optional[str] = None,
         description: Optional[str] = None,
-        tags: Optional[List[str]] = None
+        tags: Optional[List[str]] = None,
+        cost: Optional[float] = None  # Estimated cost per serving in euros
     ):
         """
         Initialize a Recipe instance.
@@ -121,6 +125,7 @@ class Recipe:
             cuisine: Cuisine type (e.g., 'Italian', 'Asian', 'Mexican')
             description: Recipe description
             tags: Additional tags for categorization
+            cost: Estimated cost per serving in euros
         """
         self.name = name
         self.diet = diet
@@ -143,6 +148,16 @@ class Recipe:
         self.cuisine = cuisine
         self.description = description
         self.tags = tags or []
+        self.cost = cost or 5.0  # Default to moderate cost if not specified
+        
+        # State attributes for forward-chaining inference
+        self.suitable_for_user: bool = True
+        self.affordable: bool = True
+        self.can_prepare: bool = True
+        self.skill_appropriate: bool = True
+        self.exclusion_reasons: List[str] = []
+        self.recommendation_score: float = 0.0
+        self.substitution_suggestions: Dict = {}
     
     def __repr__(self) -> str:
         return f"Recipe(name='{self.name}', diet={self.diet.value}, meal={self.meal.value})"

@@ -38,19 +38,26 @@ These are our **main roles**, but we will **collaborate and support each other**
 
 The Recipe Recommender is an intelligent knowledge-based system that helps users find recipes matching their preferences using a sophisticated inference engine. The system features:
 
-**Hierarchical Domain Model** (6 classes)
+**Hierarchical Domain Model** (13 classes)
 - **User**: Profiles with dietary restrictions, allergies, skill level, equipment, time constraints, health goals
-- **Recipe**: Recipes with ingredients, equipment, cooking methods, nutritional info
-- **Ingredient**: Ingredients with category, nutritional properties, allergen information
+- **Recipe**: Recipes with ingredients, equipment, cooking methods (6 types: Pan, Oven, Grill, Marinated, Bowl, Blender), nutritional info
+- **Ingredient**: Ingredients with category, nutritional properties, allergen information, substitutes
 - **Equipment**: Kitchen equipment with type, alternatives, availability
 - **DetailedCookingMethod**: Cooking methods with temperature, duration, substitutions
 - **NutritionalInfo**: Nutritional data with health goal evaluation (high protein, low calorie, high fiber)
+- **Allergy**: Allergen types with tracking
+- **HealthGoal**: Health objectives (weight loss, muscle building, heart health, diabetes management, general wellness)
+- **DietaryPreference**: Dietary options (vegan, vegetarian, pescatarian, gluten-free, lactose-free, nut-free)
+- **CookingSkill**: Skill levels (beginner, intermediate, experienced)
+- **TimeConstraint**: Time availability constraints
+- **BudgetConstraint**: Budget categories (budget, moderate, premium)
+- **Kitchen**: Kitchen setup with available equipment
 
 **Inference Engine**
-- **25 modular rules** in YAML knowledge base (declarative, separate from code)
-- **11 Filtering Rules**: Exclude recipes based on allergies, diet, time, skill, equipment, cuisine
-- **7 Scoring Rules**: Rank recipes by cuisine match, health goals, speed, difficulty, budget, nutrition
-- **7 Substitution Rules**: Suggest alternatives for dairy, meat, gluten, cooking methods, equipment
+- **51 modular rules** in YAML knowledge base (declarative, separate from code)
+- **Filtering Rules**: Exclude recipes based on allergies (13 specific allergen rules including dairy, milk, cheese, butter, cream, yogurt), diet, time, skill, equipment, cuisine
+- **Scoring Rules**: Rank recipes by cuisine match, health goals, speed, difficulty, budget, nutrition
+- **Substitution Rules**: Suggest alternatives for dairy, meat, gluten, cooking methods, equipment
 - **Priority-based execution**: Rules evaluated in order (0-100 priority)
 - **Declarative conditions**: Operators include ==, !=, >, <, in, contains, method_call
 - **Context-aware reasoning**: Rules operate on User and Recipe domain objects
@@ -87,6 +94,10 @@ Open browser to: **http://localhost:8505**
 ## Features
 
 ### Interactive Quiz Interface
+- **Comprehensive allergen tracking**: 9 allergen questions (dairy, milk, cheese, butter, cream, yogurt, nuts, gluten, eggs)
+- **Health goals selection**: 5 health goal options (weight loss, muscle building, heart health, diabetes management, general wellness)
+- **Equipment availability**: 8 equipment questions (pan, oven, grill, blender, bowl, special equipment)
+- **Dietary preferences**: 7 options (vegan, vegetarian, pescatarian, gluten-free, lactose-free, nut-free, none)
 - **Step-by-step questionnaire**: Guided questions to capture user preferences
 - **Progress tracking**: Visual progress bar showing quiz completion
 - **Smart question flow**: Questions adapt based on previous answers
@@ -94,9 +105,9 @@ Open browser to: **http://localhost:8505**
 - **Custom styling**: Color-coded buttons for intuitive user experience
 
 ### Recipe Filtering & Scoring
-- **Filtering rules**: 11 rules to exclude recipes based on allergies, diet, time, skill, equipment
-- **Scoring rules**: 7 rules to rank recipes by relevance (cuisine match, health goals, speed, etc.)
-- **Substitution suggestions**: 7 rules for ingredient/method alternatives (dairy, meat, gluten, equipment)
+- **Filtering rules**: Comprehensive rules to exclude recipes based on 13+ allergens, diet, time, skill, equipment
+- **Scoring rules**: Rank recipes by relevance (cuisine match, health goals, speed, etc.)
+- **Substitution suggestions**: Ingredient/method alternatives (dairy, meat, gluten, equipment)
 - **Priority-based execution**: Rules processed by priority (highest first)
 - **Reason explanations**: Every filter/score includes human-readable explanation
 
@@ -111,23 +122,30 @@ Open browser to: **http://localhost:8505**
 
 ## System Architecture
 
-### Domain Model (6 Classes)
+### Domain Model (13 Classes)
 The system implements a hierarchical object-oriented domain model:
 
 - **User**: User profile with dietary restrictions, allergies, preferences, skill level, equipment, time constraints, health goals
-- **Recipe**: Recipe with ingredients, equipment, cooking methods, nutritional info, skill level, time, budget
-- **Ingredient**: Ingredient with category, nutritional properties, allergen info
+- **Recipe**: Recipe with ingredients, equipment, cooking methods (Pan, Oven, Grill, Marinated, Bowl, Blender), nutritional info, skill level, time, budget
+- **Ingredient**: Ingredient with category, nutritional properties, allergen info, substitutes
 - **Equipment**: Kitchen equipment with type, alternatives, availability
 - **DetailedCookingMethod**: Cooking methods with temperature, duration, substitutions
 - **NutritionalInfo**: Nutritional data with health goal evaluation methods
+- **Allergy**: Allergen type definitions and tracking
+- **HealthGoal**: Health objectives (weight loss, muscle building, heart health, diabetes management, general wellness)
+- **DietaryPreference**: Dietary options (vegan, vegetarian, pescatarian, gluten-free, lactose-free, nut-free)
+- **CookingSkill**: Skill levels with recipe complexity matching
+- **TimeConstraint**: Time availability constraints for cooking
+- **BudgetConstraint**: Budget categories for recipe cost filtering
+- **Kitchen**: Kitchen setup with available equipment and capabilities
 
 ### Inference Engine Architecture
 The system uses a knowledge-based inference engine with:
 
-1. **Knowledge Base (25 Rules in YAML)**:
-   - 11 Filtering Rules (allergies, diet, time, skill, equipment, cuisine)
-   - 7 Scoring Rules (cuisine match, health goals, quick recipes, beginner-friendly, budget, low-calorie, high-fiber)
-   - 7 Substitution Rules (dairy alternatives, meat alternatives, gluten-free, cooking methods, equipment)
+1. **Knowledge Base (51 Rules in YAML)**:
+   - Filtering Rules (allergies with 13 specific rules for dairy/milk/cheese/butter/cream/yogurt/nuts/gluten/eggs/soy/fish/shellfish/sesame, diet, time, skill, equipment, cuisine)
+   - Scoring Rules (cuisine match, health goals, quick recipes, beginner-friendly, budget, low-calorie, high-fiber)
+   - Substitution Rules (dairy alternatives, meat alternatives, gluten-free, cooking methods, equipment)
 
 2. **Rule Structure**:
    - Priority-based execution (0-100)
@@ -139,6 +157,13 @@ The system uses a knowledge-based inference engine with:
    - Evaluate conditions against User and Recipe objects
    - Execute actions based on rule priority
    - Return filtered, scored recipes with substitution suggestions
+
+4. **Recipe Database**:
+   - 20 diverse recipes covering Italian, French, British, American, Mexican, Romanian, Mediterranean, Middle Eastern, and Asian cuisines
+   - 6 cooking methods: Pan, Oven, Grill, Marinated, Bowl, Blender
+   - Full dietary spectrum: Vegan, Vegetarian, Pescatarian, Omnivore
+   - Complete nutritional data and ingredient substitutions
+   - Includes Chef Sorin's handwritten recipes and team-contributed recipes
 
 ### System Workflow
 ```
@@ -239,36 +264,72 @@ The recommendation engine uses declarative rule-based filtering with priority ex
 
 ```
 recipe_recommender/
-├── main.py                          # Streamlit app with quiz interface
-├── requirements.txt                 # Python dependencies (streamlit, pyyaml)
-├── knowledge_base.yaml              # 25 declarative rules for inference engine
+├── main.py                          # Streamlit app with comprehensive quiz interface
+├── requirements.txt                 # Python dependencies (streamlit, pyyaml, pytest)
+├── knowledge_base.yaml              # 51 declarative rules for inference engine
+├── HOW_TO_ADD_RECIPES.md           # Guide for adding new recipes
 ├── models/
 │   ├── __init__.py                 # Model exports
 │   ├── user.py                     # User class with preferences/constraints
-│   ├── recipe.py                   # Recipe class + enums (Diet, Skill, etc.)
+│   ├── recipe.py                   # Recipe class + enums (Diet, Skill, CookingMethod, etc.)
 │   ├── ingredient.py               # Ingredient class
 │   ├── equipment.py                # Equipment class
-│   ├── cooking_method.py           # CookingMethod class
-│   └── nutritional_info.py         # NutritionalInfo class
+│   ├── cooking_method.py           # DetailedCookingMethod class
+│   ├── nutritional_info.py         # NutritionalInfo class
+│   ├── allergy.py                  # Allergy enum
+│   ├── budget_constraint.py        # BudgetConstraint class
+│   ├── health_goal.py              # HealthGoal enum
+│   ├── time_constraint.py          # TimeConstraint class
+│   ├── cooking_skill.py            # CookingSkill class
+│   ├── dietary_preference.py       # DietaryPreference enum
+│   └── kitchen.py                  # Kitchen class
 ├── data/
 │   ├── __init__.py
-│   └── sample_recipes.py           # 5 sample recipes with full data
+│   └── sample_recipes.py           # 20 sample recipes with full data
 ├── system/
 │   ├── __init__.py                 # System exports
 │   ├── inference_engine.py         # Rule evaluation engine (Rule, InferenceEngine)
 │   └── utils.py                    # Utility functions (preferences_to_user)
-└── pages/
-    └── 1_Team_Info.py              # Team information page
+├── pages/
+│   ├── 1_Team_Info.py              # Team information page
+│   └── 2_All_Recipes.py            # Recipe browsing page
+└── tests/
+    ├── __init__.py
+    └── test_recipe_recommender.py  # Comprehensive test suite (68 tests)
 ```
 
 ### Key Files
 
-- **`main.py`**: Streamlit interface with quiz flow and result display
-- **`knowledge_base.yaml`**: 25 rules (11 filtering, 7 scoring, 7 substitution)
+- **`main.py`**: Streamlit interface with comprehensive quiz flow, allergen tracking, health goals, and result display
+- **`knowledge_base.yaml`**: 51 rules (filtering with 13+ allergen rules, scoring, substitution)
 - **`system/inference_engine.py`**: Core engine with Rule and InferenceEngine classes
-- **`models/recipe.py`**: Recipe class + 8 enums (Diet, DietRestriction, CookingTime, Skill, CookingMethod enum, Budget, Meal, Macros)
-- **`models/cooking_method.py`**: CookingMethod class with properties, alternatives, skill matching
-- **`data/sample_recipes.py`**: 5 sample recipes with full details
+- **`models/recipe.py`**: Recipe class + enums (Diet, DietRestriction, CookingTime, Skill, CookingMethod with 6 values, Budget, Meal, Macros)
+- **`models/cooking_method.py`**: DetailedCookingMethod class with properties, alternatives, skill matching
+- **`data/sample_recipes.py`**: 20 diverse recipes covering 9 cuisines (French, British, Italian, American, Mexican, Mediterranean, Middle Eastern, Asian, Romanian)
+- **`pages/2_All_Recipes.py`**: Recipe browsing page with 13 filter options
+- **`tests/test_recipe_recommender.py`**: 68 comprehensive tests ensuring system reliability
+
+---
+
+## Testing
+
+The project includes a comprehensive test suite with **68 tests** covering:
+
+- **Inference Engine Tests**: Knowledge base loading, rule evaluation, filtering logic
+- **Recipe Tests**: All 20 recipes validated for proper structure and attributes
+- **New Recipe Tests**: 15 dedicated tests for newly added recipes (Beef Wellington, Potato Puree, Asparagus Soup, Couscous, Hummus)
+- **Cooking Method Tests**: Validation of all 6 cooking methods (Pan, Oven, Grill, Marinated, Bowl, Blender)
+- **Filtering Tests**: Allergy filtering, dietary restrictions, time constraints, skill matching
+- **Integration Tests**: End-to-end testing of quiz → inference → recommendations
+
+### Running Tests
+
+```bash
+cd recipe_recommender
+pytest tests/ -v
+```
+
+All 68 tests pass successfully, ensuring system reliability and correctness.
 
 ---
 
@@ -277,29 +338,34 @@ recipe_recommender/
 - **[Python 3.13](https://www.python.org/)**: Core programming language
 - **[Streamlit](https://streamlit.io/)**: Web application framework for interactive UI
 - **[PyYAML](https://pyyaml.org/)**: YAML parser for knowledge base loading
-- **Object-Oriented Design**: 6-class hierarchical domain model
-- **Knowledge Representation**: Declarative rules in YAML format
+- **[Pytest](https://pytest.org/)**: Testing framework with 68 comprehensive tests
+- **Object-Oriented Design**: Extended domain model with 13 classes
+- **Knowledge Representation**: Declarative rules in YAML format (51 rules)
 - **Inference Engine**: Priority-based rule evaluation with context-aware reasoning
 
 ### Dependencies
 ```
 streamlit>=1.28.0
 pyyaml>=6.0
+pytest>=9.0.0
 ```
 
 ### Running the Application
 ```bash
 # Development mode
-streamlit run main.py --server.port=8505
+streamlit run main.py --server.port=8501
 
 # Production mode
-streamlit run main.py --server.port=8505 --server.headless=true
+streamlit run main.py --server.port=8501 --server.headless=true
 ```
 
 ### Testing the Inference Engine
 ```bash
-# Run test script to verify all components
+# Run comprehensive test suite (68 tests)
 cd recipe_recommender
+pytest tests/ -v
+
+# Quick validation test
 python -c "
 from system import InferenceEngine
 from data.sample_recipes import get_all_recipes
@@ -309,27 +375,15 @@ from models import User
 engine = InferenceEngine('knowledge_base.yaml')
 print(f'Loaded {len(engine.rules)} rules')
 
-# Test recipe filtering
+# Test recipe database
 recipes = get_all_recipes()
 print(f'Available recipes: {len(recipes)}')
 
 # Test with vegan user
 user = User(name='Test', dietary_restrictions=['vegan'])
 results = engine.apply_rules(user, recipes)
-print(f'Filtered recipes: {len(results)}')
+print(f'Vegan-friendly recipes: {len(results)}')
 "
-```
-
----
-
-### Dependencies
-```
-streamlit>=1.28.0
-```
-
-### Running in Development
-```bash
-streamlit run main.py 
 ```
 
 ---

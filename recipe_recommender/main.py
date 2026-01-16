@@ -3,8 +3,17 @@ from models import (
     Recipe, Diet, DietRestriction, CookingTime, 
     Skill, CookingMethod, Budget, Meal, Macros
 )
+from models.allergy import Allergy
+from models.budget_constraint import BudgetConstraint
+from models.cooking_skill import CookingSkill
+from models.time_constraint import TimeConstraint
+from models.dietary_preference import DietaryPreference
+from models.health_goal import HealthGoal
+from models.kitchen import Kitchen
+from models.user import User
 from data.sample_recipes import get_all_recipes
-from system import InferenceEngine, preferences_to_user
+from system.inference_engine import InferenceEngine
+from pathlib import Path
 
 st.set_page_config(
     page_title="Recipe Recommender",
@@ -17,39 +26,51 @@ st.divider()
 
 # All quiz questions (text, category, value, question type)
 QUESTIONS = [
-    # Diet - once answered, skip to next section
-    ("Are you Vegan?", "diet", Diet.VEGAN, "single"),
-    ("Are you Vegetarian?", "diet", Diet.VEGETARIAN, "single"),
-    ("Are you Pescatarian?", "diet", Diet.PESCATARIAN, "single"),
-    
-    # Dietary restrictions - can select multiple
-    ("Are you Lactose Intolerant?", "restrictions", DietRestriction.LACTOSE_INTOLERANT, "multiple"),
-    ("Are you Gluten Intolerant?", "restrictions", DietRestriction.GLUTEN_INTOLERANT, "multiple"),
-    ("Do you have Nut Allergies?", "restrictions", DietRestriction.NUTS_ALLERGIES, "multiple"),
-    ("Do you have Diabetes?", "restrictions", DietRestriction.DIABETES, "multiple"),
-    
-    # Cooking time - special three-button layout
-    ("Do you have 15 to 45 minutes to cook?", "cooking_time", CookingTime.BETWEEN_15_45, "time"),
-    
-    # Skill level - special three-button layout
-    ("What's your cooking skill level?", "skill", Skill.MEDIUM, "skill"),
-    
-    # Cooking methods - can select multiple
-    ("Do you want to use a Pan?", "cooking_methods", CookingMethod.PAN, "multiple"),
-    ("Do you want to use an Oven?", "cooking_methods", CookingMethod.OVEN, "multiple"),
-    ("Do you want to use a Grill?", "cooking_methods", CookingMethod.GRILL, "multiple"),
+    # Allergens - can select multiple
+    ("Are you allergic to Dairy?", "allergens", "Dairy", "multiple"),
+    ("Are you allergic to Eggs?", "allergens", "Eggs", "multiple"),
+    ("Are you allergic to Shellfish?", "allergens", "Shellfish", "multiple"),
+    ("Are you allergic to Fish?", "allergens", "Fish", "multiple"),
+    ("Are you allergic to Peanuts?", "allergens", "Peanuts", "multiple"),
+    ("Are you allergic to Tree Nuts?", "allergens", "Tree Nuts", "multiple"),
+    ("Are you allergic to Wheat?", "allergens", "Wheat", "multiple"),
+    ("Are you allergic to Soy?", "allergens", "Soy", "multiple"),
+    ("Are you allergic to Sesame?", "allergens", "Sesame", "multiple"),
     
     # Budget - special three-button layout
-    ("What's your budget?", "budget", Budget.BUDGET_FRIENDLY, "budget"),
+    ("What's your budget for ingredients?", "budget", "low_cost", "budget"),
     
-    # Meal type - special five-button layout
-    ("What meal are you looking for?", "meal", Meal.LUNCH, "meal"),
+    # Skill level - special three-button layout
+    ("What's your cooking experience?", "skill", "intermediate", "skill"),
     
-    # Nutritional preferences - can select multiple
-    ("Do you want High Protein recipes?", "macros", Macros.HIGH_PROTEIN, "multiple"),
-    ("Do you want Low Fat recipes?", "macros", Macros.LOW_FATS, "multiple"),
-    ("Do you want Low Carb recipes?", "macros", Macros.LOW_CARBS, "multiple"),
-    ("Do you want Low Sugar recipes?", "macros", Macros.LOW_SUGARS, "multiple"),
+    # Time - special three-button layout
+    ("How much time can you spend cooking?", "time", 30, "time"),
+    
+    # Dietary preferences - can select multiple
+    ("Do you follow a Vegan diet?", "dietary_prefs", "vegan", "multiple"),
+    ("Do you follow a Vegetarian diet?", "dietary_prefs", "vegetarian", "multiple"),
+    ("Do you need Gluten-Free options?", "dietary_prefs", "gluten-free", "multiple"),
+    ("Do you need Dairy-Free options?", "dietary_prefs", "dairy-free", "multiple"),
+    ("Are you looking for Low-Carb recipes?", "dietary_prefs", "low-carb", "multiple"),
+    ("Are you looking for High-Protein recipes?", "dietary_prefs", "high-protein", "multiple"),
+    ("Do you eat fish but not meat? (Pescatarian)", "dietary_prefs", "pescatarian", "multiple"),
+    
+    # Health goals - can select multiple
+    ("Is Weight Loss one of your goals?", "health_goals", "weight-loss", "multiple"),
+    ("Is Muscle Gain one of your goals?", "health_goals", "muscle-gain", "multiple"),
+    ("Is Heart Health one of your goals?", "health_goals", "heart-health", "multiple"),
+    ("Do you need to control Blood Sugar?", "health_goals", "blood-sugar-control", "multiple"),
+    ("Are you looking for an Energy Boost?", "health_goals", "energy-boost", "multiple"),
+    
+    # Kitchen equipment - can select multiple
+    ("Do you have an Oven?", "equipment", "Oven", "multiple"),
+    ("Do you have a Stove?", "equipment", "Stove", "multiple"),
+    ("Do you have a Microwave?", "equipment", "Microwave", "multiple"),
+    ("Do you have a Blender?", "equipment", "Blender", "multiple"),
+    ("Do you have a Food Processor?", "equipment", "Food Processor", "multiple"),
+    ("Do you have an Air Fryer?", "equipment", "Air Fryer", "multiple"),
+    ("Do you have a Slow Cooker?", "equipment", "Slow Cooker", "multiple"),
+    ("Do you have a Grill?", "equipment", "Grill", "multiple"),
 ]
 
 # Track quiz progress
@@ -58,14 +79,13 @@ if 'current_question' not in st.session_state:
     
 if 'answers' not in st.session_state:
     st.session_state.answers = {
-        'diet': [],
-        'restrictions': [],
-        'cooking_time': [],
-        'skill': [],
-        'cooking_methods': [],
-        'budget': [],
-        'meal': [],
-        'macros': []
+        'allergens': [],  # List of allergen names
+        'budget': [],  # Will have 1 item: (min, max)
+        'skill': [],  # Will have 1 item: SkillLevel
+        'time': [],  # Will have 1 item: minutes
+        'dietary_prefs': [],  # List of PreferenceType
+        'health_goals': [],  # List of GoalType
+        'equipment': []  # List of equipment names
     }
 
 if 'quiz_complete' not in st.session_state:
@@ -77,7 +97,7 @@ def answer_question(answer, custom_value=None):
     question_text, category, value, q_type = QUESTIONS[st.session_state.current_question]
     
     if custom_value is not None:
-        # Time question uses custom value
+        # Budget/skill/time questions use custom value
         if answer:
             st.session_state.answers[category].append(custom_value)
     else:
@@ -86,49 +106,21 @@ def answer_question(answer, custom_value=None):
     
     st.session_state.current_question += 1
     
-    # Skip remaining questions in this category if single-choice and answered yes
-    if q_type == "single" and answer:
-        while (st.session_state.current_question < len(QUESTIONS) and 
-               QUESTIONS[st.session_state.current_question][1] == category):
-            st.session_state.current_question += 1
-    
-    # Apply defaults when moving to a new category
-    if st.session_state.current_question < len(QUESTIONS):
-        prev_category = category
-        next_category = QUESTIONS[st.session_state.current_question][1]
-        
-        # No diet selected? Default to omnivore
-        if prev_category == "diet" and next_category != "diet":
-            if not st.session_state.answers["diet"]:
-                st.session_state.answers["diet"].append(Diet.OMNIVORE)
-        
-        # No restrictions selected? Default to none
-        if prev_category == "restrictions" and next_category != "restrictions":
-            if not st.session_state.answers["restrictions"]:
-                st.session_state.answers["restrictions"].append(DietRestriction.NONE)
-    
     # Quiz finished?
     if st.session_state.current_question >= len(QUESTIONS):
-        # Apply any missing defaults
-        if not st.session_state.answers["diet"]:
-            st.session_state.answers["diet"].append(Diet.OMNIVORE)
-        if not st.session_state.answers["restrictions"]:
-            st.session_state.answers["restrictions"].append(DietRestriction.NONE)
-        
         st.session_state.quiz_complete = True
 
 def reset_quiz():
     """Clear all answers and restart from beginning"""
     st.session_state.current_question = 0
     st.session_state.answers = {
-        'diet': [],
-        'restrictions': [],
-        'cooking_time': [],
-        'skill': [],
-        'cooking_methods': [],
+        'allergens': [],
         'budget': [],
-        'meal': [],
-        'macros': []
+        'skill': [],
+        'time': [],
+        'dietary_prefs': [],
+        'health_goals': [],
+        'equipment': []
     }
     st.session_state.quiz_complete = False
 
@@ -143,8 +135,8 @@ if not st.session_state.quiz_complete:
     question_text, category, value, q_type = QUESTIONS[st.session_state.current_question]
     st.subheader(question_text)
     
-    # Time question gets three buttons instead of yes/no
-    if q_type == "time":
+    # Budget question gets three buttons
+    if q_type == "budget":
         st.markdown("""
             <style>
                 div.stButton > button[kind="primary"] {
@@ -156,7 +148,7 @@ if not st.session_state.quiz_complete:
                     background-color: #28a745;
                     color: white;
                     border: 2px solid #28a745;
-                }
+                }   
                 div.stButton > button[kind="secondary"] {
                     background-color: transparent;
                     color: #007bff;
@@ -167,27 +159,37 @@ if not st.session_state.quiz_complete:
                     color: white;
                     border: 2px solid #007bff;
                 }
+                div.stButton > button[kind="tertiary"] {
+                    background-color: transparent;
+                    color: #dc3545;
+                    border: 2px solid #dc3545;
+                }
+                div.stButton > button[kind="tertiary"]:hover {
+                    background-color: #dc3545;
+                    color: white;
+                    border: 2px solid #dc3545;
+                }
             </style>
         """, unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("Less", key="time_less", use_container_width=True, type="secondary"):
-                answer_question(True, CookingTime.LESS_THAN_15)
+            if st.button("Low Cost", key=f"budget_low_{st.session_state.current_question}", use_container_width=True, type="secondary"):
+                answer_question(True, "budget")
                 st.rerun()
         
         with col2:
-            if st.button("Yes", key="time_yes", use_container_width=True, type="primary"):
-                answer_question(True, CookingTime.BETWEEN_15_45)
+            if st.button("Moderate", key=f"budget_mid_{st.session_state.current_question}", use_container_width=True, type="primary"):
+                answer_question(True, "moderate")
                 st.rerun()
         
         with col3:
-            if st.button("More", key="time_more", use_container_width=True, type="secondary"):
-                answer_question(True, CookingTime.MORE_THAN_45)
+            if st.button("Premium", key=f"budget_high_{st.session_state.current_question}", use_container_width=True, type="tertiary"):
+                answer_question(True, "premium")
                 st.rerun()
     
-    # Skill question gets three buttons: Beginner/Intermediate/Experienced
+    # Skill question gets three buttons: Beginner/Intermediate/Advanced
     elif q_type == "skill":
         st.markdown("""
             <style>
@@ -227,22 +229,22 @@ if not st.session_state.quiz_complete:
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("Beginner", key="skill_easy", use_container_width=True, type="secondary"):
-                answer_question(True, Skill.EASY)
+            if st.button("Beginner", key=f"skill_beginner_{st.session_state.current_question}", use_container_width=True, type="secondary"):
+                answer_question(True, "beginner")
                 st.rerun()
         
         with col2:
-            if st.button("Intermediate", key="skill_medium", use_container_width=True, type="primary"):
-                answer_question(True, Skill.MEDIUM)
+            if st.button("Intermediate", key=f"skill_intermediate_{st.session_state.current_question}", use_container_width=True, type="primary"):
+                answer_question(True, "intermediate")
                 st.rerun()
         
         with col3:
-            if st.button("Experienced", key="skill_exp", use_container_width=True, type="tertiary"):
-                answer_question(True, Skill.EXPERIENCED)
+            if st.button("Advanced", key=f"skill_advanced_{st.session_state.current_question}", use_container_width=True, type="tertiary"):
+                answer_question(True, "advanced")
                 st.rerun()
     
-    # Budget question gets three buttons: Student Life/Budget Friendly/Gourmet
-    elif q_type == "budget":
+    # Time question gets three buttons
+    elif q_type == "time":
         st.markdown("""
             <style>
                 div.stButton > button[kind="primary"] {
@@ -254,7 +256,7 @@ if not st.session_state.quiz_complete:
                     background-color: #28a745;
                     color: white;
                     border: 2px solid #28a745;
-                }   
+                }
                 div.stButton > button[kind="secondary"] {
                     background-color: transparent;
                     color: #007bff;
@@ -264,16 +266,6 @@ if not st.session_state.quiz_complete:
                     background-color: #007bff;
                     color: white;
                     border: 2px solid #007bff;
-                }
-                div.stButton > button[kind="tertiary"] {
-                    background-color: transparent;
-                    color: #dc3545;
-                    border: 2px solid #dc3545;
-                }
-                div.stButton > button[kind="tertiary"]:hover {
-                    background-color: #dc3545;
-                    color: white;
-                    border: 2px solid #dc3545;
                 }
             </style>
         """, unsafe_allow_html=True)
@@ -281,76 +273,22 @@ if not st.session_state.quiz_complete:
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("Student Life", key="budget_student", use_container_width=True, type="secondary"):
-                answer_question(True, Budget.STUDENT_LIFE)
+            if st.button("< 15 min", key=f"time_less_{st.session_state.current_question}", use_container_width=True, type="secondary"):
+                answer_question(True, 15)
                 st.rerun()
         
         with col2:
-            if st.button("Budget Friendly", key="budget_friendly", use_container_width=True, type="primary"):
-                answer_question(True, Budget.BUDGET_FRIENDLY)
+            if st.button("15-45 min", key=f"time_yes_{st.session_state.current_question}", use_container_width=True, type="primary"):
+                answer_question(True, 30)
                 st.rerun()
         
         with col3:
-            if st.button("Gourmet", key="budget_gourmet", use_container_width=True, type="tertiary"):
-                answer_question(True, Budget.GOURMET)
+            if st.button("> 45 min", key=f"time_more_{st.session_state.current_question}", use_container_width=True, type="secondary"):
+                answer_question(True, 60)
                 st.rerun()
     
-    # Meal type question gets five buttons
-    elif q_type == "meal":
-        st.markdown("""
-            <style>
-                div.stButton > button[kind="primary"] {
-                    background-color: transparent;
-                    color: #007bff;
-                    border: 2px solid #007bff;
-                }
-                div.stButton > button[kind="primary"]:hover {
-                    background-color: #007bff;
-                    color: white;
-                    border: 2px solid #007bff;
-                }   
-                div.stButton > button[kind="secondary"] {
-                    background-color: transparent;
-                    color: #007bff;
-                    border: 2px solid #007bff;
-                }
-                div.stButton > button[kind="secondary"]:hover {
-                    background-color: #007bff;
-                    color: white;
-                    border: 2px solid #007bff;
-                }
-            </style>
-        """, unsafe_allow_html=True)
-        
-        col1, col2, col3, col4, col5 = st.columns(5)
-        
-        with col1:
-            if st.button("Breakfast", key="meal_breakfast", use_container_width=True, type="secondary"):
-                answer_question(True, Meal.BREAKFAST)
-                st.rerun()
-        
-        with col2:
-            if st.button("Lunch", key="meal_lunch", use_container_width=True, type="secondary"):
-                answer_question(True, Meal.LUNCH)
-                st.rerun()
-        
-        with col3:
-            if st.button("Dinner", key="meal_dinner", use_container_width=True, type="secondary"):
-                answer_question(True, Meal.DINNER)
-                st.rerun()
-        
-        with col4:
-            if st.button("Snack", key="meal_snack", use_container_width=True, type="secondary"):
-                answer_question(True, Meal.SNACK)
-                st.rerun()
-        
-        with col5:
-            if st.button("Dessert", key="meal_dessert", use_container_width=True, type="secondary"):
-                answer_question(True, Meal.DESSERT)
-                st.rerun()
-    
+    # All other questions get yes/no buttons
     else:
-        # Yes/No buttons with custom styling
         st.markdown("""
             <style>
                 div.stButton > button[kind="primary"] {
@@ -379,225 +317,142 @@ if not st.session_state.quiz_complete:
         col1, col2 = st.columns(2)
         
         with col1:
-            if st.button("Yes", key="yes_btn", use_container_width=True, type="primary"):
+            if st.button("Yes", key=f"yes_{st.session_state.current_question}", use_container_width=True, type="primary"):
                 answer_question(True)
                 st.rerun()
         
         with col2:
-            if st.button("No", key="no_btn", use_container_width=True, type="secondary"):
+            if st.button("No", key=f"no_{st.session_state.current_question}", use_container_width=True, type="secondary"):
                 answer_question(False)
                 st.rerun()
     
     st.divider()
     
-    if st.button("🔄 Reset Quiz", key="reset_btn", use_container_width=False):
+    if st.button("🔄 Reset Quiz", key=f"reset_btn_{st.session_state.current_question}", use_container_width=False):
         reset_quiz()
         st.rerun()
 
 else:
-    # Show summary of selected preferences
-    st.success("✅ All questions answered!")
-    
-    st.subheader("Your Preferences")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        if st.session_state.answers['diet']:
-            st.write(f"**Diet:** {', '.join([d.value.title() for d in st.session_state.answers['diet']])}")
-        else:
-            st.write("**Diet:** None selected")
-            
-        if st.session_state.answers['cooking_time']:
-            st.write(f"**Cooking Time:** {', '.join([t.value.title() for t in st.session_state.answers['cooking_time']])}")
-        else:
-            st.write("**Cooking Time:** None selected")
-            
-        if st.session_state.answers['skill']:
-            st.write(f"**Skill Level:** {', '.join([s.value.title() for s in st.session_state.answers['skill']])}")
-        else:
-            st.write("**Skill Level:** None selected")
-            
-        if st.session_state.answers['budget']:
-            st.write(f"**Budget:** {', '.join([b.value.title() for b in st.session_state.answers['budget']])}")
-        else:
-            st.write("**Budget:** None selected")
-    
-    with col2:
-        if st.session_state.answers['meal']:
-            st.write(f"**Meal Type:** {', '.join([m.value.title() for m in st.session_state.answers['meal']])}")
-        else:
-            st.write("**Meal Type:** None selected")
-            
-        if st.session_state.answers['restrictions']:
-            st.write(f"**Dietary Restrictions:** {', '.join([r.value.title() for r in st.session_state.answers['restrictions']])}")
-        else:
-            st.write("**Dietary Restrictions:** None selected")
-            
-        if st.session_state.answers['cooking_methods']:
-            st.write(f"**Cooking Methods:** {', '.join([m.value.title() for m in st.session_state.answers['cooking_methods']])}")
-        else:
-            st.write("**Cooking Methods:** None selected")
-            
-        if st.session_state.answers['macros']:
-            st.write(f"**Nutritional Goals:** {', '.join([m.value.title() for m in st.session_state.answers['macros']])}")
-        else:
-            st.write("**Nutritional Goals:** None selected")
-    
+    # Quiz complete - show recipe recommendations
+    st.success("✅ Quiz Complete! Let's find your perfect recipes!")
     st.divider()
     
-    # Filter and display matching recipes
-    st.subheader("🍳 Your Recipe Matches")
+    # Create User object and get recipe recommendations
+    st.subheader("🍽️ Your Recipe Recommendations")
     
-    # Convert preferences to User object
-    preferences = {
-        'diet': st.session_state.answers['diet'],
-        'diet_restrictions': st.session_state.answers['restrictions'],
-        'cooking_time': st.session_state.answers['cooking_time'],
-        'skill': st.session_state.answers['skill'],
-        'cooking_methods': st.session_state.answers['cooking_methods'],
-        'budget': st.session_state.answers['budget'],
-        'meal': st.session_state.answers['meal'],
-        'macros': st.session_state.answers['macros']
-    }
+    # Create domain objects for User
+    allergies_list = [Allergy(allergen_name=a) for a in st.session_state.answers.get('allergens', [])]
     
-    # Create User object from preferences
-    user = preferences_to_user(preferences)
+    skill_obj = CookingSkill(level=st.session_state.answers['skill'][0] if st.session_state.answers['skill'] else 'beginner')
     
-    # Load inference engine and filter recipes
+    time_obj = TimeConstraint(
+        available_minutes=st.session_state.answers['time'][0] if st.session_state.answers['time'] else 60
+    ) if st.session_state.answers['time'] else None
+    
+    dietary_prefs_list = [DietaryPreference(type=p) for p in st.session_state.answers['dietary_prefs']]
+    
+    health_goals_list = [HealthGoal(goal_type=g) for g in st.session_state.answers['health_goals']]
+    
+    budget_obj = BudgetConstraint(
+        preferred_range=st.session_state.answers['budget'][0] if st.session_state.answers['budget'] else 'moderate',
+        flexibility='flexible'
+    ) if st.session_state.answers['budget'] else None
+    
+    kitchen_obj = Kitchen(
+        available_equipment=st.session_state.answers['equipment']
+    ) if st.session_state.answers['equipment'] else None
+    
+    # Build dietary restrictions list from preferences for legacy compatibility
+    dietary_restrictions_list = []
+    for pref in st.session_state.answers['dietary_prefs']:
+        dietary_restrictions_list.append(pref)
+    
+    # Determine primary diet type for dietary_preference
+    diet_type = 'omnivore'
+    if 'vegan' in st.session_state.answers['dietary_prefs']:
+        diet_type = 'vegan'
+    elif 'vegetarian' in st.session_state.answers['dietary_prefs']:
+        diet_type = 'vegetarian'
+    elif 'pescatarian' in st.session_state.answers['dietary_prefs']:
+        diet_type = 'pescatarian'
+    
+    primary_dietary_pref = DietaryPreference(
+        type=diet_type,
+        restrictions=dietary_restrictions_list,
+        preferred_cuisines=[]
+    )
+    
+    # Create User object
+    user = User(
+        name="Test User",
+        dietary_restrictions=dietary_restrictions_list,
+        allergies=st.session_state.answers.get('allergens', []),
+        skill_level=st.session_state.answers['skill'][0] if st.session_state.answers['skill'] else 'beginner',
+        available_equipment=st.session_state.answers['equipment'],
+        max_cooking_time=st.session_state.answers['time'][0] if st.session_state.answers['time'] else 60,
+        health_goals=st.session_state.answers['health_goals'],
+        allergies_list=allergies_list,
+        skill=skill_obj,
+        time_constraint=time_obj,
+        dietary_preference=primary_dietary_pref,
+        health_goals_list=health_goals_list,
+        budget=budget_obj,
+        kitchen=kitchen_obj
+    )
+    
+    # Get all recipes
     all_recipes = get_all_recipes()
     
-    try:
-        engine = InferenceEngine('knowledge_base.yaml')
-        # Use inference engine to filter and score recipes
-        filtered_results = engine.filter_recipes(all_recipes, user)
-        matching_recipes = [recipe for recipe, score, reasons in filtered_results]
+    # Run inference engine with knowledge base
+    kb_path = Path(__file__).parent / 'knowledge_base.yaml'
+    
+    engine = InferenceEngine(str(kb_path))
+    engine.forward_chain(user, kitchen_obj, all_recipes)
+    recommended = engine.get_recommended_recipes(all_recipes)
+    
+    if recommended:
+        st.success(f"Found {len(recommended)} recipe(s) matching your preferences!")
         
-        if matching_recipes:
-            st.success(f"Found {len(matching_recipes)} recipe(s) that match your preferences!")
-            
-            # Display recipes with scores
-            for i, (recipe, score, reasons) in enumerate(filtered_results, 1):
-                score_emoji = "⭐" * min(5, max(1, int(score / 3) + 1))
-                with st.expander(f"🍽️ {recipe.name} {score_emoji}", expanded=(i == 1)):
-                    # Recipe description
-                    if recipe.description:
-                        st.markdown(f"*{recipe.description}*")
-                    
-                    # Show matching reasons if available
-                    if reasons:
-                        st.info("✨ " + " • ".join(reasons[:3]))
-                    
-                    st.divider()
-                
-                # Basic info
-                col1, col2, col3 = st.columns(3)
+        for recipe in recommended:
+            with st.expander(f"📖 {recipe.name}", expanded=False):
+                col1, col2 = st.columns([2, 1])
                 
                 with col1:
-                    st.write(f"**Diet:** {recipe.diet.value.title()}")
-                    st.write(f"**Skill Level:** {recipe.skill.value.title()}")
-                    if recipe.cuisine:
-                        st.write(f"**Cuisine:** {recipe.cuisine}")
+                    if recipe.description:
+                        st.markdown(f"**{recipe.description}**")
+                    
+                    if recipe.prep_time:
+                        st.write(f"⏱️ **Prep Time:** {recipe.prep_time} min")
+                    st.write(f"🕐 **Cooking Time:** {recipe.cooking_time.value if hasattr(recipe.cooking_time, 'value') else recipe.cooking_time}")
+                    st.write(f"👨‍🍳 **Skill Level:** {recipe.skill.value if hasattr(recipe.skill, 'value') else recipe.skill}")
+                    st.write(f"🍽️ **Servings:** {recipe.servings}")
+                    
+                    if recipe.ingredients:
+                        st.markdown("**Ingredients:**")
+                        for ingredient in recipe.ingredients:
+                            st.write(f"- {ingredient.quantity} {ingredient.unit} {ingredient.name}")
+                    
+                    if recipe.instructions:
+                        st.markdown("**Instructions:**")
+                        for i, instruction in enumerate(recipe.instructions, 1):
+                            st.write(f"{i}. {instruction}")
                 
                 with col2:
-                    st.write(f"**Cooking Time:** {recipe.cooking_time.value.title()}")
-                    if recipe.prep_time:
-                        st.write(f"**Prep Time:** {recipe.prep_time} min")
-                    st.write(f"**Servings:** {recipe.servings}")
-                
-                with col3:
-                    st.write(f"**Meal Type:** {recipe.meal.value.title()}")
-                    st.write(f"**Budget:** {recipe.budget.value.title()}")
-                    methods = [m.value.title() for m in recipe.cooking_methods]
-                    st.write(f"**Methods:** {', '.join(methods)}")
-                
-                # Nutritional information
-                if recipe.nutritional_info and recipe.nutritional_info.calories > 0:
-                    st.divider()
-                    st.markdown("**📊 Nutrition (per serving)**")
-                    col1, col2, col3, col4 = st.columns(4)
-                    with col1:
-                        st.metric("Calories", f"{int(recipe.nutritional_info.calories)}")
-                    with col2:
-                        st.metric("Protein", f"{int(recipe.nutritional_info.protein)}g")
-                    with col3:
-                        st.metric("Carbs", f"{int(recipe.nutritional_info.carbohydrates)}g")
-                    with col4:
-                        st.metric("Fat", f"{int(recipe.nutritional_info.fat)}g")
-                
-                # Ingredients
-                if recipe.ingredients:
-                    st.divider()
-                    st.markdown("**🥘 Ingredients**")
-                    for ingredient in recipe.ingredients:
-                        st.write(f"• {ingredient}")
-                
-                # Equipment
-                if recipe.equipment:
-                    st.divider()
-                    st.markdown("**🔪 Equipment Needed**")
-                    equip_list = [eq.name.title() for eq in recipe.equipment]
-                    st.write(", ".join(equip_list))
-                
-                # Instructions
-                if recipe.instructions:
-                    st.divider()
-                    st.markdown("**👩‍🍳 Instructions**")
-                    for idx, instruction in enumerate(recipe.instructions, 1):
-                        st.write(f"{idx}. {instruction}")
-                
-                # Dietary info
-                restrictions = [r.value.title() for r in recipe.diet_restrictions if r != DietRestriction.NONE]
-                if restrictions or recipe.macros:
-                    st.divider()
-                    if restrictions:
-                        st.write(f"✅ **Suitable for:** {', '.join(restrictions)}")
-                    if recipe.macros:
-                        macros = [m.value.title() for m in recipe.macros]
-                        st.write(f"💪 **Health benefits:** {', '.join(macros)}")
-                
-                # Substitution suggestions
-                try:
-                    substitutions = engine.get_substitutions(recipe, user)
-                    has_subs = any(substitutions.values())
+                    if recipe.nutritional_info:
+                        st.markdown("**Nutrition:**")
+                        st.write(f"🔥 {recipe.nutritional_info.calories} cal")
+                        st.write(f"🥩 {recipe.nutritional_info.protein}g protein")
+                        st.write(f"🍞 {recipe.nutritional_info.carbohydrates}g carbs")
+                        st.write(f"🧈 {recipe.nutritional_info.fat}g fat")
                     
-                    if has_subs:
-                        st.divider()
-                        st.markdown("**🔄 Substitution Suggestions**")
-                        
-                        if substitutions.get('ingredients'):
-                            st.markdown("*Ingredient alternatives:*")
-                            for original, alternatives in substitutions['ingredients'].items():
-                                if alternatives:
-                                    st.write(f"• {original.title()} → {', '.join(alternatives)}")
-                        
-                        if substitutions.get('cooking_methods'):
-                            st.markdown("*Cooking method alternatives:*")
-                            for original, alternatives in substitutions['cooking_methods'].items():
-                                if alternatives:
-                                    st.write(f"• {original.title()} → {', '.join(alternatives)}")
-                        
-                        if substitutions.get('equipment'):
-                            st.markdown("*Equipment alternatives:*")
-                            for original, alternatives in substitutions['equipment'].items():
-                                if alternatives:
-                                    st.write(f"• {original.title()} → {', '.join(alternatives)}")
-                except Exception:
-                    pass  # Skip substitutions if there's an error
-    
-    except Exception as e:
-        st.error(f"Error using inference engine: {e}")
-        st.info("Please try adjusting your preferences and try again.")
-        matching_recipes = []
-    
-    if not matching_recipes:
-        st.warning("😔 No recipes match all your preferences. Try adjusting your criteria!")
-        st.info("💡 Tip: You can reset the quiz and try different options to find matching recipes.")
+                    if recipe.cost:
+                        st.write(f"💰 **Cost:** €{recipe.cost:.2f}/serving")
+    else:
+        st.warning("No recipes match your criteria. Try adjusting your preferences!")
     
     st.divider()
     
-    if st.button("🔄 Start Over", use_container_width=True):
+    # Reset button
+    if st.button("🔄 Start Over", use_container_width=True, type="primary"):
         reset_quiz()
         st.rerun()
-
-
