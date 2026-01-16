@@ -10,9 +10,6 @@ from models import (
 # ============================================================================
 
 SAMPLE_RECIPES = [
-    # ============================================================================
-    # CHEF SORIN'S RECIPES - Handwritten recipes
-    # ============================================================================
     
     # Recipe 1: Crème Brûlée
     Recipe(
@@ -256,11 +253,7 @@ SAMPLE_RECIPES = [
         cuisine="French",
     ),
     
-    # ============================================================================
-    # OTHER SAMPLE RECIPES
-    # ============================================================================
-    
-    # Classic Italian pasta dishes
+    # Recipe 6: Cacio e pepe
     Recipe(
         name="Cacio e pepe",
         diet=Diet.VEGETARIAN,
@@ -306,6 +299,7 @@ SAMPLE_RECIPES = [
         cost=3.5  # Budget-friendly
     ),
     
+    # Recipe 7: Risotto allo zafferano
     Recipe(
         name="Risotto allo zafferano",
         diet=Diet.VEGETARIAN,
@@ -356,6 +350,7 @@ SAMPLE_RECIPES = [
         cost=6.5  # Moderate due to saffron
     ),
     
+    # Recipe 8: Saltimbocca alla romana
     Recipe(
         name="Saltimbocca alla romana",
         diet=Diet.OMNIVORE,
@@ -406,6 +401,7 @@ SAMPLE_RECIPES = [
         cost=5.5  # Moderate with veal and prosciutto
     ),
     
+    # Recipe 9: Fritta di patate
     Recipe(
         name="Fritta di patate",
         diet=Diet.VEGETARIAN,
@@ -454,6 +450,7 @@ SAMPLE_RECIPES = [
         cost=9.0  # Premium category
     ),
     
+    # Recipe 10: Dark Chocolate Energy Bites
     Recipe(
         name="Dark Chocolate Energy Bites",
         diet=Diet.VEGETARIAN,
@@ -501,7 +498,7 @@ SAMPLE_RECIPES = [
         cost=4.5  # Moderate with specialty ingredients
     ),
 
-    # 1) Trout fillet marinated in sugar (snack)
+    # Recipe 11: Trout Fillet Marinated in Sugar
     Recipe(
         name="Trout Fillet Marinated in Sugar",
         diet=Diet.PESCATARIAN,
@@ -544,7 +541,7 @@ SAMPLE_RECIPES = [
         cost=5.0
     ),
 
-    # 2) American-style pico de gallo salad
+    # Recipe 12: American-Style Pico de Gallo Salad
     Recipe(
         name="American-Style Pico de Gallo Salad",
         diet=Diet.VEGETARIAN,
@@ -590,7 +587,7 @@ SAMPLE_RECIPES = [
         cost=2.0
     ),
 
-    # 3) Flatbread taco with minced beef and red onion
+    # Recipe 13: Flatbread Taco with Minced Beef and Red Onion
     Recipe(
         name="Flatbread Taco with Minced Beef and Red Onion",
         diet=Diet.OMNIVORE,
@@ -638,7 +635,7 @@ SAMPLE_RECIPES = [
         cost=4.0
     ),
 
-    # 4) Cessar-style chicken salad
+    # Recipe 14: Cessar Chicken Salad
     Recipe(
         name="Cessar Chicken Salad",
         diet=Diet.OMNIVORE,
@@ -683,7 +680,7 @@ SAMPLE_RECIPES = [
         cost=6.0
     ),
 
-    # 5) Meal replacement protein shake
+    # Recipe 15: Meal Replacement Protein Shake
     Recipe(
         name="Meal Replacement Protein Shake",
         diet=Diet.VEGETARIAN,
@@ -741,11 +738,7 @@ SAMPLE_RECIPES = [
         cost=3.5
     ),
     
-    # ============================================================================
-    # NEWLY ADDED RECIPES - Handwritten recipes from team
-    # ============================================================================
-    
-    # Recipe 6: Beef Wellington
+    # Recipe 16: Beef Wellington
     Recipe(
         name="Beef Wellington",
         diet=Diet.OMNIVORE,
@@ -807,7 +800,7 @@ SAMPLE_RECIPES = [
         cost=18.0
     ),
 
-    # Recipe 7: Simple Potato Puree
+    # Recipe 17: Simple Potato Puree
     Recipe(
         name="Simple Potato Puree",
         diet=Diet.VEGETARIAN,
@@ -859,7 +852,7 @@ SAMPLE_RECIPES = [
         cost=3.0
     ),
 
-    # Recipe 8: Asparagus Cream Soup
+    # Recipe 18: Asparagus Cream Soup
     Recipe(
         name="Asparagus Cream Soup",
         diet=Diet.VEGETARIAN,
@@ -914,7 +907,7 @@ SAMPLE_RECIPES = [
         cost=5.5
     ),
 
-    # Recipe 9: Couscous with Vegetables and Peas Cream
+    # Recipe 19: Couscous with Vegetables and Peas Cream
     Recipe(
         name="Couscous with Vegetables and Peas Cream",
         diet=Diet.VEGAN,
@@ -977,7 +970,7 @@ SAMPLE_RECIPES = [
         cost=4.5
     ),
 
-    # Recipe 10: Hummus
+    # Recipe 20: Hummus
     Recipe(
         name="Hummus",
         diet=Diet.VEGAN,
