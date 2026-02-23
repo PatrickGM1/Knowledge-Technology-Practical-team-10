@@ -16,3 +16,6 @@ venv/
 
 # Lecture PDFs
 *.pdf
+
+# Ignore tests
+recipe_recommender/tests/
