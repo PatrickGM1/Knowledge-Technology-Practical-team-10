@@ -1,0 +1,1262 @@
+recipes:
+  - name: "Crème Brûlée"
+    cuisine: "French"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 70
+    skill_level: "medium"
+    cooking_methods: ["oven"]
+    budget_category: "moderate"
+    meal_type: "dinner"
+    servings: 6
+    prep_time_minutes: 15
+    cost: 4.50
+    tags: ["french", "dessert", "classic", "elegant"]
+    ingredients:
+      - name: "egg yolks"
+        quantity: 6
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "heavy cream"
+        quantity: 500
+        unit: "ml"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "sugar"
+        quantity: 100
+        unit: "g"
+        category: "other"
+      - name: "vanilla extract"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "bowl"
+      - "whisk"
+      - "ramekins"
+      - "oven"
+      - "baking tray"
+    instructions:
+      - "In a bowl, whisk egg yolks and sugar until well combined"
+      - "Add the heavy cream and vanilla extract to the mixture"
+      - "Pour mixture into individual ramekins"
+      - "Place ramekins in a baking tray filled with water (bain-marie)"
+      - "Bake in oven at 120°C (no fan) for 1 hour to 1 hour 10 minutes"
+      - "Leave in oven to cool gradually"
+      - "Before serving, sprinkle sugar on top and caramelize with a torch"
+    nutritional_info:
+      calories: 320
+      protein: 6
+      carbohydrates: 28
+      fat: 21
+      fiber: 0
+      sodium: 50
+
+  - name: "Clarified Butter Hollandaise"
+    cuisine: "French"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "medium"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 15
+    cost: 3.00
+    tags: ["sauce", "french", "classic"]
+    ingredients:
+      - name: "butter"
+        quantity: 200
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "egg yolk"
+        quantity: 3
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "lemon juice"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+      - name: "white wine vinegar"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.25
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "sauce pan"
+      - "bowl"
+      - "whisk"
+      - "sieve"
+    instructions:
+      - "Melt the butter in a pan"
+      - "Skim the foam from the top with a spoon"
+      - "Filter the melted butter through a sieve to get clear golden liquid"
+      - "Discard impurities that settled on the bottom"
+      - "In a sauce pan with boiling water, place a bowl on top"
+      - "Add egg yolks, lemon juice, and vinegar to the bowl"
+      - "Whisk while slowly adding the clarified butter"
+      - "Turn heat on and off to prevent eggs from overcooking"
+      - "Continue whisking until sauce is thick and emulsified"
+    nutritional_info:
+      calories: 280
+      protein: 3
+      carbohydrates: 2
+      fat: 30
+      fiber: 0
+      sodium: 180
+
+  - name: "Avocado Toast with Poached Eggs"
+    cuisine: "American"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 13
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "breakfast"
+    servings: 2
+    prep_time_minutes: 13
+    cost: 4.00
+    tags: ["breakfast", "healthy", "quick", "modern"]
+    ingredients:
+      - name: "toasted bread"
+        quantity: 2
+        unit: "slices"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "avocado"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "green onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "red onion"
+        quantity: 0.25
+        unit: "piece"
+        category: "vegetable"
+      - name: "tomato"
+        quantity: 0.5
+        unit: "piece"
+        category: "vegetable"
+      - name: "lime juice"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+      - name: "eggs"
+        quantity: 2
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "white wine vinegar"
+        quantity: 100
+        unit: "ml"
+        category: "other"
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.25
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "pot"
+      - "bowl"
+      - "spatula"
+    instructions:
+      - "Make guacamole: mash avocado with green onion, red onion, tomato, salt, pepper, and lime juice"
+      - "For poached eggs: bring 2L water with 100ml white wine vinegar to boil"
+      - "Create a vortex in the water with a spatula"
+      - "Crack egg into the vortex"
+      - "Cook for 3-4 minutes"
+      - "Toast the bread slices"
+      - "Spread guacamole on toasted bread"
+      - "Top with poached egg"
+    nutritional_info:
+      calories: 340
+      protein: 14
+      carbohydrates: 28
+      fat: 20
+      fiber: 8
+      sodium: 320
+
+  - name: "Fried Rice with Eggs and Shrimp"
+    cuisine: "Asian"
+    diet: "pescatarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 2
+    prep_time_minutes: 15
+    cost: 6.00
+    tags: ["asian", "quick", "easy", "seafood"]
+    ingredients:
+      - name: "cooked rice"
+        quantity: 300
+        unit: "g"
+        category: "grain"
+      - name: "eggs"
+        quantity: 2
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "shrimp"
+        quantity: 200
+        unit: "g"
+        category: "protein"
+        allergens: ["shellfish"]
+      - name: "spring onion"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+        preparation: "julienned"
+      - name: "soy sauce"
+        quantity: 2
+        unit: "tbsp"
+        category: "other"
+        allergens: ["soy"]
+      - name: "oil"
+        quantity: 2
+        unit: "tbsp"
+        category: "other"
+      - name: "butter"
+        quantity: 1
+        unit: "tbsp"
+        category: "dairy"
+        allergens: ["dairy"]
+    equipment:
+      - "wok or large pan"
+      - "spatula"
+    instructions:
+      - "Cook the rice if not already cooked (steam method preferred)"
+      - "Heat oil in a hot pan or wok"
+      - "Add eggs and scramble"
+      - "Add the spring onion julienne and cook briefly"
+      - "Add the shrimp and cook until brown"
+      - "Add the cooked rice and stir-fry"
+      - "Add soy sauce and let rice absorb the flavor"
+      - "Finish with butter and egg, mixing well"
+    nutritional_info:
+      calories: 450
+      protein: 28
+      carbohydrates: 52
+      fat: 14
+      fiber: 2
+      sodium: 680
+
+  - name: "Simple Vinaigrette"
+    cuisine: "French"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 3
+    skill_level: "easy"
+    cooking_methods: ["blender"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 3
+    cost: 1.00
+    tags: ["simple", "quick", "vegan", "salad", "dressing"]
+    ingredients:
+      - name: "olive oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "other"
+      - name: "white wine vinegar"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+      - name: "salt"
+        quantity: 0.25
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.25
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "blender"
+      - "bowl"
+    instructions:
+      - "Add olive oil, white wine vinegar, salt, and pepper to blender"
+      - "Blend until everything is fully incorporated"
+      - "Serve with any salad"
+    nutritional_info:
+      calories: 90
+      protein: 0
+      carbohydrates: 0
+      fat: 10
+      fiber: 0
+      sodium: 60
+
+  - name: "Cacio e pepe"
+    cuisine: "Italian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 2
+    prep_time_minutes: 5
+    cost: 3.50
+    tags: ["italian", "pasta", "simple", "classic"]
+    ingredients:
+      - name: "pasta"
+        quantity: 200
+        unit: "g"
+        category: "grain"
+      - name: "pecorino cheese"
+        quantity: 50
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "black pepper"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+        optional: true
+    equipment:
+      - "pot"
+      - "pan"
+      - "grater"
+    instructions:
+      - "Boil salted water and cook pasta until al dente"
+      - "Reserve 1 cup of pasta water before draining"
+      - "Grate pecorino cheese finely"
+      - "Toast black pepper in a pan"
+      - "Add cooked pasta and pasta water to pan"
+      - "Toss with cheese and pepper until creamy"
+      - "Serve immediately"
+    nutritional_info:
+      calories: 450
+      protein: 18
+      carbohydrates: 65
+      fat: 12
+      fiber: 3
+      sodium: 400
+
+  - name: "Risotto allo zafferano"
+    cuisine: "Italian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 30
+    skill_level: "medium"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "dinner"
+    servings: 4
+    prep_time_minutes: 10
+    cost: 6.50
+    tags: ["italian", "risotto", "saffron", "creamy"]
+    ingredients:
+      - name: "arborio rice"
+        quantity: 300
+        unit: "g"
+        category: "grain"
+      - name: "vegetable broth"
+        quantity: 1
+        unit: "liter"
+        category: "other"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+        preparation: "finely chopped"
+      - name: "white wine"
+        quantity: 100
+        unit: "ml"
+        category: "other"
+        optional: true
+      - name: "saffron"
+        quantity: 0.5
+        unit: "g"
+        category: "spice"
+      - name: "butter"
+        quantity: 30
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "parmesan cheese"
+        quantity: 50
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+    equipment:
+      - "large pan"
+      - "wooden spoon"
+      - "ladle"
+    instructions:
+      - "Heat broth and keep it warm"
+      - "Sauté onion in butter until translucent"
+      - "Add rice and toast for 2 minutes"
+      - "Add wine and let it evaporate"
+      - "Add broth one ladle at a time, stirring constantly"
+      - "After 15 minutes, add saffron"
+      - "Continue cooking until rice is creamy (about 18-20 minutes total)"
+      - "Stir in butter and parmesan"
+      - "Let rest for 2 minutes before serving"
+    nutritional_info:
+      calories: 520
+      protein: 14
+      carbohydrates: 75
+      fat: 16
+      fiber: 2
+      sodium: 600
+
+  - name: "Saltimbocca alla romana"
+    cuisine: "Italian"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "easy"
+    cooking_methods: ["pan", "oven"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 10
+    cost: 5.50
+    tags: ["italian", "veal", "prosciutto", "quick"]
+    ingredients:
+      - name: "veal cutlets"
+        quantity: 4
+        unit: "pieces"
+        category: "protein"
+      - name: "prosciutto"
+        quantity: 4
+        unit: "slices"
+        category: "protein"
+      - name: "sage leaves"
+        quantity: 8
+        unit: "pieces"
+        category: "spice"
+      - name: "white wine"
+        quantity: 100
+        unit: "ml"
+        category: "other"
+      - name: "butter"
+        quantity: 30
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+        substitutes: ["olive oil"]
+      - name: "flour"
+        quantity: 2
+        unit: "tbsp"
+        category: "grain"
+        optional: true
+    equipment:
+      - "pan"
+      - "tongs"
+      - "toothpicks"
+    instructions:
+      - "Pound veal cutlets to even thickness"
+      - "Place prosciutto and sage on each cutlet, secure with toothpick"
+      - "Dust lightly with flour if using"
+      - "Heat butter in pan over medium-high heat"
+      - "Cook cutlets sage-side down for 2-3 minutes"
+      - "Flip and cook for another 2 minutes"
+      - "Remove cutlets and keep warm"
+      - "Deglaze pan with white wine"
+      - "Pour sauce over cutlets and serve"
+    nutritional_info:
+      calories: 320
+      protein: 35
+      carbohydrates: 5
+      fat: 15
+      fiber: 0.5
+      sodium: 550
+
+  - name: "Fritta di patate"
+    cuisine: "Italian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "premium"
+    meal_type: "snack"
+    servings: 4
+    prep_time_minutes: 8
+    cost: 9.00
+    tags: ["italian", "frittata", "potato", "eggs"]
+    ingredients:
+      - name: "potatoes"
+        quantity: 500
+        unit: "g"
+        category: "vegetable"
+        preparation: "thinly sliced"
+      - name: "eggs"
+        quantity: 6
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+        preparation: "sliced"
+        optional: true
+      - name: "olive oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "oil"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "large pan"
+      - "spatula"
+      - "bowl"
+    instructions:
+      - "Heat olive oil in pan"
+      - "Fry potato slices until golden and tender"
+      - "Beat eggs with salt and pepper"
+      - "Add cooked potatoes to eggs"
+      - "Pour mixture back into pan"
+      - "Cook until bottom is set"
+      - "Flip and cook other side until golden"
+      - "Serve hot or at room temperature"
+    nutritional_info:
+      calories: 280
+      protein: 14
+      carbohydrates: 25
+      fat: 14
+      fiber: 3
+      sodium: 420
+
+  - name: "Dark Chocolate Energy Bites"
+    cuisine: "American"
+    diet: "vegetarian"
+    dietary_restrictions: ["gluten-free", "diabetic-friendly"]
+    cooking_time_minutes: 10
+    skill_level: "easy"
+    cooking_methods: ["no-cook"]
+    budget_category: "moderate"
+    meal_type: "snack"
+    servings: 12
+    prep_time_minutes: 10
+    cost: 4.50
+    tags: ["healthy", "no-bake", "energy", "snack"]
+    ingredients:
+      - name: "rolled oats"
+        quantity: 200
+        unit: "g"
+        category: "grain"
+        dietary_flags: ["gluten-free"]
+      - name: "dark chocolate"
+        quantity: 100
+        unit: "g"
+        category: "sweetener"
+      - name: "almond butter"
+        quantity: 100
+        unit: "g"
+        category: "protein"
+        allergens: ["nuts"]
+        substitutes: ["sunflower seed butter", "peanut butter"]
+      - name: "honey"
+        quantity: 3
+        unit: "tbsp"
+        category: "sweetener"
+        substitutes: ["maple syrup", "agave"]
+      - name: "chia seeds"
+        quantity: 2
+        unit: "tbsp"
+        category: "other"
+        optional: true
+      - name: "vanilla extract"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "bowl"
+      - "spoon"
+      - "baking sheet"
+    instructions:
+      - "Mix all ingredients in a bowl"
+      - "Let mixture chill in refrigerator for 30 minutes"
+      - "Roll into bite-sized balls"
+      - "Store in refrigerator for up to 1 week"
+    nutritional_info:
+      calories: 180
+      protein: 6
+      carbohydrates: 20
+      fat: 9
+      fiber: 4
+      sodium: 25
+      sugar: 8
+
+  - name: "Trout Fillet Marinated in Sugar"
+    cuisine: "Romanian-inspired"
+    diet: "pescatarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 5
+    skill_level: "easy"
+    cooking_methods: ["marinated"]
+    budget_category: "moderate"
+    meal_type: "snack"
+    servings: 2
+    prep_time_minutes: 5
+    cost: 5.00
+    tags: ["fish", "marinated", "simple", "protein"]
+    ingredients:
+      - name: "trout fillet"
+        quantity: 250
+        unit: "g"
+        category: "protein"
+        preparation: "skin removed"
+      - name: "sugar"
+        quantity: 1
+        unit: "tbsp"
+        category: "sweetener"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "bowl"
+      - "sealed container"
+    instructions:
+      - "Use a cleaned trout fillet with skin removed"
+      - "Rub the trout fillet with sugar and salt"
+      - "Place the fillet in a sealed container"
+      - "Marinate in the refrigerator for 2–3 hours"
+      - "Ready to eat"
+    nutritional_info:
+      calories: 280
+      protein: 42
+      carbohydrates: 4
+      fat: 10
+      fiber: 0
+      sodium: 600
+      sugar: 4
+
+  - name: "American-Style Pico de Gallo Salad"
+    cuisine: "American"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 10
+    skill_level: "easy"
+    cooking_methods: ["no-cook"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 2
+    prep_time_minutes: 10
+    cost: 2.00
+    tags: ["fresh", "salad", "quick", "healthy"]
+    ingredients:
+      - name: "tomatoes"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "red onion"
+        quantity: 0.5
+        unit: "piece"
+        category: "vegetable"
+      - name: "jalapeno"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+        optional: true
+      - name: "lemon juice"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "knife"
+      - "bowl"
+    instructions:
+      - "Dice the tomatoes"
+      - "Finely chop the red onion"
+      - "Chop the jalapeno if using"
+      - "Mix with lemon juice, salt, and black pepper to taste"
+      - "Serve immediately"
+    nutritional_info:
+      calories: 70
+      protein: 2
+      carbohydrates: 14
+      fat: 0.5
+      fiber: 3
+      sodium: 250
+      sugar: 7
+
+  - name: "Flatbread Taco with Minced Beef and Red Onion"
+    cuisine: "Mexican-inspired"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "easy"
+    cooking_methods: ["oven", "pan"]
+    budget_category: "low"
+    meal_type: "snack"
+    servings: 2
+    prep_time_minutes: 7
+    cost: 4.00
+    tags: ["quick", "taco", "beef", "simple"]
+    ingredients:
+      - name: "flatbread"
+        quantity: 2
+        unit: "pieces"
+        category: "grain"
+      - name: "ground beef"
+        quantity: 250
+        unit: "g"
+        category: "protein"
+      - name: "red onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+        preparation: "julienned"
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "mixed spices"
+        quantity: 1
+        unit: "tbsp"
+        category: "spice"
+        optional: true
+    equipment:
+      - "baking tray"
+      - "knife"
+    instructions:
+      - "Spread the ground beef evenly over the flatbread"
+      - "Add julienned red onion on top"
+      - "Season with salt and black pepper"
+      - "Add mixed spices and optional seasoning"
+      - "Bake until the meat is fully cooked"
+      - "Serve hot"
+    nutritional_info:
+      calories: 520
+      protein: 33
+      carbohydrates: 45
+      fat: 22
+      fiber: 4
+      sodium: 650
+      sugar: 3
+
+  - name: "Cessar Chicken Salad"
+    cuisine: "International"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 10
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 1
+    prep_time_minutes: 10
+    cost: 6.00
+    tags: ["salad", "chicken", "healthy", "protein"]
+    ingredients:
+      - name: "green lettuce"
+        quantity: 150
+        unit: "g"
+        category: "vegetable"
+      - name: "chicken breast"
+        quantity: 200
+        unit: "g"
+        category: "protein"
+        preparation: "pan-cooked"
+      - name: "cherry tomatoes"
+        quantity: 150
+        unit: "g"
+        category: "vegetable"
+      - name: "boiled egg"
+        quantity: 1
+        unit: "piece"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "parmesan cheese"
+        quantity: 25
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "croutons"
+        quantity: 30
+        unit: "g"
+        category: "grain"
+      - name: "mayonnaise sauce"
+        quantity: 2
+        unit: "tbsp"
+        category: "other"
+    equipment:
+      - "pan"
+      - "bowl"
+      - "knife"
+    instructions:
+      - "Cook the chicken breast in a pan according to preference"
+      - "Assemble the salad with lettuce, chicken, cherry tomatoes, boiled egg, parmesan, croutons, and mayonnaise sauce"
+    nutritional_info:
+      calories: 520
+      protein: 40
+      carbohydrates: 20
+      fat: 30
+      fiber: 4
+      sodium: 700
+      sugar: 5
+
+  - name: "Meal Replacement Protein Shake"
+    cuisine: "International"
+    diet: "vegetarian"
+    dietary_restrictions: ["lactose-free option"]
+    cooking_time_minutes: 5
+    skill_level: "easy"
+    cooking_methods: ["blender"]
+    budget_category: "low"
+    meal_type: "snack"
+    servings: 1
+    prep_time_minutes: 5
+    cost: 3.50
+    tags: ["protein", "shake", "quick", "healthy"]
+    ingredients:
+      - name: "milk"
+        quantity: 300
+        unit: "ml"
+        category: "dairy"
+        allergens: ["dairy"]
+        substitutes: ["almond milk", "soy milk", "oat milk"]
+      - name: "protein powder"
+        quantity: 30
+        unit: "g"
+        category: "protein"
+      - name: "rolled oats"
+        quantity: 30
+        unit: "g"
+        category: "grain"
+      - name: "peanut butter"
+        quantity: 1
+        unit: "tbsp"
+        category: "protein"
+        allergens: ["nuts"]
+        substitutes: ["sunflower seed butter"]
+      - name: "banana"
+        quantity: 1
+        unit: "piece"
+        category: "fruit"
+      - name: "flavoring"
+        quantity: 1
+        unit: "tsp"
+        category: "other"
+        optional: true
+        substitutes: ["honey", "maple syrup"]
+    equipment:
+      - "blender"
+    instructions:
+      - "Add all ingredients to the blender"
+      - "Blend until smooth"
+      - "Serve immediately"
+    nutritional_info:
+      calories: 480
+      protein: 35
+      carbohydrates: 58
+      fat: 14
+      fiber: 7
+      sodium: 220
+      sugar: 12
+
+  - name: "Beef Wellington"
+    cuisine: "British"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 90
+    skill_level: "experienced"
+    cooking_methods: ["pan", "oven"]
+    budget_category: "premium"
+    meal_type: "dinner"
+    servings: 4
+    prep_time_minutes: 45
+    cost: 18.00
+    tags: ["beef", "elegant", "special occasion", "complex"]
+    ingredients:
+      - name: "beef fillet"
+        quantity: 800
+        unit: "g"
+        category: "protein"
+      - name: "mushroom champignon"
+        quantity: 400
+        unit: "g"
+        category: "vegetable"
+      - name: "crepes"
+        quantity: 4
+        unit: "pieces"
+        category: "grain"
+        allergens: ["eggs"]
+      - name: "spinach"
+        quantity: 150
+        unit: "g"
+        category: "vegetable"
+      - name: "prosciutto crudo"
+        quantity: 200
+        unit: "g"
+        category: "protein"
+      - name: "mustard"
+        quantity: 2
+        unit: "tbsp"
+        category: "spice"
+      - name: "puff pastry"
+        quantity: 500
+        unit: "g"
+        category: "grain"
+        allergens: ["dairy"]
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "olive oil"
+        quantity: 2
+        unit: "tbsp"
+        category: "oil"
+      - name: "egg"
+        quantity: 1
+        unit: "piece"
+        category: "protein"
+        allergens: ["eggs"]
+        optional: true
+    equipment:
+      - "pan"
+      - "oven"
+      - "knife"
+      - "plastic wrap"
+      - "baking tray"
+    instructions:
+      - "Cook the beef fillet for 1 minute on each side in a hot pan"
+      - "Coat the beef with mustard and set aside to cool"
+      - "Thinly slice onions and cook them in a pan until soft"
+      - "Cube the mushrooms and add them to the pan with the onions"
+      - "Cook the mushroom and onion mixture until all moisture evaporates"
+      - "On a plastic wrap, place the prosciutto slices in a rectangular shape"
+      - "Layer the crepes on top of the prosciutto"
+      - "Spread the mushroom and onion mixture over the crepes"
+      - "Add fresh spinach leaves on top"
+      - "Place the beef fillet on top and roll everything tightly using the plastic wrap"
+      - "Refrigerate for 3 hours to set"
+      - "After 3 hours, remove the plastic wrap and wrap the beef in puff pastry"
+      - "Optional: brush with beaten egg for golden color"
+      - "Bake in oven at 185°C for 35 minutes"
+      - "Let rest for 5 minutes before slicing and serving"
+    nutritional_info:
+      calories: 620
+      protein: 45
+      carbohydrates: 35
+      fat: 32
+      fiber: 3
+      sodium: 850
+
+  - name: "Simple Potato Puree"
+    cuisine: "French"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 40
+    skill_level: "easy"
+    cooking_methods: ["oven"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 10
+    cost: 3.00
+    tags: ["potato", "side dish", "classic", "creamy"]
+    ingredients:
+      - name: "potatoes"
+        quantity: 800
+        unit: "g"
+        category: "vegetable"
+      - name: "salt"
+        quantity: 100
+        unit: "g"
+        category: "spice"
+      - name: "butter"
+        quantity: 100
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "warm milk"
+        quantity: 150
+        unit: "ml"
+        category: "dairy"
+        allergens: ["dairy"]
+    equipment:
+      - "oven"
+      - "baking tray"
+      - "sieve"
+      - "spoon"
+      - "bowl"
+    instructions:
+      - "Preheat oven to 180°C"
+      - "Spread salt on a baking tray to create a bed"
+      - "Place whole skinned potatoes on the salt bed"
+      - "Bake for 30-40 minutes until tender"
+      - "While still hot, cut potatoes in half"
+      - "Scoop out the potato flesh with a spoon"
+      - "Pass the hot potato through a sieve for smooth texture"
+      - "Add cold butter cubes to the sieved potato in a line"
+      - "Add warm milk gradually while mixing"
+      - "Continue mixing until smooth and creamy"
+      - "Serve immediately while hot"
+    nutritional_info:
+      calories: 280
+      protein: 5
+      carbohydrates: 38
+      fat: 12
+      fiber: 3
+      sodium: 650
+
+  - name: "Asparagus Cream Soup"
+    cuisine: "French"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 30
+    skill_level: "easy"
+    cooking_methods: ["pan", "blender"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 15
+    cost: 5.50
+    tags: ["soup", "creamy", "vegetables", "healthy"]
+    ingredients:
+      - name: "asparagus"
+        quantity: 500
+        unit: "g"
+        category: "vegetable"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "potatoes"
+        quantity: 300
+        unit: "g"
+        category: "vegetable"
+      - name: "olive oil"
+        quantity: 2
+        unit: "tbsp"
+        category: "oil"
+      - name: "water"
+        quantity: 1000
+        unit: "ml"
+        category: "other"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "butter"
+        quantity: 30
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "cooking cream"
+        quantity: 100
+        unit: "ml"
+        category: "dairy"
+        allergens: ["dairy"]
+    equipment:
+      - "sauce pan"
+      - "blender"
+      - "knife"
+    instructions:
+      - "Clean the asparagus and remove the hard woody parts at the bottom"
+      - "Clean and cube the onion and potatoes"
+      - "Heat olive oil in a sauce pan"
+      - "Add the cubed onion and cook until softened"
+      - "When the onion gets some color, add asparagus and potatoes"
+      - "Add water until everything is covered"
+      - "Boil until everything is soft (about 20-25 minutes)"
+      - "Use a blender to blend everything until smooth"
+      - "Add salt, pepper, butter, and cooking cream"
+      - "Stir well and heat through without boiling"
+      - "Serve hot"
+    nutritional_info:
+      calories: 180
+      protein: 6
+      carbohydrates: 18
+      fat: 10
+      fiber: 4
+      sodium: 550
+
+  - name: "Couscous with Vegetables and Peas Cream"
+    cuisine: "Mediterranean"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 35
+    skill_level: "medium"
+    cooking_methods: ["pan", "blender"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 20
+    cost: 4.50
+    tags: ["vegan", "vegetables", "healthy", "colorful"]
+    ingredients:
+      - name: "carrot"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "zucchini"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "tomatoes"
+        quantity: 3
+        unit: "pieces"
+        category: "vegetable"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "vegetable stock"
+        quantity: 500
+        unit: "ml"
+        category: "other"
+      - name: "peas"
+        quantity: 300
+        unit: "g"
+        category: "vegetable"
+      - name: "couscous"
+        quantity: 250
+        unit: "g"
+        category: "grain"
+      - name: "olive oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "oil"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "pan"
+      - "sauce pan"
+      - "blender"
+      - "knife"
+      - "bowl"
+    instructions:
+      - "Cube the carrot, zucchini, and dice the tomatoes (remove juice and seeds)"
+      - "Cut the onion thinly"
+      - "In a pan with boiling water, cook the cubed vegetables until tender"
+      - "Bring vegetable stock to a boil and add the couscous (250g)"
+      - "Cover and let the couscous absorb the liquid for 5 minutes"
+      - "In another sauce pan, cook the thinly sliced onion in a bit of olive oil"
+      - "Set the cooked onion aside"
+      - "Boil the peas (300g) in water for 3-4 minutes"
+      - "Transfer the peas immediately to iced water to stop cooking"
+      - "Add the peas to the cooked onion"
+      - "Blend the pea and onion mixture - if too thick, add some vegetable stock"
+      - "Add olive oil to the blended pea cream"
+      - "Season with salt and pepper to taste"
+      - "Fluff the couscous with a fork"
+      - "Mix the couscous with the cooked vegetables"
+      - "Serve the couscous and vegetables with the pea cream on top or on the side"
+    nutritional_info:
+      calories: 320
+      protein: 12
+      carbohydrates: 58
+      fat: 6
+      fiber: 8
+      sodium: 480
+
+  - name: "Hummus"
+    cuisine: "Middle Eastern"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 5
+    skill_level: "easy"
+    cooking_methods: ["blender"]
+    budget_category: "low"
+    meal_type: "snack"
+    servings: 6
+    prep_time_minutes: 5
+    cost: 2.50
+    tags: ["vegan", "healthy", "protein", "dip"]
+    ingredients:
+      - name: "chickpeas"
+        quantity: 400
+        unit: "g"
+        category: "protein"
+      - name: "olive oil"
+        quantity: 4
+        unit: "tbsp"
+        category: "oil"
+      - name: "lemon juice"
+        quantity: 3
+        unit: "tbsp"
+        category: "other"
+      - name: "water"
+        quantity: 50
+        unit: "ml"
+        category: "other"
+      - name: "garlic clove"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "tahini paste"
+        quantity: 3
+        unit: "tbsp"
+        category: "other"
+        allergens: ["sesame"]
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "blender"
+      - "bowl"
+    instructions:
+      - "If using canned chickpeas, drain and rinse them"
+      - "Add all ingredients to the blender: chickpeas, olive oil, lemon juice, water, garlic cloves, tahini paste, and salt"
+      - "Blend until smooth and creamy"
+      - "If too thick, add a bit more water or olive oil"
+      - "Taste and adjust seasoning if needed"
+      - "Serve with vegetables, pita bread, or crackers"
+    nutritional_info:
+      calories: 220
+      protein: 8
+      carbohydrates: 20
+      fat: 14
+      fiber: 6
+      sodium: 280
