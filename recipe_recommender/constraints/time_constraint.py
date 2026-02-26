@@ -13,6 +13,7 @@ class TimeConstraint:
     includes_prep: bool = True
     flexibility: bool = False
     
+    # Check if a recipe fits the time constraint
     def can_fit(self, recipe) -> bool:
         total_time = self._calculate_recipe_time(recipe)
         
@@ -24,6 +25,7 @@ class TimeConstraint:
         else:
             return total_time <= (self.available_minutes + 10)
     
+    # Calculate total time needed for a recipe
     def _calculate_recipe_time(self, recipe) -> int:
         total_time = 0
         
@@ -58,6 +60,7 @@ class TimeConstraint:
         
         return total_time if total_time > 0 else None
     
+    # Get a human-readable description of the time constraint
     def get_time_description(self) -> str:
         if self.available_minutes < 15:
             return "Quick meal (< 15 min)"
@@ -66,9 +69,11 @@ class TimeConstraint:
         else:
             return f"Extended cooking ({self.available_minutes} min)"
     
+    # Check if the available time is for a quick cook
     def is_quick_cook(self) -> bool:
         return self.available_minutes < 20
     
+    # User-friendly string for the time constraint
     def __str__(self) -> str:
         flex = " (flexible)" if self.flexibility else ""
         return f"{self.available_minutes} minutes available{flex}"

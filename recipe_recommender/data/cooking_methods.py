@@ -1,6 +1,5 @@
 """
-Cooking Methods - Domain Concept
-The cooking methods/techniques used in recipes
+Cooking methods used in recipes
 """
 
 COOKING_METHODS = [

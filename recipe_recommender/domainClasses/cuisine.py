@@ -19,9 +19,11 @@ class Cuisine:
     common_techniques: List[str] = field(default_factory=list)
     flavor_profile: List[str] = field(default_factory=list)
     
+    # Popularity: how common this cuisine is in the dataset
     def __str__(self) -> str:
         return self.name
     
+    # String representation for debugging
     def is_similar_to(self, other_cuisine: str) -> bool:
         similar_groups = {
             'italian': ['mediterranean', 'greek'],

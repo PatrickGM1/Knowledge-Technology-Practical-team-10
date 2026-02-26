@@ -14,6 +14,7 @@ class BudgetConstraint:
     preferred_range: str = "moderate"
     flexibility: str = "flexible"
     
+    # Set min and max cost based on preferred range
     def __post_init__(self):
         if self.max_cost == float('inf') and self.min_cost == 0.0:
             ranges = {
@@ -23,6 +24,7 @@ class BudgetConstraint:
             }
             self.min_cost, self.max_cost = ranges.get(self.preferred_range.lower(), (0.0, float('inf')))
     
+    # Check if a recipe is affordable
     def can_afford(self, recipe) -> bool:
         if not hasattr(recipe, 'cost'):
             if hasattr(recipe, 'budget'):
@@ -40,6 +42,7 @@ class BudgetConstraint:
             flexibility_margin = self.max_cost * 0.5
             return recipe_cost <= (self.max_cost + flexibility_margin)
     
+    # Check if recipe's budget enum fits preference
     def _check_budget_enum(self, recipe_budget) -> bool:
         budget_value = recipe_budget.value if hasattr(recipe_budget, 'value') else str(recipe_budget)
         budget_lower = budget_value.lower()
@@ -53,10 +56,12 @@ class BudgetConstraint:
         preferred = self.preferred_range.lower()
         return budget_lower in acceptable.get(preferred, ['budget', 'moderate', 'premium'])
     
+    # Get a string describing the cost range
     def get_cost_range_description(self) -> str:
         if self.max_cost == float('inf'):
             return f"${self.min_cost:.2f}+"
         return f"${self.min_cost:.2f} - ${self.max_cost:.2f}"
     
+    # User-friendly string for the budget constraint
     def __str__(self) -> str:
         return f"Budget: {self.preferred_range} ({self.get_cost_range_description()})"

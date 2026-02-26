@@ -50,16 +50,20 @@ class Recipe:
     exclusion_reasons: List[str] = field(default_factory=list)
     substitution_suggestions: Dict[str, str] = field(default_factory=dict)
     
+    # Set total_time if not provided
     def __post_init__(self):
         if self.total_time == 0:
             self.total_time = self.prep_time + self.cook_time
     
+    # String representation for debugging
     def __repr__(self) -> str:
         return f"Recipe(name='{self.name}', diet={self.diet}, meal={self.meal})"
     
+    # User-friendly string for printing
     def __str__(self) -> str:
         return f"{self.name} - {self.diet} {self.meal}"
     
+    # Check if recipe has any of the given ingredients
     def has_ingredient(self, *ingredient_names: str) -> bool:
         """Check if recipe contains any of the specified ingredients"""
         for target_name in ingredient_names:
@@ -69,6 +73,7 @@ class Recipe:
                     return True
         return False
     
+    # Check if recipe needs specific equipment
     def has_equipment(self, equipment_name: str) -> bool:
         """Check if recipe requires specific equipment"""
         for eq in self.equipment:
@@ -77,18 +82,22 @@ class Recipe:
                 return True
         return False
     
+    # Check if recipe matches a diet
     def matches_diet(self, diet: str) -> bool:
         """Check if recipe matches a specific diet type"""
         return self.diet.lower() == diet.lower()
     
+    # Check if recipe is for a meal type
     def matches_meal(self, meal: str) -> bool:
         """Check if recipe is for a specific meal type"""
         return self.meal.lower() == meal.lower()
     
+    # Check if recipe is quick to make
     def is_quick(self) -> bool:
         """Check if recipe is quick (less than 15 minutes)"""
         return self.cooking_time == "less than 15 minutes"
     
+    # Check if recipe is budget-friendly
     def is_budget_friendly(self) -> bool:
         """Check if recipe is budget-friendly"""
         return self.budget == "low_cost"

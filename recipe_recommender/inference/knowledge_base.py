@@ -9,9 +9,10 @@ from pathlib import Path
 
 
 class KnowledgeBase:
-    """Manages rules and domain knowledge"""
+    """Manages the knowledge base for the recipe recommendation system, including rules and metadata"""
     
     def __init__(self, kb_path: str = None):
+        # Initialize knowledge base
         self.rules: List[Dict[str, Any]] = []
         self.metadata: Dict[str, Any] = {}
         
@@ -19,7 +20,7 @@ class KnowledgeBase:
             self.load(kb_path)
     
     def load(self, kb_path: str):
-        """Load knowledge base from file"""
+        # Load knowledge base from file
         path = Path(kb_path)
         
         if not path.exists():
@@ -37,7 +38,7 @@ class KnowledgeBase:
         self.metadata = data.get('metadata', {})
     
     def save(self, kb_path: str):
-        """Save knowledge base to file"""
+        # Save knowledge base to file
         path = Path(kb_path)
         
         data = {
@@ -52,17 +53,17 @@ class KnowledgeBase:
                 json.dump(data, f, indent=2)
     
     def add_rule(self, rule: Dict[str, Any]):
-        """Add a rule to the knowledge base"""
+        # Add a rule
         self.rules.append(rule)
     
     def get_rules(self, category: str = None) -> List[Dict[str, Any]]:
-        """Get rules, optionally filtered by category"""
+        # Get rules, filter by category if needed
         if category:
             return [r for r in self.rules if r.get('category') == category]
         return self.rules
     
     def get_rule_by_id(self, rule_id: str) -> Dict[str, Any]:
-        """Get a specific rule by ID"""
+        # Get rule by ID
         for rule in self.rules:
             if rule.get('id') == rule_id:
                 return rule

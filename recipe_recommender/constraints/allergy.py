@@ -13,10 +13,12 @@ class Allergy:
     allergen_name: str
     ingredients_to_avoid: List[str] = field(default_factory=list)
     
+    # Set default ingredients to avoid if not provided
     def __post_init__(self):
         if not self.ingredients_to_avoid:
             self.ingredients_to_avoid = self._get_default_ingredients()
     
+    # Get default ingredients to avoid for this allergen
     def _get_default_ingredients(self) -> List[str]:
         allergen_map = {
             'nuts': ['nuts', 'almonds', 'walnuts', 'pecans', 'cashews', 'peanuts', 
@@ -34,6 +36,7 @@ class Allergy:
         allergen_lower = self.allergen_name.lower()
         return allergen_map.get(allergen_lower, [allergen_lower])
     
+    # Check if an ingredient is safe for this allergy
     def is_safe(self, ingredient) -> bool:
         ingredient_name = ingredient.name if hasattr(ingredient, 'name') else str(ingredient)
         ingredient_lower = ingredient_name.lower()
@@ -49,5 +52,6 @@ class Allergy:
         
         return True
     
+    # User-friendly string for the allergy
     def __str__(self) -> str:
         return f"{self.allergen_name} allergy"

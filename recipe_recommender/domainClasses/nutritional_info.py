@@ -28,31 +28,40 @@ class NutritionalInfo:
     serving_size: str = "1 serving"
     servings_per_recipe: int = 1
     
+    # User-friendly string for nutrition info
     def __str__(self) -> str:
         return (f"Calories: {self.calories}, Protein: {self.protein}g, "
                 f"Carbs: {self.carbohydrates}g, Fat: {self.fat}g")
     
+    # Check if calories are below a threshold
     def is_low_calorie(self, threshold: float = 400.0) -> bool:
         return self.calories < threshold
     
+    # Check if protein is above a threshold
     def is_high_protein(self, threshold: float = 20.0) -> bool:
         return self.protein >= threshold
     
+    # Check if carbs are below a threshold
     def is_low_carb(self, threshold: float = 30.0) -> bool:
         return self.carbohydrates < threshold
     
+    # Check if fat is below a threshold
     def is_low_fat(self, threshold: float = 10.0) -> bool:
         return self.fat < threshold
     
+    # Check if fiber is above a threshold
     def is_high_fiber(self, threshold: float = 5.0) -> bool:
         return self.fiber >= threshold
     
+    # Check if sodium is below a threshold
     def is_low_sodium(self, threshold: float = 500.0) -> bool:
         return self.sodium < threshold
     
+    # Check if recipe is heart healthy
     def is_heart_healthy(self) -> bool:
         return self.saturated_fat < 5.0 and self.sodium < 400.0
     
+    # Get calorie density as low/medium/high
     def get_calorie_density(self) -> str:
         if self.calories < 300:
             return "low"
@@ -61,6 +70,7 @@ class NutritionalInfo:
         else:
             return "high"
     
+    # Calculate percentage of calories from macros
     def get_macro_balance(self) -> Dict[str, float]:
         """Calculate percentage of calories from each macronutrient"""
         protein_cal = self.protein * 4

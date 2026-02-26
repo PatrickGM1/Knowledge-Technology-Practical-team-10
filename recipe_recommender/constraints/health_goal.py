@@ -14,6 +14,7 @@ class HealthGoal:
     target_value: Optional[float] = None
     priority: str = "medium"
     
+    # Check if nutritional info matches the health goal
     def matches(self, nutritional_info) -> bool:
         if not nutritional_info:
             return False
@@ -55,10 +56,12 @@ class HealthGoal:
         
         return False
     
+    # Get numeric priority level
     def get_priority_level(self) -> int:
         priority_map = {'low': 1, 'medium': 2, 'high': 3}
         return priority_map.get(self.priority.lower(), 2)
     
+    # Get a human-readable description of the goal
     def get_goal_description(self) -> str:
         descriptions = {
             'high-protein': 'High Protein',
@@ -72,6 +75,7 @@ class HealthGoal:
         }
         return descriptions.get(self.goal_type.lower(), self.goal_type.title())
     
+    # User-friendly string for the health goal
     def __str__(self) -> str:
         target = f" (target: {self.target_value})" if self.target_value else ""
         return f"{self.get_goal_description()}{target}"

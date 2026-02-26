@@ -15,10 +15,12 @@ class CookingSkill:
     comfortable_techniques: List[str] = field(default_factory=list)
     learned_recipes: List[str] = field(default_factory=list)
     
+    # Set default techniques if not provided
     def __post_init__(self):
         if not self.comfortable_techniques:
             self.comfortable_techniques = self._get_default_techniques()
     
+    # Get default techniques for the skill level
     def _get_default_techniques(self) -> List[str]:
         all_techniques = {
             'beginner': ['boiling', 'simmering', 'pan-frying', 'basic knife skills'],
@@ -40,6 +42,7 @@ class CookingSkill:
         
         return techniques
     
+    # Check if user can handle a recipe's complexity
     def can_handle(self, recipe_or_complexity) -> bool:
         if hasattr(recipe_or_complexity, 'skill'):
             recipe_complexity = recipe_or_complexity.skill.value if hasattr(recipe_or_complexity.skill, 'value') else str(recipe_or_complexity.skill)
@@ -67,14 +70,17 @@ class CookingSkill:
         except ValueError:
             return True
     
+    # Check if user can perform a technique
     def can_perform_technique(self, technique: str) -> bool:
         technique_lower = technique.lower()
         return any(tech.lower() in technique_lower or technique_lower in tech.lower() 
                   for tech in self.comfortable_techniques)
     
+    # Check if user has learned a recipe
     def has_learned(self, recipe_name: str) -> bool:
         return recipe_name.lower() in [r.lower() for r in self.learned_recipes]
     
+    # Get numeric skill level
     def get_skill_level_number(self) -> int:
         skill_map = {'beginner': 1, 'intermediate': 2, 'advanced': 3}
         return skill_map.get(self.level.lower(), 1)

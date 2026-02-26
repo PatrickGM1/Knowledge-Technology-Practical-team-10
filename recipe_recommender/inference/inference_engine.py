@@ -8,9 +8,10 @@ from .rule import Rule
 
 
 class InferenceEngine:
-    """Applies rules to domain objects using forward-chaining inference"""
+    """Implements a forward-chaining inference engine to apply rules and derive recommendations"""
     
     def __init__(self, kb_path: Optional[str] = None):
+        # Initialize inference engine
         self.rules: List[Rule] = []
         self.working_memory: Set[str] = set()  # Asserted facts
         self.recipe_facts: Dict[str, Dict[str, Any]] = {}  # Per-recipe facts
@@ -21,7 +22,7 @@ class InferenceEngine:
             self.load_knowledge_base(kb_path)
     
     def load_knowledge_base(self, kb_path: str):
-        """Load rules from knowledge base file"""
+        # Load rules from knowledge base file
         path = Path(kb_path)
         
         if not path.exists():
@@ -50,22 +51,22 @@ class InferenceEngine:
         self.rules.sort(key=lambda r: r.priority, reverse=True)
         
     def assert_fact(self, fact: str):
-        """Assert a new fact into working memory (forward-chaining)"""
+        # Add a fact to working memory
         if fact not in self.working_memory:
             self.working_memory.add(fact)
             return True
         return False
     
     def has_fact(self, fact: str) -> bool:
-        """Check if a fact exists in working memory"""
+        # Check if fact exists
         return fact in self.working_memory
     
     def get_recipe_fact(self, recipe_id: str, fact_name: str) -> Any:
-        """Get a specific fact about a recipe"""
+        # Get a fact about a recipe
         return self.recipe_facts.get(recipe_id, {}).get(fact_name)
     
     def set_recipe_fact(self, recipe_id: str, fact_name: str, value: Any) -> bool:
-        """Set a fact about a recipe (returns True if changed)"""
+        # Set a fact about a recipe
         if recipe_id not in self.recipe_facts:
             self.recipe_facts[recipe_id] = {}
         
@@ -76,14 +77,14 @@ class InferenceEngine:
         return False
     
     def clear_working_memory(self):
-        """Clear all inferred facts"""
+        # Clear all inferred facts
         self.working_memory.clear()
         self.recipe_facts.clear()
         self.fired_rules.clear()
         self.inference_log.clear()
     
     def evaluate_condition(self, condition: Dict[str, Any], context: Dict[str, Any]) -> bool:
-        """Evaluate a single condition (checks facts and object attributes)"""
+        # Check one condition
         cond_type = condition.get('type', 'attribute')
         
         # Check if it's a fact-based condition (true forward-chaining)
@@ -172,7 +173,7 @@ class InferenceEngine:
         return self._compare_values(attr_value, resolved_value, operator)
     
     def _compare_values(self, actual, expected, operator: str) -> bool:
-        """Compare two values using the given operator"""
+        # Compare values
         if operator == '==':
             return actual == expected
         elif operator == '!=':
@@ -194,7 +195,7 @@ class InferenceEngine:
         return False
     
     def evaluate_conditions(self, conditions: List[Dict[str, Any]], context: Dict[str, Any]) -> bool:
-        """Evaluate all conditions for a rule"""
+        # Check all conditions for a rule
         if not conditions:
             return True
         
@@ -208,18 +209,7 @@ class InferenceEngine:
         return True
     
     def forward_chain(self, person: Any, kitchen: Any, recipes: List[Any], max_iterations: int = 20) -> List[Any]:
-        """
-        TRUE FORWARD-CHAINING INFERENCE
-        
-        1. Load initial facts from user and recipes into working memory
-        2. Repeat until fixed point (no new facts):
-           a. Find rules whose conditions match current facts
-           b. Fire rules to assert NEW facts
-           c. Track what changed
-        3. Use final facts to determine recommendations
-        
-        This is NOT filtering - we're deriving new knowledge!
-        """
+        # Run forward-chaining inference
         # Reset inference state
         self.clear_working_memory()
         for rule in self.rules:
@@ -272,7 +262,7 @@ class InferenceEngine:
         return self.get_recommended_recipes(recipes)
     
     def _load_initial_facts(self, person: Any, kitchen: Any, recipes: List[Any]):
-        """Load initial facts from domain objects into working memory"""
+        # Load initial facts from domain objects
         # Assert user preference facts
         if hasattr(person, 'allergies'):
             for allergy in person.allergies:
@@ -305,15 +295,7 @@ class InferenceEngine:
             self.set_recipe_fact(recipe_id, 'substitutions', {})
     
     def execute_forward_action(self, rule: Rule, recipe: Any, context: Dict[str, Any], recipe_id: str) -> bool:
-        """
-        Execute rule action - ASSERT NEW FACTS (forward-chaining)
-        
-        This is the key difference from filtering:
-        - Filtering: removes recipes from a list
-        - Forward-chaining: asserts new facts about recipes
-        
-        Returns True if new facts were derived, False otherwise.
-        """
+        # Fire rule and assert new facts
         action = rule.action
         action_type = action.get('type', 'assert')
         changed = False
@@ -377,17 +359,7 @@ class InferenceEngine:
         return changed
     
     def get_recommended_recipes(self, recipes: List[Any]) -> List[Any]:
-        """
-        Extract recommended recipes from final facts (after inference)
-        
-        A recipe is recommended if:
-        - suitable_for_user = True (no allergies, diet compatible)
-        - affordable = True (within budget)
-        - can_prepare = True (has equipment)
-        - skill_appropriate = True (user can cook it)
-        
-        Sorted by recommendation_score (derived facts)
-        """
+        # Get recommended recipes after inference
         recommended = []
         
         for recipe in recipes:
@@ -417,7 +389,7 @@ class InferenceEngine:
         return recommended
     
     def get_inference_explanation(self, recipe_name: str) -> Dict[str, Any]:
-        """Get explanation of why a recipe was/wasn't recommended"""
+        # Explain why a recipe was/wasn't recommended
         facts = self.recipe_facts.get(recipe_name, {})
         relevant_rules = [log for log in self.inference_log if log['recipe'] == recipe_name]
         

@@ -1,6 +1,5 @@
 """
-Meal Types - Domain Concept
-The meal types when dishes are served
+ Meal types for recipes
 """
 
 MEAL_TYPES = [

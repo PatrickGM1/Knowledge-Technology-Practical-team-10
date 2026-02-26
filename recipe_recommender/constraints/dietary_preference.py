@@ -14,6 +14,7 @@ class DietaryPreference:
     restrictions: List[str] = field(default_factory=list)
     preferred_cuisines: List[str] = field(default_factory=list)
     
+    # Set implicit restrictions based on diet type
     def __post_init__(self):
         if not self.restrictions:
             self.restrictions = []
@@ -35,6 +36,7 @@ class DietaryPreference:
                 if restriction not in self.restrictions:
                     self.restrictions.append(restriction)
     
+    # Check if a recipe matches the user's diet
     def is_compatible(self, recipe) -> bool:
         if not hasattr(recipe, 'diet'):
             return True
@@ -56,6 +58,7 @@ class DietaryPreference:
         else:
             return True
     
+    # Check if user prefers a cuisine
     def prefers_cuisine(self, cuisine: str) -> bool:
         if not self.preferred_cuisines:
             return True
@@ -64,6 +67,7 @@ class DietaryPreference:
         return any(pref.lower() in cuisine_lower or cuisine_lower in pref.lower() 
                   for pref in self.preferred_cuisines)
     
+    # Check if user has a specific restriction
     def has_restriction(self, restriction: str) -> bool:
         restriction_lower = restriction.lower()
         return any(r.lower() == restriction_lower for r in self.restrictions)

@@ -27,6 +27,7 @@ class Ingredient:
     is_carb_source: bool = False
     is_fat_source: bool = False
     
+    # User-friendly string for ingredient
     def __str__(self) -> str:
         optional = " (optional)" if self.is_optional else ""
         prep = f", {self.preparation}" if self.preparation else ""
@@ -34,15 +35,19 @@ class Ingredient:
             return f"{self.quantity} {self.unit} {self.name}{prep}{optional}"
         return f"{self.name}{prep}{optional}"
     
+    # String for debugging/printing
     def __repr__(self) -> str:
         return f"Ingredient(name='{self.name}', quantity={self.quantity}, unit='{self.unit}')"
     
+    # Check if ingredient has a specific allergen
     def has_allergen(self, allergen: str) -> bool:
         return allergen.lower() in [a.lower() for a in self.allergens]
     
+    # Check if ingredient fits a diet
     def is_suitable_for_diet(self, diet: str) -> bool:
         return diet.lower() in [d.lower() for d in self.dietary_flags]
     
+    # Get substitute ratio for another ingredient
     def get_substitute(self, substitute_name: str) -> float:
         for sub, ratio in self.substitutes.items():
             if sub.lower() == substitute_name.lower():

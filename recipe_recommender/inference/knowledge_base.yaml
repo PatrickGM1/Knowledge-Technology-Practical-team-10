@@ -2,8 +2,8 @@ metadata:
   name: Recipe Recommendation Knowledge Base
   version: 2.0
   description: Forward-chaining rules for recipe recommendations
-  expert: Professional Chef and Nutritionist
-  total_rules: 106
+  expert: Professional Chef Sorin Dumitrescu 
+  total_rules: 220
 
 rules:
   # ============================================================================

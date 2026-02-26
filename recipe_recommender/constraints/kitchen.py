@@ -15,12 +15,14 @@ class Kitchen:
     storage_items: List[str] = field(default_factory=list)
     space_size: str = "medium"
     
+    # Add basic utensils if not present
     def __post_init__(self):
         basic_utensils = ['knife', 'cutting board', 'bowl', 'spoon', 'measuring cups']
         for utensil in basic_utensils:
             if utensil not in self.available_utensils:
                 self.available_utensils.append(utensil)
     
+    # Check if kitchen can prepare the recipe
     def can_prepare(self, recipe) -> bool:
         if not hasattr(recipe, 'equipment'):
             return True
@@ -43,6 +45,7 @@ class Kitchen:
         
         return True
     
+    # Check if kitchen has specific equipment
     def has_equipment(self, equipment_name: str) -> bool:
         equipment_lower = equipment_name.lower()
         
@@ -56,15 +59,18 @@ class Kitchen:
         
         return False
     
+    # Check if kitchen has a specific utensil
     def has_utensil(self, utensil_name: str) -> bool:
         utensil_lower = utensil_name.lower()
         return any(u.lower() in utensil_lower or utensil_lower in u.lower() 
                   for u in self.available_utensils)
     
+    # Add equipment to the kitchen
     def add_equipment(self, equipment_name: str):
         if equipment_name not in self.available_equipment:
             self.available_equipment.append(equipment_name)
     
+    # Add utensil to the kitchen
     def add_utensil(self, utensil_name: str):
         if utensil_name not in self.available_utensils:
             self.available_utensils.append(utensil_name)

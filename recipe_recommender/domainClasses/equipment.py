@@ -13,6 +13,7 @@ class Equipment:
     category: Optional[str] = None
     alternatives: Optional[List[str]] = None
     
+    # Indicates if this equipment is essential for the recipe
     def __post_init__(self):
         if self.alternatives is None:
             self.alternatives = []

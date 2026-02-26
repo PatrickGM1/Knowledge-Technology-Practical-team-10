@@ -1,6 +1,6 @@
 """
 Recipe Recommender Streamlit UI
-TRUE Forward-Chaining Inference System (NOT filtering!)
+Forward-Chaining Inference System
 """
 
 import streamlit as st
@@ -22,7 +22,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for better styling
+ # CSS for Streamlit buttons
 st.markdown("""
     <style>
         div.stButton > button {
@@ -59,8 +59,7 @@ st.markdown("### *Powered by Forward-Chaining Inference Engine*")
 st.write("Answer questions to find recipes that match your preferences!")
 st.divider()
 
-# Quiz questions with conditional logic (text, category, value, question_type, condition)
-# Condition: None means always ask, or function that returns True if should ask
+ # List of quiz questions. Some are conditional.
 QUESTIONS = [
     # Gate questions - determine if we need to ask follow-ups
     ("Do you have any **food allergies**?", "has_allergies", True, "yes_no", None),
@@ -156,7 +155,7 @@ if 'inference_complete' not in st.session_state:
 
 
 def answer_question(answer, custom_value=None):
-    """Process answer and advance to next question"""
+    # Save answer and go to next question
     question_text, category, value, q_type, condition = QUESTIONS[st.session_state.current_question]
     
     if custom_value is not None:
@@ -188,7 +187,7 @@ def answer_question(answer, custom_value=None):
 
 
 def reset_quiz():
-    """Reset quiz to beginning"""
+    # Reset quiz state
     st.session_state.current_question = 0
     st.session_state.answers = {
         'has_allergies': [],
@@ -211,7 +210,7 @@ def reset_quiz():
 
 
 def load_all_recipes():
-    """Load recipes from recipes.yaml"""
+    # Load recipes from YAML file
     recipes_file = Path(__file__).parent / 'data' / 'recipes.yaml'
     
     with open(recipes_file, 'r') as f:
@@ -263,7 +262,7 @@ def load_all_recipes():
 
 
 def get_recommendation_reasons(recipe, user, working_memory):
-    """Generate human-readable reasons why this recipe was recommended based on inference facts"""
+    # Make a list of reasons for recommending a recipe
     reasons = []
     recipe_name_lower = recipe.name.lower().replace(' ', '_')
     
@@ -363,21 +362,21 @@ def get_recommendation_reasons(recipe, user, working_memory):
     return reasons
 
 
-# QUIZ MODE - Show questions one by one
+ # Show quiz questions one at a time
 if not st.session_state.quiz_complete:
-    # Calculate actual progress (skip conditional questions)
+    # Figure out how many questions we've asked
     total_to_ask = sum(1 for i, (_, _, _, _, cond) in enumerate(QUESTIONS) 
                        if i <= st.session_state.current_question and 
                        (cond is None or (callable(cond) and cond())))
     
-    # Progress bar
+    # Show progress bar
     progress = st.session_state.current_question / len(QUESTIONS)
     st.progress(progress)
     st.caption(f"Question {total_to_ask} (skipped {st.session_state.current_question - total_to_ask + 1} irrelevant)")
     
     st.divider()
     
-    # Get current question
+    # Ask the current question
     question_text, category, value, q_type, condition = QUESTIONS[st.session_state.current_question]
     st.subheader(question_text)
     st.write("")  # spacing
@@ -455,13 +454,13 @@ if not st.session_state.quiz_complete:
     
     st.divider()
     
-    # Reset button
+    # Reset quiz button
     if st.button("🔄 Reset Quiz", use_container_width=False):
         reset_quiz()
         st.rerun()
 
 
-# CONFIRMATION SCREEN - Show collected data and confirm
+ # Show summary and confirm before inference
 elif st.session_state.show_confirmation and not st.session_state.inference_complete:
     st.success("✅ Quiz Complete!")
     st.divider()
@@ -470,7 +469,7 @@ elif st.session_state.show_confirmation and not st.session_state.inference_compl
     st.write("Please review your answers before we find your perfect recipes:")
     st.write("")
     
-    # Display collected preferences
+    # Show what the user picked
     col1, col2 = st.columns(2)
     
     with col1:
@@ -537,7 +536,7 @@ elif st.session_state.show_confirmation and not st.session_state.inference_compl
     
     st.divider()
     
-    # Confirmation buttons
+    # Confirm or restart
     col1, col2 = st.columns([1, 1])
     
     with col1:
@@ -552,12 +551,12 @@ elif st.session_state.show_confirmation and not st.session_state.inference_compl
             st.rerun()
 
 
-# INFERENCE & RESULTS - Run forward-chaining and show recommended recipes
+ # Run inference and show results
 elif st.session_state.inference_complete:
     st.success("🔍 Running Forward-Chaining Inference...")
     st.divider()
     
-    # Create User object
+    # Make User object
     all_dietary_restrictions = st.session_state.answers['diet'] + st.session_state.answers.get('restrictions', [])
     
     user = User(
@@ -571,30 +570,30 @@ elif st.session_state.inference_complete:
         health_goals=st.session_state.answers['health_goals']
     )
     
-    # Load all recipes
+    # Load recipes
     all_recipes = load_all_recipes()
     
-    # Run FORWARD-CHAINING INFERENCE (NOT filtering!)
+    # Run inference engine
     kb_path = Path(__file__).parent / 'inference' / 'knowledge_base.yaml'
     engine = InferenceEngine(str(kb_path))
     
     with st.spinner("🧠 Running inference engine..."):
         recommended = engine.forward_chain(user, user, all_recipes)
     
-    # Show inference statistics
+    # Show stats from inference
     st.info(f"**Inference Stats:** Derived {len(engine.working_memory)} facts through forward-chaining")
     
     if recommended:
         st.success(f"✅ Found {len(recommended)} recipe(s) matching your preferences!")
         st.divider()
         
-        # Display each recommended recipe
+        # Show each recommended recipe
         for i, recipe in enumerate(recommended, 1):
             with st.expander(f"📖 {i}. {recipe.name}", expanded=(i == 1)):
-                # Get recommendation reasons
+                # List reasons for recommendation
                 reasons = get_recommendation_reasons(recipe, user, engine.working_memory)
                 
-                # Show why it was recommended
+                # Show reasons
                 st.markdown("### 🎯 Why This Recipe?")
                 for reason in reasons:
                     st.markdown(reason)
@@ -616,7 +615,7 @@ elif st.session_state.inference_complete:
                     
                     st.markdown("---")
                     
-                    # Ingredients
+                    # Show ingredients
                     if recipe.ingredients:
                         st.markdown("**🥕 Ingredients:**")
                         for ingredient in recipe.ingredients:
@@ -626,14 +625,14 @@ elif st.session_state.inference_complete:
                     
                     st.markdown("---")
                     
-                    # Instructions
+                    # Show instructions
                     if recipe.instructions:
                         st.markdown("**📝 Instructions:**")
                         for idx, instruction in enumerate(recipe.instructions, 1):
                             st.write(f"{idx}. {instruction}")
                 
                 with col2:
-                    # Nutrition info
+                    # Show nutrition info
                     if recipe.nutritional_info:
                         st.markdown("**📊 Nutrition (per serving):**")
                         st.metric("Calories", f"{recipe.nutritional_info.calories} kcal")
@@ -642,7 +641,7 @@ elif st.session_state.inference_complete:
                         st.write(f"🧈 Fat: {recipe.nutritional_info.fat}g")
                         st.write(f"🌾 Fiber: {recipe.nutritional_info.fiber}g")
                     
-                    # Tags
+                    # Show tags
                     if recipe.tags:
                         st.markdown("**🏷️ Tags:**")
                         st.write(", ".join(recipe.tags))
@@ -651,7 +650,7 @@ elif st.session_state.inference_complete:
     
     st.divider()
     
-    # Show working memory (proof of inference)
+    # Show inference facts
     with st.expander("🧠 View Inference Facts (Working Memory)", expanded=False):
         st.markdown("**These facts were derived through forward-chaining inference:**")
         st.write("")
@@ -666,7 +665,7 @@ elif st.session_state.inference_complete:
     
     st.divider()
     
-    # Start over button
+    # Start new search button
     if st.button("🔄 Start New Search", use_container_width=True, type="primary"):
         reset_quiz()
         st.rerun()
