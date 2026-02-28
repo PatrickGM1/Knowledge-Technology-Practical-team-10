@@ -86,11 +86,8 @@ QUESTIONS = [
     # Dietary restrictions gate
     
     # Restriction details (conditional)
-    ("Do you need **gluten-free** options?", "has_gluten_restriction", True, "yes_no", None),
-    ("Do you need **dairy-free** options?", "has_dairy_restriction", True, "yes_no", lambda: 'vegan' not in st.session_state.answers.get('diet', [])),
-    # Restriction details (conditional)
-    ("Do you need **Gluten-Free** options?", "restrictions", "gluten-free", "yes_no", lambda: st.session_state.answers.get('has_gluten_restriction')),
-    ("Do you need **Dairy-Free** options?", "restrictions", "dairy-free", "yes_no", lambda: st.session_state.answers.get('has_dairy_restriction')),
+    ("Do you need **Gluten-Free** options?", "restrictions", "gluten-free", "yes_no", None),
+    ("Do you need **Dairy-Free** options?", "restrictions", "dairy-free", "yes_no", lambda: 'vegan' not in st.session_state.answers.get('diet', [])),
     ("Are you looking for **Low-Carb** recipes?", "restrictions", "low-carb", "yes_no", lambda: st.session_state.answers.get('has_restrictions')),
     
     # Core questions - always ask
