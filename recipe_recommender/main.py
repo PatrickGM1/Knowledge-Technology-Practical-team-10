@@ -65,7 +65,7 @@ QUESTIONS = [
     ("Do you have any **food allergies**?", "has_allergies", True, "yes_no", None),
     
     # Allergy details (conditional - only if has_allergies)
-    ("Are you allergic to **Dairy**?", "allergies", "dairy", "yes_no", lambda: st.session_state.answers.get('has_allergies')),
+    ("Are you allergic to **Dairy**?", "allergies", "dairy", "yes_no", lambda: st.session_state.answers.get('has_allergies') and 'vegan' not in st.session_state.answers.get('diet', [])),
     ("Are you allergic to **Eggs**?", "allergies", "eggs", "yes_no", lambda: st.session_state.answers.get('has_allergies')),
     ("Are you allergic to **Shellfish**?", "allergies", "shellfish", "yes_no", lambda: st.session_state.answers.get('has_allergies')),
     ("Are you allergic to **Fish**?", "allergies", "fish", "yes_no", lambda: st.session_state.answers.get('has_allergies')),
