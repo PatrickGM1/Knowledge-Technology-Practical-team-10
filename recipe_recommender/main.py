@@ -120,6 +120,40 @@ QUESTIONS = [
     ("Is **Heart Health** important to you?", "health_goals", "heart-health", "yes_no", lambda: st.session_state.answers.get('has_health_goals')),
     ("Do you need to control **Blood Sugar**?", "health_goals", "blood-sugar-control", "yes_no", lambda: st.session_state.answers.get('has_health_goals')),
     ("Are you looking for an **Energy Boost**?", "health_goals", "energy-boost", "yes_no", lambda: st.session_state.answers.get('has_health_goals')),
+    ("Are you looking for **Anti-Inflammatory** recipes?", "health_goals", "anti-inflammatory", "yes_no", lambda: st.session_state.answers.get('has_health_goals')),
+
+    # Cuisine preferences gate
+    ("Do you have any **cuisine preferences**? (Italian, Asian, etc.)", "has_cuisine_pref", True, "yes_no", None),
+    ("Do you like **Italian** food?", "cuisine_preferences", "Italian", "yes_no", lambda: st.session_state.answers.get('has_cuisine_pref')),
+    ("Do you like **Asian** food?", "cuisine_preferences", "Asian", "yes_no", lambda: st.session_state.answers.get('has_cuisine_pref')),
+    ("Do you like **Mexican** food?", "cuisine_preferences", "Mexican", "yes_no", lambda: st.session_state.answers.get('has_cuisine_pref')),
+    ("Do you like **French** food?", "cuisine_preferences", "French", "yes_no", lambda: st.session_state.answers.get('has_cuisine_pref')),
+    ("Do you like **American** food?", "cuisine_preferences", "American", "yes_no", lambda: st.session_state.answers.get('has_cuisine_pref')),
+    ("Do you like **Mediterranean** food?", "cuisine_preferences", "Mediterranean", "yes_no", lambda: st.session_state.answers.get('has_cuisine_pref')),
+    ("Do you like **Indian** food?", "cuisine_preferences", "Indian", "yes_no", lambda: st.session_state.answers.get('has_cuisine_pref')),
+
+    # Meal type preference gate
+    ("Do you have a preference for a specific **meal type**?", "has_meal_pref", True, "yes_no", None),
+    ("Are you looking for **Breakfast** recipes?", "meal_preferences", "breakfast", "yes_no", lambda: st.session_state.answers.get('has_meal_pref')),
+    ("Are you looking for **Lunch** recipes?", "meal_preferences", "lunch", "yes_no", lambda: st.session_state.answers.get('has_meal_pref')),
+    ("Are you looking for **Dinner** recipes?", "meal_preferences", "dinner", "yes_no", lambda: st.session_state.answers.get('has_meal_pref')),
+    ("Are you looking for **Snack** recipes?", "meal_preferences", "snack", "yes_no", lambda: st.session_state.answers.get('has_meal_pref')),
+
+    # Cooking method preference gate
+    ("Do you have a preferred **cooking method**?", "has_method_pref", True, "yes_no", None),
+    ("Do you enjoy **baking** (oven cooking)?", "preferred_cooking_methods", "baking", "yes_no", lambda: st.session_state.answers.get('has_method_pref')),
+    ("Do you enjoy **grilling**?", "preferred_cooking_methods", "grilling", "yes_no", lambda: st.session_state.answers.get('has_method_pref')),
+    ("Do you enjoy **stir-frying** (quick pan cooking)?", "preferred_cooking_methods", "stir-fry", "yes_no", lambda: st.session_state.answers.get('has_method_pref')),
+
+    # Serving size
+    ("How many people are you cooking for?", "serving_size", 2, "serving", None),
+
+    # Lifestyle preferences gate
+    ("Any additional **lifestyle preferences** for your recipes?", "has_lifestyle_pref", True, "yes_no", None),
+    ("Do you like **spicy food**?", "lifestyle_prefs", "spicy", "yes_no", lambda: st.session_state.answers.get('has_lifestyle_pref')),
+    ("Do you do **meal prep** (cooking in bulk for the week)?", "lifestyle_prefs", "meal_prep", "yes_no", lambda: st.session_state.answers.get('has_lifestyle_pref')),
+    ("Are you cooking for **children**?", "lifestyle_prefs", "has_children", "yes_no", lambda: st.session_state.answers.get('has_lifestyle_pref')),
+    ("Do you prefer recipes with **easy cleanup**?", "lifestyle_prefs", "easy_cleanup", "yes_no", lambda: st.session_state.answers.get('has_lifestyle_pref')),
 ]
 
 # Initialize session state
@@ -140,7 +174,16 @@ if 'answers' not in st.session_state:
         'has_equipment': [],
         'equipment': [],
         'has_health_goals': [],
-        'health_goals': []
+        'health_goals': [],
+        'has_cuisine_pref': [],
+        'cuisine_preferences': [],
+        'has_meal_pref': [],
+        'meal_preferences': [],
+        'has_method_pref': [],
+        'preferred_cooking_methods': [],
+        'serving_size': [],
+        'has_lifestyle_pref': [],
+        'lifestyle_prefs': [],
     }
 
 if 'quiz_complete' not in st.session_state:
@@ -166,7 +209,8 @@ def answer_question(answer, custom_value=None):
         if answer:
             st.session_state.answers[category].append(value)
         # For gate questions, store boolean
-        if category in ['has_allergies', 'has_special_diet', 'has_restrictions', 'has_equipment', 'has_health_goals']:
+        if category in ['has_allergies', 'has_special_diet', 'has_restrictions', 'has_equipment', 'has_health_goals',
+                        'has_cuisine_pref', 'has_meal_pref', 'has_method_pref', 'has_lifestyle_pref']:
             st.session_state.answers[category] = answer
     
     # Find next question that should be asked
@@ -201,7 +245,16 @@ def reset_quiz():
         'has_equipment': [],
         'equipment': [],
         'has_health_goals': [],
-        'health_goals': []
+        'health_goals': [],
+        'has_cuisine_pref': [],
+        'cuisine_preferences': [],
+        'has_meal_pref': [],
+        'meal_preferences': [],
+        'has_method_pref': [],
+        'preferred_cooking_methods': [],
+        'serving_size': [],
+        'has_lifestyle_pref': [],
+        'lifestyle_prefs': [],
     }
     st.session_state.quiz_complete = False
     st.session_state.show_confirmation = False
@@ -437,6 +490,25 @@ if not st.session_state.quiz_complete:
                 answer_question(True, 90)
                 st.rerun()
     
+    # Serving size question
+    elif q_type == "serving":
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            if st.button("👤 Just me (1)", key="serving_1", use_container_width=True):
+                answer_question(True, 1)
+                st.rerun()
+
+        with col2:
+            if st.button("👥 2 people", key="serving_2", use_container_width=True):
+                answer_question(True, 2)
+                st.rerun()
+
+        with col3:
+            if st.button("👨\u200d👩\u200d👧\u200d👦 4+ people", key="serving_4", use_container_width=True):
+                answer_question(True, 4)
+                st.rerun()
+
     # Yes/No questions
     else:
         col1, col2 = st.columns(2)
@@ -532,7 +604,31 @@ elif st.session_state.show_confirmation and not st.session_state.inference_compl
                 st.write("None specified")
         else:
             st.write("**No specific health goals**")
-    
+
+        st.markdown("#### 🍽️ Meal & Cuisine Preferences")
+        if st.session_state.answers.get('has_cuisine_pref') and st.session_state.answers.get('cuisine_preferences'):
+            st.write("**Cuisines:**", ", ".join(st.session_state.answers['cuisine_preferences']))
+        else:
+            st.write("**Cuisines:** No preference")
+
+        if st.session_state.answers.get('has_meal_pref') and st.session_state.answers.get('meal_preferences'):
+            st.write("**Meal types:**", ", ".join(st.session_state.answers['meal_preferences']))
+        else:
+            st.write("**Meal types:** No preference")
+
+        if st.session_state.answers.get('has_method_pref') and st.session_state.answers.get('preferred_cooking_methods'):
+            st.write("**Cooking methods:**", ", ".join(st.session_state.answers['preferred_cooking_methods']))
+        else:
+            st.write("**Cooking methods:** No preference")
+
+        serving = st.session_state.answers['serving_size'][0] if st.session_state.answers.get('serving_size') else 2
+        st.write("**Serving size:**", f"{serving} person(s)")
+
+        if st.session_state.answers.get('has_lifestyle_pref') and st.session_state.answers.get('lifestyle_prefs'):
+            st.write("**Lifestyle:**", ", ".join(st.session_state.answers['lifestyle_prefs']))
+        else:
+            st.write("**Lifestyle:** No preference")
+
     st.divider()
     
     # Confirm or restart
@@ -566,7 +662,12 @@ elif st.session_state.inference_complete:
         skill_level=st.session_state.answers['skill'][0] if st.session_state.answers['skill'] else 'beginner',
         budget=st.session_state.answers['budget'][0] if st.session_state.answers['budget'] else 20.0,
         max_cooking_time=st.session_state.answers['time'][0] if st.session_state.answers['time'] else 60,
-        health_goals=st.session_state.answers['health_goals']
+        health_goals=st.session_state.answers['health_goals'],
+        cuisine_preferences=st.session_state.answers.get('cuisine_preferences', []),
+        meal_preferences=st.session_state.answers.get('meal_preferences', []),
+        preferred_cooking_methods=st.session_state.answers.get('preferred_cooking_methods', []),
+        serving_size=st.session_state.answers['serving_size'][0] if st.session_state.answers.get('serving_size') else 2,
+        preferences={p: True for p in st.session_state.answers.get('lifestyle_prefs', [])},
     )
     
     # Load recipes

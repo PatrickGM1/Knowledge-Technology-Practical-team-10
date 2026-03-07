@@ -283,6 +283,48 @@ class InferenceEngine:
             for equipment in kitchen.available_equipment:
                 self.assert_fact(f"has_equipment({equipment.lower()})")
         
+        # Assert health goal facts
+        if hasattr(person, 'health_goals'):
+            for goal in person.health_goals:
+                self.assert_fact(f"user_health_goal({goal.lower()})")
+        
+        # Assert cuisine preference facts
+        if hasattr(person, 'cuisine_preferences'):
+            for cuisine in person.cuisine_preferences:
+                self.assert_fact(f"user_prefers_cuisine({cuisine})")
+        
+        # Assert meal preference facts
+        if hasattr(person, 'meal_preferences'):
+            for meal in person.meal_preferences:
+                self.assert_fact(f"user_meal_preference({meal.lower()})")
+        
+        # Assert cooking method preference facts
+        if hasattr(person, 'preferred_cooking_methods'):
+            for method in person.preferred_cooking_methods:
+                self.assert_fact(f"user_prefers_method({method.lower()})")
+        
+        # Assert serving size fact
+        if hasattr(person, 'serving_size') and person.serving_size:
+            self.assert_fact(f"user_serving_size({person.serving_size})")
+        
+        # Assert time constraint fact
+        if hasattr(person, 'max_cooking_time') and person.max_cooking_time is not None:
+            self.assert_fact("user_has_time_limit()")
+            self.assert_fact(f"user_max_cooking_time({person.max_cooking_time})")
+            if person.max_cooking_time <= 30:
+                self.assert_fact("user_prefers_quick_meals()")
+        
+        # Assert boolean preference facts from preferences dict
+        if hasattr(person, 'preferences') and isinstance(person.preferences, dict):
+            if person.preferences.get('spicy', False):
+                self.assert_fact("user_likes_spicy()")
+            if person.preferences.get('meal_prep', False):
+                self.assert_fact("user_meal_preps()")
+            if person.preferences.get('has_children', False):
+                self.assert_fact("user_has_children()")
+            if person.preferences.get('easy_cleanup', False):
+                self.assert_fact("user_prefers_easy_cleanup()")
+        
         # Initialize recipe facts (all recipes start as "unknown")
         for recipe in recipes:
             recipe_id = recipe.name

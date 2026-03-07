@@ -2,15 +2,16 @@ metadata:
   name: Recipe Recommendation Knowledge Base
   version: 2.0
   description: Forward-chaining rules for recipe recommendations
-  expert: Professional Chef Sorin Dumitrescu 
-  total_rules: 220
+  expert: Professional Chef Sorin Dumitrescu
+  total_rules: 106
 
 rules:
+
   # ============================================================================
   # ALLERGY SAFETY RULES
   # Priority 100 - Critical safety rules
   # ============================================================================
-  
+
   - id: R001
     name: Detect nut allergy conflict
     description: If user allergic to nuts AND recipe contains nuts, mark unsuitable
@@ -28,7 +29,7 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
+
   - id: R002
     name: Add nut allergy exclusion reason
     description: If recipe marked unsuitable due to nuts, add reason
@@ -39,7 +40,7 @@ rules:
         fact: user_allergic_to(nuts)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
       - type: attribute
         object: recipe
@@ -50,7 +51,7 @@ rules:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains nuts (allergen)
-  
+
   - id: R003
     name: Detect dairy allergy conflict
     description: If user allergic to dairy AND recipe contains dairy, mark unsuitable
@@ -68,7 +69,7 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
+
   - id: R004
     name: Add dairy allergy exclusion reason
     description: Add exclusion reason for dairy allergy
@@ -79,13 +80,13 @@ rules:
         fact: user_allergic_to(dairy)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains dairy (allergen)
-  
+
   - id: R005
     name: Detect gluten allergy conflict
     description: If user allergic to gluten AND recipe contains gluten, mark unsuitable
@@ -103,7 +104,7 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
+
   - id: R006
     name: Add gluten allergy exclusion reason
     description: Add exclusion reason for gluten allergy
@@ -114,13 +115,13 @@ rules:
         fact: user_allergic_to(gluten)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains gluten (allergen)
-  
+
   - id: R007
     name: Detect egg allergy conflict
     description: If user allergic to eggs AND recipe contains eggs, mark unsuitable
@@ -138,13 +139,13 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
+
   # ============================================================================
   # DIETARY PREFERENCE RULES
   # Priority 90 - Diet compatibility
   # ============================================================================
-  
-  - id: R010
+
+  - id: R008
     name: Vegan cannot eat meat
     description: If user is vegan AND recipe contains meat, mark unsuitable
     priority: 90
@@ -155,14 +156,14 @@ rules:
       - type: attribute
         object: recipe
         attribute: diet
-        operator: "!="
+        operator: '!='
         value: vegan
     action:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R011
+
+  - id: R009
     name: Add vegan diet exclusion
     description: Add reason for vegan diet incompatibility
     priority: 90
@@ -172,14 +173,14 @@ rules:
         fact: user_diet(vegan)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Not vegan-friendly
-  
-  - id: R012
+
+  - id: R010
     name: Vegetarian cannot eat meat
     description: If user is vegetarian AND recipe contains meat, mark unsuitable
     priority: 90
@@ -196,8 +197,8 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R013
+
+  - id: R011
     name: Add vegetarian diet exclusion
     description: Add reason for vegetarian diet incompatibility
     priority: 90
@@ -207,19 +208,19 @@ rules:
         fact: user_diet(vegetarian)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Not vegetarian-friendly
-  
+
   # ============================================================================
   # EQUIPMENT AVAILABILITY RULES
   # Priority 80 - Can user prepare this?
   # ============================================================================
-  
-  - id: R020
+
+  - id: R012
     name: Check oven availability
     description: If recipe needs oven AND user lacks oven, mark unprepareble
     priority: 80
@@ -232,14 +233,14 @@ rules:
         value: oven
       - type: fact
         fact: has_equipment(oven)
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: set_recipe_fact
       fact_name: can_prepare
       value: False
-  
-  - id: R021
+
+  - id: R013
     name: Add oven exclusion
     description: Add reason for missing oven
     priority: 80
@@ -247,7 +248,7 @@ rules:
     conditions:
       - type: recipe_fact
         fact_name: can_prepare
-        operator: ==
+        operator: '=='
         value: False
       - type: attribute
         object: recipe
@@ -258,8 +259,8 @@ rules:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Requires oven (not available)
-  
-  - id: R022
+
+  - id: R014
     name: Check grill availability
     description: If recipe needs grill AND user lacks grill, mark unpreparable
     priority: 80
@@ -272,14 +273,14 @@ rules:
         value: grill
       - type: fact
         fact: has_equipment(grill)
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: set_recipe_fact
       fact_name: can_prepare
       value: False
-  
-  - id: R023
+
+  - id: R015
     name: Check blender availability
     description: If recipe needs blender AND user lacks blender, mark unpreparable
     priority: 80
@@ -292,19 +293,19 @@ rules:
         value: blender
       - type: fact
         fact: has_equipment(blender)
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: set_recipe_fact
       fact_name: can_prepare
       value: False
-  
+
   # ============================================================================
   # SKILL LEVEL RULES
   # Priority 70 - Is recipe too complex?
   # ============================================================================
-  
-  - id: R030
+
+  - id: R016
     name: Beginner cannot cook advanced recipes
     description: If user is beginner AND recipe is advanced, mark inappropriate
     priority: 70
@@ -321,8 +322,8 @@ rules:
       type: set_recipe_fact
       fact_name: skill_appropriate
       value: False
-  
-  - id: R031
+
+  - id: R017
     name: Add skill level exclusion
     description: Add reason for skill mismatch
     priority: 70
@@ -330,14 +331,14 @@ rules:
     conditions:
       - type: recipe_fact
         fact_name: skill_appropriate
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Recipe too complex for skill level
-  
-  - id: R032
+
+  - id: R018
     name: Intermediate cannot cook very advanced recipes
     description: If user is intermediate AND recipe is advanced, mark inappropriate
     priority: 70
@@ -348,19 +349,19 @@ rules:
       - type: attribute
         object: recipe
         attribute: skill
-        operator: ==
+        operator: '=='
         value: advanced
     action:
       type: set_recipe_fact
       fact_name: skill_appropriate
       value: False
-  
+
   # ============================================================================
   # BUDGET RULES
   # Priority 60 - Can user afford this?
   # ============================================================================
-  
-  - id: R040
+
+  - id: R019
     name: Check recipe cost
     description: If recipe cost exceeds user budget, mark unaffordable
     priority: 60
@@ -380,8 +381,8 @@ rules:
       type: set_recipe_fact
       fact_name: affordable
       value: False
-  
-  - id: R041
+
+  - id: R020
     name: Add budget exclusion
     description: Add reason for exceeding budget
     priority: 60
@@ -389,19 +390,19 @@ rules:
     conditions:
       - type: recipe_fact
         fact_name: affordable
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Exceeds budget
-  
+
   # ============================================================================
   # SCORING RULES (Positive recommendations)
   # Priority 50 - Boost scores for good matches
   # ============================================================================
-  
-  - id: R050
+
+  - id: R021
     name: Boost cuisine preference match
     description: If recipe cuisine matches user preference, increase score
     priority: 50
@@ -415,8 +416,8 @@ rules:
     action:
       type: modify_score
       delta: 10
-  
-  - id: R051
+
+  - id: R022
     name: Boost easy recipes for beginners
     description: Beginners prefer easy recipes
     priority: 50
@@ -427,13 +428,13 @@ rules:
       - type: attribute
         object: recipe
         attribute: skill
-        operator: ==
+        operator: '=='
         value: easy
     action:
       type: modify_score
       delta: 15
-  
-  - id: R052
+
+  - id: R023
     name: Boost high protein for health goals
     description: If user wants high protein AND recipe is high protein, boost score
     priority: 50
@@ -452,8 +453,8 @@ rules:
     action:
       type: modify_score
       delta: 20
-  
-  - id: R053
+
+  - id: R024
     name: Boost low carb for health goals
     description: If user wants low carb AND recipe is low carb, boost score
     priority: 50
@@ -472,8 +473,8 @@ rules:
     action:
       type: modify_score
       delta: 20
-  
-  - id: R054
+
+  - id: R025
     name: Boost budget-friendly recipes
     description: If recipe is low cost, boost score
     priority: 50
@@ -482,13 +483,13 @@ rules:
       - type: attribute
         object: recipe
         attribute: budget
-        operator: ==
+        operator: '=='
         value: low_cost
     action:
       type: modify_score
       delta: 5
-  
-  - id: R055
+
+  - id: R026
     name: Boost quick meals
     description: If recipe is quick to make, boost score
     priority: 50
@@ -497,18 +498,18 @@ rules:
       - type: attribute
         object: recipe
         attribute: cooking_time
-        operator: ==
+        operator: '=='
         value: less than 15 minutes
     action:
       type: modify_score
       delta: 8
-  
+
   # ============================================================================
   # SUBSTITUTION RULES
   # Priority 40 - Suggest alternatives
   # ============================================================================
-  
-  - id: R060
+
+  - id: R027
     name: Suggest dairy-free milk
     description: If user allergic to dairy AND recipe has milk, suggest alternative
     priority: 40
@@ -525,8 +526,8 @@ rules:
       type: add_substitution
       ingredient: milk
       substitute: almond milk or oat milk
-  
-  - id: R061
+
+  - id: R028
     name: Suggest gluten-free flour
     description: If user allergic to gluten AND recipe has flour, suggest alternative
     priority: 40
@@ -543,8 +544,8 @@ rules:
       type: add_substitution
       ingredient: flour
       substitute: gluten-free flour or almond flour
-  
-  - id: R062
+
+  - id: R029
     name: Suggest egg substitute
     description: If user allergic to eggs AND recipe has eggs, suggest alternative
     priority: 40
@@ -561,12 +562,13 @@ rules:
       type: add_substitution
       ingredient: eggs
       substitute: flax eggs or chia eggs
-  
+
   # ============================================================================
-  # MORE ALLERGY SAFETY RULES (Shellfish, Fish, Soy, Sesame, Peanuts, Tree Nuts)
+  # ALLERGY SAFETY RULES
+  # Priority 100 - Critical safety rules
   # ============================================================================
-  
-  - id: R070
+
+  - id: R030
     name: Detect shellfish allergy conflict
     description: If user allergic to shellfish AND recipe contains shellfish, mark unsuitable
     priority: 100
@@ -583,8 +585,8 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R071
+
+  - id: R031
     name: Add shellfish allergy exclusion
     description: Add exclusion reason for shellfish allergy
     priority: 100
@@ -594,14 +596,14 @@ rules:
         fact: user_allergic_to(shellfish)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains shellfish (allergen)
-  
-  - id: R072
+
+  - id: R032
     name: Detect fish allergy conflict
     description: If user allergic to fish AND recipe contains fish, mark unsuitable
     priority: 100
@@ -618,8 +620,8 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R073
+
+  - id: R033
     name: Add fish allergy exclusion
     description: Add exclusion reason for fish allergy
     priority: 100
@@ -629,14 +631,14 @@ rules:
         fact: user_allergic_to(fish)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains fish (allergen)
-  
-  - id: R074
+
+  - id: R034
     name: Detect soy allergy conflict
     description: If user allergic to soy AND recipe contains soy, mark unsuitable
     priority: 100
@@ -653,8 +655,8 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R075
+
+  - id: R035
     name: Add soy allergy exclusion
     description: Add exclusion reason for soy allergy
     priority: 100
@@ -664,14 +666,14 @@ rules:
         fact: user_allergic_to(soy)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains soy (allergen)
-  
-  - id: R076
+
+  - id: R036
     name: Detect sesame allergy conflict
     description: If user allergic to sesame AND recipe contains sesame, mark unsuitable
     priority: 100
@@ -688,8 +690,8 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R077
+
+  - id: R037
     name: Add sesame allergy exclusion
     description: Add exclusion reason for sesame allergy
     priority: 100
@@ -699,14 +701,14 @@ rules:
         fact: user_allergic_to(sesame)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains sesame (allergen)
-  
-  - id: R078
+
+  - id: R038
     name: Detect peanut allergy conflict
     description: If user allergic to peanuts AND recipe contains peanuts, mark unsuitable
     priority: 100
@@ -723,8 +725,8 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R079
+
+  - id: R039
     name: Add peanut allergy exclusion
     description: Add exclusion reason for peanut allergy
     priority: 100
@@ -734,14 +736,14 @@ rules:
         fact: user_allergic_to(peanuts)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains peanuts (allergen)
-  
-  - id: R080
+
+  - id: R040
     name: Detect tree nut allergy conflict
     description: If user allergic to tree nuts AND recipe contains tree nuts, mark unsuitable
     priority: 100
@@ -758,8 +760,8 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R081
+
+  - id: R041
     name: Add tree nut allergy exclusion
     description: Add exclusion reason for tree nut allergy
     priority: 100
@@ -769,18 +771,18 @@ rules:
         fact: user_allergic_to(tree nuts)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains tree nuts (allergen)
-  
+
   # ============================================================================
   # DIETARY RESTRICTION RULES (Gluten-Free, Dairy-Free, Low-Carb)
   # ============================================================================
-  
-  - id: R090
+
+  - id: R042
     name: Gluten-free restriction check
     description: If user needs gluten-free AND recipe contains gluten, mark unsuitable
     priority: 95
@@ -797,8 +799,8 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R091
+
+  - id: R043
     name: Add gluten-free restriction exclusion
     description: Add exclusion reason for gluten-free restriction
     priority: 95
@@ -808,14 +810,14 @@ rules:
         fact: user_diet(gluten-free)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains gluten (dietary restriction)
-  
-  - id: R092
+
+  - id: R044
     name: Dairy-free restriction check
     description: If user needs dairy-free AND recipe contains dairy, mark unsuitable
     priority: 95
@@ -832,8 +834,8 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R093
+
+  - id: R045
     name: Add dairy-free restriction exclusion
     description: Add exclusion reason for dairy-free restriction
     priority: 95
@@ -843,14 +845,14 @@ rules:
         fact: user_diet(dairy-free)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains dairy (dietary restriction)
-  
-  - id: R094
+
+  - id: R046
     name: Low-carb restriction check
     description: If user wants low-carb AND recipe is high-carb, reduce score
     priority: 85
@@ -869,8 +871,13 @@ rules:
     action:
       type: modify_score
       delta: -15
-  
-  - id: R095
+
+  # ============================================================================
+  # DIETARY PREFERENCE RULES
+  # Priority 90 - Diet compatibility
+  # ============================================================================
+
+  - id: R047
     name: Pescatarian diet compatibility
     description: If user is pescatarian AND recipe has meat (not fish), mark unsuitable
     priority: 90
@@ -887,8 +894,8 @@ rules:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R096
+
+  - id: R048
     name: Add pescatarian diet exclusion
     description: Add reason for pescatarian diet incompatibility
     priority: 90
@@ -898,18 +905,19 @@ rules:
         fact: user_diet(pescatarian)
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Contains meat (not pescatarian-friendly)
-  
+
   # ============================================================================
-  # MORE EQUIPMENT RULES
+  # EQUIPMENT AVAILABILITY RULES
+  # Priority 80 - Can user prepare this?
   # ============================================================================
-  
-  - id: R100
+
+  - id: R049
     name: Check food processor availability
     description: If recipe needs food processor AND user lacks it, mark unpreparable
     priority: 80
@@ -922,14 +930,14 @@ rules:
         args: ['food processor']
       - type: fact
         fact: has_equipment(food processor)
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: set_recipe_fact
       fact_name: can_prepare
       value: False
-  
-  - id: R101
+
+  - id: R050
     name: Check mixer availability
     description: If recipe needs mixer AND user lacks mixer, mark unpreparable
     priority: 80
@@ -942,14 +950,14 @@ rules:
         args: ['mixer']
       - type: fact
         fact: has_equipment(mixer)
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: set_recipe_fact
       fact_name: can_prepare
       value: False
-  
-  - id: R102
+
+  - id: R051
     name: Check slow cooker availability
     description: If recipe needs slow cooker AND user lacks it, mark unpreparable
     priority: 80
@@ -962,14 +970,14 @@ rules:
         args: ['slow cooker']
       - type: fact
         fact: has_equipment(slow cooker)
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: set_recipe_fact
       fact_name: can_prepare
       value: False
-  
-  - id: R103
+
+  - id: R052
     name: Check air fryer availability
     description: If recipe needs air fryer AND user lacks it, mark unpreparable
     priority: 80
@@ -982,14 +990,14 @@ rules:
         args: ['air fryer']
       - type: fact
         fact: has_equipment(air fryer)
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: set_recipe_fact
       fact_name: can_prepare
       value: False
-  
-  - id: R104
+
+  - id: R053
     name: Check stand mixer availability
     description: If recipe needs stand mixer AND user lacks it, mark unpreparable
     priority: 80
@@ -1002,19 +1010,387 @@ rules:
         args: ['stand mixer']
       - type: fact
         fact: has_equipment(stand mixer)
-        operator: ==
+        operator: '=='
         value: False
     action:
       type: set_recipe_fact
       fact_name: can_prepare
       value: False
-  
+
+  # ============================================================================
+  # SEASONAL AND FRESHNESS RULES
+  # ============================================================================
+
+  - id: R054
+    name: Seasonal ingredient bonus
+    description: If recipe uses seasonal ingredients, boost score
+    priority: 35
+    category: seasonal
+    conditions:
+      - type: attribute
+        object: recipe
+        operator: method_call
+        method: has_seasonal_ingredients
+        args: []
+    action:
+      type: modify_score
+      delta: 7
+
+  # ============================================================================
+  # COMBINATION RULES (Higher-order inference)
+  # ============================================================================
+
+  - id: R055
+    name: Beginner-friendly and quick
+    description: If recipe is easy AND quick, boost for beginners
+    priority: 45
+    category: combination
+    conditions:
+      - type: fact
+        fact: user_skill_level(beginner)
+      - type: attribute
+        object: recipe
+        attribute: skill
+        operator: '=='
+        value: easy
+      - type: attribute
+        object: recipe
+        attribute: cook_time
+        operator: '<='
+        value: 20
+    action:
+      type: modify_score
+      delta: 25
+
+  - id: R056
+    name: Budget and healthy combo
+    description: If recipe is low cost AND healthy, boost score
+    priority: 40
+    category: combination
+    conditions:
+      - type: attribute
+        object: recipe
+        attribute: budget
+        operator: '=='
+        value: low_cost
+      - type: attribute
+        object: recipe
+        attribute: macros
+        operator: contains
+        value: balanced
+    action:
+      type: modify_score
+      delta: 15
+
+  # ============================================================================
+  # PENALTY RULES (Negative scoring)
+  # ============================================================================
+
+  - id: R057
+    name: Too expensive penalty
+    description: If recipe is expensive, apply penalty
+    priority: 55
+    category: penalty
+    conditions:
+      - type: attribute
+        object: recipe
+        attribute: budget
+        operator: '=='
+        value: expensive
+    action:
+      type: modify_score
+      delta: -10
+
+  - id: R058
+    name: Very complex recipe penalty
+    description: If recipe is very complex, apply small penalty
+    priority: 55
+    category: penalty
+    conditions:
+      - type: attribute
+        object: recipe
+        attribute: skill
+        operator: '=='
+        value: advanced
+    action:
+      type: modify_score
+      delta: -5
+
+  - id: R059
+    name: Time-intensive penalty
+    description: If recipe takes very long, apply penalty
+    priority: 55
+    category: penalty
+    conditions:
+      - type: attribute
+        object: recipe
+        attribute: total_time
+        operator: '>'
+        value: 120
+    action:
+      type: modify_score
+      delta: -12
+
+  # ============================================================================
+  # FINAL RECOMMENDATION RULES
+  # ============================================================================
+
+  - id: R060
+    name: Mark as recommended
+    description: If recipe is suitable and score is high, mark as recommended
+    priority: 10
+    category: final
+    conditions:
+      - type: recipe_fact
+        fact_name: suitable_for_user
+        operator: '=='
+        value: True
+      - type: recipe_fact
+        fact_name: recommendation_score
+        operator: '>='
+        value: 50
+    action:
+      type: set_recipe_fact
+      fact_name: recommended
+      value: True
+
+  - id: R061
+    name: Mark as highly recommended
+    description: If recipe score is very high, mark as highly recommended
+    priority: 10
+    category: final
+    conditions:
+      - type: recipe_fact
+        fact_name: recommended
+        operator: '=='
+        value: True
+      - type: recipe_fact
+        fact_name: recommendation_score
+        operator: '>='
+        value: 80
+    action:
+      type: set_recipe_fact
+      fact_name: highly_recommended
+      value: True
+
+  - id: R062
+    name: Final suitability check
+    description: Ensure all critical checks passed before final recommendation
+    priority: 5
+    category: final
+    conditions:
+      - type: recipe_fact
+        fact_name: suitable_for_user
+        operator: '=='
+        value: True
+      - type: recipe_fact
+        fact_name: can_prepare
+        operator: '=='
+        value: True
+      - type: recipe_fact
+        fact_name: affordable
+        operator: '=='
+        value: True
+    action:
+      type: set_recipe_fact
+      fact_name: passes_all_checks
+      value: True
+
+  # ============================================================================
+  # DIETARY PREFERENCE RULES
+  # Priority 90 - Diet compatibility
+  # ============================================================================
+
+  - id: R063
+    name: Vegan recipe boost for vegans
+    description: If user is vegan AND recipe is vegan, boost score
+    priority: 85
+    category: diet
+    conditions:
+      - type: fact
+        fact: user_diet(vegan)
+      - type: attribute
+        object: recipe
+        attribute: diet
+        operator: '=='
+        value: vegan
+    action:
+      type: modify_score
+      delta: 30
+
+  - id: R064
+    name: Vegetarian recipe boost for vegetarians
+    description: If user is vegetarian AND recipe is vegetarian, boost score
+    priority: 85
+    category: diet
+    conditions:
+      - type: fact
+        fact: user_diet(vegetarian)
+      - type: attribute
+        object: recipe
+        attribute: diet
+        operator: in
+        value: ['vegan', 'vegetarian']
+    action:
+      type: modify_score
+      delta: 25
+
+  - id: R065
+    name: Pescatarian recipe boost
+    description: If user is pescatarian AND recipe is pescatarian-friendly, boost
+    priority: 85
+    category: diet
+    conditions:
+      - type: fact
+        fact: user_diet(pescatarian)
+      - type: attribute
+        object: recipe
+        attribute: diet
+        operator: in
+        value: ['vegan', 'vegetarian', 'pescatarian']
+    action:
+      type: modify_score
+      delta: 25
+
+  # ============================================================================
+  # PREFERENCE AND BOOST RULES
+  # ============================================================================
+
+  - id: R066
+    name: Comfort food preference
+    description: If recipe is comfort food, small boost
+    priority: 30
+    category: preference
+    conditions:
+      - type: attribute
+        object: recipe
+        attribute: meal
+        operator: '=='
+        value: comfort
+    action:
+      type: modify_score
+      delta: 5
+
   # ============================================================================
   # HEALTH GOAL RULES
   # ============================================================================
-  
-  - id: R110
-    name: Weight loss goal - low calorie
+
+  - id: R067
+    name: High fiber for digestion
+    description: If recipe is high fiber, boost for health
+    priority: 45
+    category: health
+    conditions:
+      - type: attribute
+        object: recipe
+        attribute: nutritional_info
+        operator: method_call
+        method: get_fiber
+        args: []
+        comparison: '>='
+        value: 8
+    action:
+      type: modify_score
+      delta: 10
+
+  # ============================================================================
+  # DIETARY PREFERENCE RULES
+  # Priority 90 - Diet compatibility
+  # ============================================================================
+
+  - id: R068
+    name: Keto diet compatibility
+    description: If user follows keto AND recipe is keto-friendly, boost
+    priority: 90
+    category: diet
+    conditions:
+      - type: fact
+        fact: user_diet(keto)
+      - type: attribute
+        object: recipe
+        attribute: macros
+        operator: contains
+        value: low carbs
+    action:
+      type: modify_score
+      delta: 35
+
+  - id: R069
+    name: Paleo diet compatibility
+    description: If user follows paleo AND recipe is paleo-friendly, boost
+    priority: 90
+    category: diet
+    conditions:
+      - type: fact
+        fact: user_diet(paleo)
+      - type: attribute
+        object: recipe
+        attribute: diet
+        operator: '=='
+        value: paleo
+    action:
+      type: modify_score
+      delta: 35
+
+  - id: R070
+    name: Whole30 diet compatibility
+    description: If user follows Whole30 AND recipe is Whole30-compliant, boost
+    priority: 90
+    category: diet
+    conditions:
+      - type: fact
+        fact: user_diet(whole30)
+      - type: attribute
+        object: recipe
+        attribute: diet
+        operator: '=='
+        value: whole30
+    action:
+      type: modify_score
+      delta: 35
+
+  - id: R071
+    name: Raw food preference
+    description: If user prefers raw food AND recipe is raw, boost
+    priority: 85
+    category: diet
+    conditions:
+      - type: fact
+        fact: user_diet(raw)
+      - type: attribute
+        object: recipe
+        attribute: cooking_methods
+        operator: '=='
+        value: []
+    action:
+      type: modify_score
+      delta: 40
+
+  # ============================================================================
+  # CONVENIENCE RULES
+  # ============================================================================
+
+  - id: R072
+    name: Freezer-friendly bonus
+    description: If recipe can be frozen, small boost
+    priority: 35
+    category: convenience
+    conditions:
+      - type: attribute
+        object: recipe
+        operator: method_call
+        method: freezer_friendly
+        args: []
+    action:
+      type: modify_score
+      delta: 8
+
+  # ============================================================================
+  # HEALTH GOAL RULES
+    # ============================================================================
+
+  - id: R073
+    name: Weight loss goal - low calorie boost
     description: If user wants weight loss AND recipe is low calorie, boost score
     priority: 50
     category: health
@@ -1032,8 +1408,8 @@ rules:
     action:
       type: modify_score
       delta: 25
-  
-  - id: R111
+
+  - id: R074
     name: Weight loss goal - high calorie penalty
     description: If user wants weight loss AND recipe is high calorie, reduce score
     priority: 50
@@ -1052,9 +1428,9 @@ rules:
     action:
       type: modify_score
       delta: -20
-  
-  - id: R112
-    name: Muscle gain goal - high protein
+
+  - id: R075
+    name: Muscle gain goal - high protein boost
     description: If user wants muscle gain AND recipe is high protein, boost score
     priority: 50
     category: health
@@ -1072,8 +1448,8 @@ rules:
     action:
       type: modify_score
       delta: 25
-  
-  - id: R113
+
+  - id: R076
     name: Muscle gain goal - low protein penalty
     description: If user wants muscle gain AND recipe is low protein, reduce score
     priority: 50
@@ -1092,9 +1468,9 @@ rules:
     action:
       type: modify_score
       delta: -15
-  
-  - id: R114
-    name: Heart health goal - low fat
+
+  - id: R077
+    name: Heart health goal - low fat boost
     description: If user wants heart health AND recipe is low fat, boost score
     priority: 50
     category: health
@@ -1112,8 +1488,8 @@ rules:
     action:
       type: modify_score
       delta: 20
-  
-  - id: R115
+
+  - id: R078
     name: Heart health goal - high fat penalty
     description: If user wants heart health AND recipe is high fat, reduce score
     priority: 50
@@ -1132,9 +1508,9 @@ rules:
     action:
       type: modify_score
       delta: -18
-  
-  - id: R116
-    name: Blood sugar control - low carb
+
+  - id: R079
+    name: Blood sugar control - low carb boost
     description: If user wants blood sugar control AND recipe is low carb, boost score
     priority: 50
     category: health
@@ -1152,8 +1528,8 @@ rules:
     action:
       type: modify_score
       delta: 22
-  
-  - id: R117
+
+  - id: R080
     name: Energy boost goal - balanced macros
     description: If user wants energy boost AND recipe has balanced macros, boost score
     priority: 50
@@ -1169,14 +1545,14 @@ rules:
     action:
       type: modify_score
       delta: 15
-  
+
   # ============================================================================
   # TIME CONSTRAINT RULES
-  # ============================================================================
-  
-  - id: R120
-    name: Quick meal preference
-    description: If user prefers quick meals AND recipe takes less than 15 min, boost
+    # ============================================================================
+
+  - id: R081
+    name: Quick meal preference boost
+    description: If user prefers quick meals AND recipe takes <= 15 min, boost score
     priority: 60
     category: time
     conditions:
@@ -1190,47 +1566,52 @@ rules:
     action:
       type: modify_score
       delta: 18
-  
-  - id: R121
+
+  - id: R082
     name: Time constraint violation
-    description: If recipe time exceeds user available time, mark unsuitable
+    description: If recipe total time exceeds user max cooking time, mark unsuitable
     priority: 70
     category: time
     conditions:
       - type: fact
-        fact: user_max_cooking_time(X)
+        fact: user_has_time_limit()
       - type: attribute
         object: recipe
         attribute: total_time
         operator: '>'
-        value: X
+        value: user.max_cooking_time
     action:
       type: set_recipe_fact
       fact_name: suitable_for_user
       value: False
-  
-  - id: R122
-    name: Add time constraint exclusion
-    description: Add reason for time constraint violation
+
+  - id: R083
+    name: Add time constraint exclusion reason
+    description: Add reason when recipe exceeds user time limit
     priority: 70
     category: time
     conditions:
+      - type: fact
+        fact: user_has_time_limit()
       - type: recipe_fact
         fact_name: suitable_for_user
-        operator: ==
+        operator: '=='
         value: False
-      - type: fact
-        fact: user_max_cooking_time(X)
+      - type: attribute
+        object: recipe
+        attribute: total_time
+        operator: '>'
+        value: user.max_cooking_time
     action:
       type: add_to_list
       fact_name: exclusion_reasons
       item: Takes too long to prepare
-  
+
   # ============================================================================
   # CUISINE PREFERENCE RULES
-  # ============================================================================
-  
-  - id: R130
+    # ============================================================================
+
+  - id: R084
     name: Italian cuisine preference
     description: If user prefers Italian AND recipe is Italian, boost score
     priority: 55
@@ -1241,13 +1622,13 @@ rules:
       - type: attribute
         object: recipe
         attribute: cuisine
-        operator: ==
+        operator: '=='
         value: Italian
     action:
       type: modify_score
       delta: 12
-  
-  - id: R131
+
+  - id: R085
     name: Asian cuisine preference
     description: If user prefers Asian AND recipe is Asian, boost score
     priority: 55
@@ -1258,13 +1639,13 @@ rules:
       - type: attribute
         object: recipe
         attribute: cuisine
-        operator: ==
+        operator: '=='
         value: Asian
     action:
       type: modify_score
       delta: 12
-  
-  - id: R132
+
+  - id: R086
     name: Mexican cuisine preference
     description: If user prefers Mexican AND recipe is Mexican, boost score
     priority: 55
@@ -1275,13 +1656,13 @@ rules:
       - type: attribute
         object: recipe
         attribute: cuisine
-        operator: ==
+        operator: '=='
         value: Mexican
     action:
       type: modify_score
       delta: 12
-  
-  - id: R133
+
+  - id: R087
     name: French cuisine preference
     description: If user prefers French AND recipe is French, boost score
     priority: 55
@@ -1292,13 +1673,13 @@ rules:
       - type: attribute
         object: recipe
         attribute: cuisine
-        operator: ==
+        operator: '=='
         value: French
     action:
       type: modify_score
       delta: 12
-  
-  - id: R134
+
+  - id: R088
     name: American cuisine preference
     description: If user prefers American AND recipe is American, boost score
     priority: 55
@@ -1309,17 +1690,17 @@ rules:
       - type: attribute
         object: recipe
         attribute: cuisine
-        operator: ==
+        operator: '=='
         value: American
     action:
       type: modify_score
       delta: 12
-  
+
   # ============================================================================
-  # MEAL TYPE RULES
-  # ============================================================================
-  
-  - id: R140
+  # MEAL TYPE PREFERENCE RULES
+    # ============================================================================
+
+  - id: R089
     name: Breakfast preference match
     description: If user wants breakfast AND recipe is breakfast, boost score
     priority: 60
@@ -1330,13 +1711,13 @@ rules:
       - type: attribute
         object: recipe
         attribute: meal
-        operator: ==
+        operator: '=='
         value: breakfast
     action:
       type: modify_score
       delta: 20
-  
-  - id: R141
+
+  - id: R090
     name: Lunch preference match
     description: If user wants lunch AND recipe is lunch, boost score
     priority: 60
@@ -1347,13 +1728,13 @@ rules:
       - type: attribute
         object: recipe
         attribute: meal
-        operator: ==
+        operator: '=='
         value: lunch
     action:
       type: modify_score
       delta: 20
-  
-  - id: R142
+
+  - id: R091
     name: Dinner preference match
     description: If user wants dinner AND recipe is dinner, boost score
     priority: 60
@@ -1364,13 +1745,13 @@ rules:
       - type: attribute
         object: recipe
         attribute: meal
-        operator: ==
+        operator: '=='
         value: dinner
     action:
       type: modify_score
       delta: 20
-  
-  - id: R143
+
+  - id: R092
     name: Snack preference match
     description: If user wants snack AND recipe is snack, boost score
     priority: 60
@@ -1381,19 +1762,19 @@ rules:
       - type: attribute
         object: recipe
         attribute: meal
-        operator: ==
+        operator: '=='
         value: snack
     action:
       type: modify_score
       delta: 20
-  
+
   # ============================================================================
   # COOKING METHOD PREFERENCE RULES
-  # ============================================================================
-  
-  - id: R150
+    # ============================================================================
+
+  - id: R093
     name: Baking preference
-    description: If user prefers baking AND recipe uses baking, boost score
+    description: If user prefers baking AND recipe uses oven, boost score
     priority: 45
     category: cooking_method
     conditions:
@@ -1407,10 +1788,10 @@ rules:
     action:
       type: modify_score
       delta: 10
-  
-  - id: R151
+
+  - id: R094
     name: Grilling preference
-    description: If user prefers grilling AND recipe uses grilling, boost score
+    description: If user prefers grilling AND recipe uses grill, boost score
     priority: 45
     category: cooking_method
     conditions:
@@ -1424,9 +1805,9 @@ rules:
     action:
       type: modify_score
       delta: 10
-  
-  - id: R152
-    name: Stir-frying preference
+
+  - id: R095
+    name: Stir-fry preference
     description: If user prefers stir-frying AND recipe uses pan, boost score
     priority: 45
     category: cooking_method
@@ -1441,12 +1822,12 @@ rules:
     action:
       type: modify_score
       delta: 10
-  
+
   # ============================================================================
   # SERVING SIZE RULES
-  # ============================================================================
-  
-  - id: R160
+    # ============================================================================
+
+  - id: R096
     name: Single serving preference
     description: If user wants single serving AND recipe serves 1-2, boost score
     priority: 40
@@ -1462,8 +1843,8 @@ rules:
     action:
       type: modify_score
       delta: 8
-  
-  - id: R161
+
+  - id: R097
     name: Family serving preference
     description: If user wants family serving AND recipe serves 4+, boost score
     priority: 40
@@ -1479,215 +1860,35 @@ rules:
     action:
       type: modify_score
       delta: 8
-  
+
   # ============================================================================
-  # SEASONAL AND FRESHNESS RULES
-  # ============================================================================
-  
-  - id: R170
-    name: Seasonal ingredient bonus
-    description: If recipe uses seasonal ingredients, boost score
-    priority: 35
-    category: seasonal
-    conditions:
-      - type: attribute
-        object: recipe
-        operator: method_call
-        method: has_seasonal_ingredients
-        args: []
-    action:
-      type: modify_score
-      delta: 7
-  
-  # ============================================================================
-  # COMBINATION RULES (Higher-order inference)
-  # ============================================================================
-  
-  - id: R180
-    name: Perfect health match
-    description: If recipe meets all user health goals, bonus boost
-    priority: 30
-    category: combination
-    conditions:
-      - type: recipe_fact
-        fact_name: meets_protein_goal
-        operator: ==
-        value: True
-      - type: recipe_fact
-        fact_name: meets_calorie_goal
-        operator: ==
-        value: True
-      - type: recipe_fact
-        fact_name: meets_carb_goal
-        operator: ==
-        value: True
-    action:
-      type: modify_score
-      delta: 30
-  
-  - id: R181
-    name: Beginner-friendly and quick
-    description: If recipe is easy AND quick, boost for beginners
+  # ADDITIONAL COMBINATION RULES
+    # ============================================================================
+
+  - id: R098
+    name: Beginner quick and suitable combo
+    description: If beginner user finds recipe skill-appropriate AND quick to cook, bonus boost
     priority: 45
     category: combination
     conditions:
       - type: fact
         fact: user_skill_level(beginner)
-      - type: attribute
-        object: recipe
-        attribute: skill
-        operator: ==
-        value: easy
+      - type: recipe_fact
+        fact_name: skill_appropriate
+        operator: '=='
+        value: True
       - type: attribute
         object: recipe
         attribute: cook_time
         operator: '<='
-        value: 20
+        value: 30
     action:
       type: modify_score
-      delta: 25
-  
-  - id: R182
-    name: Budget and healthy combo
-    description: If recipe is low cost AND healthy, boost score
-    priority: 40
-    category: combination
-    conditions:
-      - type: attribute
-        object: recipe
-        attribute: budget
-        operator: ==
-        value: low_cost
-      - type: attribute
-        object: recipe
-        attribute: macros
-        operator: contains
-        value: balanced
-    action:
-      type: modify_score
-      delta: 15
-  
-  # ============================================================================
-  # PENALTY RULES (Negative scoring)
-  # ============================================================================
-  
-  - id: R190
-    name: Too expensive penalty
-    description: If recipe is expensive, apply penalty
-    priority: 55
-    category: penalty
-    conditions:
-      - type: attribute
-        object: recipe
-        attribute: budget
-        operator: ==
-        value: expensive
-    action:
-      type: modify_score
-      delta: -10
-  
-  - id: R191
-    name: Very complex recipe penalty
-    description: If recipe is very complex, apply small penalty
-    priority: 55
-    category: penalty
-    conditions:
-      - type: attribute
-        object: recipe
-        attribute: skill
-        operator: ==
-        value: advanced
-    action:
-      type: modify_score
-      delta: -5
-  
-  - id: R192
-    name: Time-intensive penalty
-    description: If recipe takes very long, apply penalty
-    priority: 55
-    category: penalty
-    conditions:
-      - type: attribute
-        object: recipe
-        attribute: total_time
-        operator: '>'
-        value: 120
-    action:
-      type: modify_score
-      delta: -12
-  
-  # ============================================================================
-  # FINAL RECOMMENDATION RULES
-  # ============================================================================
-  
-  - id: R200
-    name: Mark as recommended
-    description: If recipe is suitable and score is high, mark as recommended
-    priority: 10
-    category: final
-    conditions:
-      - type: recipe_fact
-        fact_name: suitable_for_user
-        operator: ==
-        value: True
-      - type: recipe_fact
-        fact_name: recommendation_score
-        operator: '>='
-        value: 50
-    action:
-      type: set_recipe_fact
-      fact_name: recommended
-      value: True
-  
-  - id: R201
-    name: Mark as highly recommended
-    description: If recipe score is very high, mark as highly recommended
-    priority: 10
-    category: final
-    conditions:
-      - type: recipe_fact
-        fact_name: recommended
-        operator: ==
-        value: True
-      - type: recipe_fact
-        fact_name: recommendation_score
-        operator: '>='
-        value: 80
-    action:
-      type: set_recipe_fact
-      fact_name: highly_recommended
-      value: True
-  
-  - id: R202
-    name: Final suitability check
-    description: Ensure all critical checks passed before final recommendation
-    priority: 5
-    category: final
-    conditions:
-      - type: recipe_fact
-        fact_name: suitable_for_user
-        operator: ==
-        value: True
-      - type: recipe_fact
-        fact_name: can_prepare
-        operator: ==
-        value: True
-      - type: recipe_fact
-        fact_name: affordable
-        operator: ==
-        value: True
-    action:
-      type: set_recipe_fact
-      fact_name: passes_all_checks
-      value: True
-  
-  # ============================================================================
-  # ADDITIONAL SCORING RULES FOR 100+ TOTAL
-  # ============================================================================
-  
-  - id: R203
-    name: Mediterranean diet preference
-    description: If user prefers Mediterranean AND recipe is Mediterranean, boost
+      delta: 20
+
+  - id: R099
+    name: Mediterranean cuisine preference
+    description: If user prefers Mediterranean AND recipe is Mediterranean, boost score
     priority: 55
     category: cuisine
     conditions:
@@ -1696,13 +1897,13 @@ rules:
       - type: attribute
         object: recipe
         attribute: cuisine
-        operator: ==
+        operator: '=='
         value: Mediterranean
     action:
       type: modify_score
       delta: 12
-  
-  - id: R204
+
+  - id: R100
     name: Indian cuisine preference
     description: If user prefers Indian AND recipe is Indian, boost score
     priority: 55
@@ -1713,81 +1914,15 @@ rules:
       - type: attribute
         object: recipe
         attribute: cuisine
-        operator: ==
+        operator: '=='
         value: Indian
     action:
       type: modify_score
       delta: 12
-  
-  - id: R205
-    name: Vegan recipe boost for vegans
-    description: If user is vegan AND recipe is vegan, boost score
-    priority: 85
-    category: diet
-    conditions:
-      - type: fact
-        fact: user_diet(vegan)
-      - type: attribute
-        object: recipe
-        attribute: diet
-        operator: ==
-        value: vegan
-    action:
-      type: modify_score
-      delta: 30
-  
-  - id: R206
-    name: Vegetarian recipe boost for vegetarians
-    description: If user is vegetarian AND recipe is vegetarian, boost score
-    priority: 85
-    category: diet
-    conditions:
-      - type: fact
-        fact: user_diet(vegetarian)
-      - type: attribute
-        object: recipe
-        attribute: diet
-        operator: in
-        value: ['vegan', 'vegetarian']
-    action:
-      type: modify_score
-      delta: 25
-  
-  - id: R207
-    name: Pescatarian recipe boost
-    description: If user is pescatarian AND recipe is pescatarian-friendly, boost
-    priority: 85
-    category: diet
-    conditions:
-      - type: fact
-        fact: user_diet(pescatarian)
-      - type: attribute
-        object: recipe
-        attribute: diet
-        operator: in
-        value: ['vegan', 'vegetarian', 'pescatarian']
-    action:
-      type: modify_score
-      delta: 25
-  
-  - id: R208
-    name: Comfort food preference
-    description: If recipe is comfort food, small boost
-    priority: 30
-    category: preference
-    conditions:
-      - type: attribute
-        object: recipe
-        attribute: meal
-        operator: ==
-        value: comfort
-    action:
-      type: modify_score
-      delta: 5
-  
-  - id: R209
+
+  - id: R101
     name: Low sodium for heart health
-    description: If user wants heart health AND recipe is low sodium, boost
+    description: If user wants heart health AND recipe is low sodium, boost score
     priority: 50
     category: health
     conditions:
@@ -1804,189 +1939,88 @@ rules:
     action:
       type: modify_score
       delta: 15
-  
-  - id: R210
-    name: High fiber for digestion
-    description: If recipe is high fiber, boost for health
-    priority: 45
-    category: health
-    conditions:
-      - type: attribute
-        object: recipe
-        attribute: nutritional_info
-        operator: method_call
-        method: get_fiber
-        args: []
-        comparison: '>='
-        value: 8
-    action:
-      type: modify_score
-      delta: 10
-  
-  - id: R211
-    name: Keto diet compatibility
-    description: If user follows keto AND recipe is keto-friendly, boost
-    priority: 90
-    category: diet
-    conditions:
-      - type: fact
-        fact: user_diet(keto)
-      - type: attribute
-        object: recipe
-        attribute: macros
-        operator: contains
-        value: low carbs
-    action:
-      type: modify_score
-      delta: 35
-  
-  - id: R212
-    name: Paleo diet compatibility
-    description: If user follows paleo AND recipe is paleo-friendly, boost
-    priority: 90
-    category: diet
-    conditions:
-      - type: fact
-        fact: user_diet(paleo)
-      - type: attribute
-        object: recipe
-        attribute: diet
-        operator: ==
-        value: paleo
-    action:
-      type: modify_score
-      delta: 35
-  
-  - id: R213
-    name: Whole30 diet compatibility
-    description: If user follows Whole30 AND recipe is Whole30-compliant, boost
-    priority: 90
-    category: diet
-    conditions:
-      - type: fact
-        fact: user_diet(whole30)
-      - type: attribute
-        object: recipe
-        attribute: diet
-        operator: ==
-        value: whole30
-    action:
-      type: modify_score
-      delta: 35
-  
-  - id: R214
-    name: Raw food preference
-    description: If user prefers raw food AND recipe is raw, boost
-    priority: 85
-    category: diet
-    conditions:
-      - type: fact
-        fact: user_diet(raw)
-      - type: attribute
-        object: recipe
-        attribute: cooking_methods
-        operator: ==
-        value: []
-    action:
-      type: modify_score
-      delta: 40
-  
-  - id: R215
-    name: One-pot meal preference
-    description: If user prefers easy cleanup AND recipe is one-pot, boost
-    priority: 42
-    category: convenience
+
+  - id: R102
+    name: Easy cleanup preference
+    description: If user prefers easy cleanup AND recipe uses stovetop only, boost score
+    priority: 35
+    category: preference
     conditions:
       - type: fact
         fact: user_prefers_easy_cleanup()
       - type: attribute
         object: recipe
-        operator: method_call
-        method: is_one_pot
-        args: []
+        attribute: cooking_methods
+        operator: contains
+        value: pan
     action:
       type: modify_score
-      delta: 18
-  
-  - id: R216
-    name: Meal prep friendly
-    description: If user meal preps AND recipe stores well, boost
-    priority: 40
-    category: convenience
+      delta: 8
+
+  - id: R103
+    name: Meal prep user - large batch boost
+    description: If user does meal prep AND recipe makes large batch, boost score
+    priority: 35
+    category: preference
     conditions:
       - type: fact
         fact: user_meal_preps()
       - type: attribute
         object: recipe
-        operator: method_call
-        method: stores_well
-        args: []
+        attribute: servings
+        operator: '>='
+        value: 4
     action:
       type: modify_score
-      delta: 15
-  
-  - id: R217
-    name: Freezer-friendly bonus
-    description: If recipe can be frozen, small boost
+      delta: 12
+
+  - id: R104
+    name: Family-friendly easy recipe boost
+    description: If user has children AND recipe is easy skill, boost score
     priority: 35
-    category: convenience
-    conditions:
-      - type: attribute
-        object: recipe
-        operator: method_call
-        method: freezer_friendly
-        args: []
-    action:
-      type: modify_score
-      delta: 8
-  
-  - id: R218
-    name: Kid-friendly preference
-    description: If user has kids AND recipe is kid-friendly, boost
-    priority: 65
-    category: family
+    category: preference
     conditions:
       - type: fact
         fact: user_has_children()
       - type: attribute
         object: recipe
-        operator: method_call
-        method: is_kid_friendly
-        args: []
+        attribute: skill
+        operator: '=='
+        value: easy
     action:
       type: modify_score
-      delta: 20
-  
-  - id: R219
-    name: Spicy food preference
-    description: If user likes spicy AND recipe is spicy, boost
-    priority: 40
+      delta: 15
+
+  - id: R105
+    name: Spicy food preference boost
+    description: If user likes spicy AND recipe is tagged spicy, boost score
+    priority: 35
     category: preference
     conditions:
       - type: fact
         fact: user_likes_spicy()
       - type: attribute
         object: recipe
-        operator: method_call
-        method: is_spicy
-        args: []
+        attribute: macros
+        operator: contains
+        value: spicy
     action:
       type: modify_score
-      delta: 12
-  
-  - id: R220
-    name: Anti-inflammatory diet
-    description: If user wants anti-inflammatory AND recipe has anti-inflammatory ingredients, boost
-    priority: 55
+      delta: 10
+
+  - id: R106
+    name: Anti-inflammatory diet - vegan recipe boost
+    description: If user has anti-inflammatory goal AND recipe is vegan, boost score
+    priority: 50
     category: health
     conditions:
       - type: fact
         fact: user_health_goal(anti-inflammatory)
       - type: attribute
         object: recipe
-        operator: method_call
-        method: has_anti_inflammatory_ingredients
-        args: []
+        attribute: diet
+        operator: '=='
+        value: vegan
     action:
       type: modify_score
-      delta: 18
+      delta: 15
