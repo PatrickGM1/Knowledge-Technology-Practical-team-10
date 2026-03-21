@@ -90,10 +90,15 @@ class InferenceEngine:
         # Check if it's a fact-based condition (true forward-chaining)
         if cond_type == 'fact':
             fact = condition.get('fact', '')
+            operator = condition.get('operator', '==')
+            expected_value = condition.get('value', True)
+
             # Support fact templates with variables
             fact = fact.replace('{recipe}', context.get('recipe_id', ''))
             fact = fact.replace('{user}', context.get('user', {}).name if hasattr(context.get('user', {}), 'name') else 'user')
-            return self.has_fact(fact)
+
+            actual_value = self.has_fact(fact)
+            return self._compare_values(actual_value, expected_value, operator)
         
         # Check recipe-specific facts
         elif cond_type == 'recipe_fact':

@@ -230,7 +230,7 @@ recipes:
         quantity: 2
         unit: "tbsp"
         category: "other"
-        allergens: ["soy"]
+        allergens: ["soy", "gluten"]
       - name: "oil"
         quantity: 2
         unit: "tbsp"
@@ -323,6 +323,7 @@ recipes:
         quantity: 200
         unit: "g"
         category: "grain"
+        allergens: ["gluten"]
       - name: "pecorino cheese"
         quantity: 50
         unit: "g"
@@ -465,6 +466,7 @@ recipes:
         quantity: 2
         unit: "tbsp"
         category: "grain"
+        allergens: ["gluten"]
         optional: true
     equipment:
       - "pan"
@@ -631,6 +633,7 @@ recipes:
         unit: "g"
         category: "protein"
         preparation: "skin removed"
+        allergens: ["fish"]
       - name: "sugar"
         quantity: 1
         unit: "tbsp"
@@ -732,6 +735,7 @@ recipes:
         quantity: 2
         unit: "pieces"
         category: "grain"
+        allergens: ["gluten"]
       - name: "ground beef"
         quantity: 250
         unit: "g"
@@ -814,10 +818,12 @@ recipes:
         quantity: 30
         unit: "g"
         category: "grain"
+        allergens: ["gluten"]
       - name: "mayonnaise sauce"
         quantity: 2
         unit: "tbsp"
         category: "other"
+        allergens: ["eggs"]
     equipment:
       - "pan"
       - "bowl"
@@ -866,7 +872,7 @@ recipes:
         quantity: 1
         unit: "tbsp"
         category: "protein"
-        allergens: ["nuts"]
+        allergens: ["peanuts"]
         substitutes: ["sunflower seed butter"]
       - name: "banana"
         quantity: 1
@@ -919,7 +925,7 @@ recipes:
         quantity: 4
         unit: "pieces"
         category: "grain"
-        allergens: ["eggs"]
+        allergens: ["eggs", "dairy", "gluten"]
       - name: "spinach"
         quantity: 150
         unit: "g"
@@ -932,11 +938,12 @@ recipes:
         quantity: 2
         unit: "tbsp"
         category: "spice"
+        allergens: ["mustard"]
       - name: "puff pastry"
         quantity: 500
         unit: "g"
         category: "grain"
-        allergens: ["dairy"]
+        allergens: ["dairy", "gluten"]
       - name: "onion"
         quantity: 1
         unit: "piece"
@@ -1157,6 +1164,7 @@ recipes:
         quantity: 250
         unit: "g"
         category: "grain"
+        allergens: ["gluten"]
       - name: "olive oil"
         quantity: 3
         unit: "tbsp"
@@ -1816,6 +1824,7 @@ recipes:
         quantity: 100
         unit: "g"
         category: "vegetable"
+        allergens: ["celery"]
       - name: "onion"
         quantity: 1
         unit: "piece"
@@ -2720,4 +2729,3 @@ recipes:
       fat: 15
       fiber: 2
       sodium: 60
-
