@@ -1,6 +1,5 @@
 """
-Time constraint domain class for recipe recommendation system.
-Represents a user's available cooking time and flexibility.
+Time constraint model for recipe recommendation system
 """
 
 from dataclasses import dataclass
@@ -14,49 +13,34 @@ class TimeConstraint:
     includes_prep: bool = True
     flexibility: bool = False
     
+    # Check if a recipe fits the time constraint
     def can_fit(self, recipe) -> bool:
-        """
-        Check if recipe's cooking time fits within user's time constraint.
-        
-        Args:
-            recipe: Recipe object with prep_time and/or cooking_time
-            
-        Returns:
-            True if recipe can be completed in available time, False otherwise
-        """
         total_time = self._calculate_recipe_time(recipe)
         
         if total_time is None:
-            return True  # If no time info, assume it fits
+            return True
         
-        # Strict: must be within available time
         if not self.flexibility:
             return total_time <= self.available_minutes
-        
-        # Flexible: allow 10 minutes extra
         else:
             return total_time <= (self.available_minutes + 10)
     
+    # Calculate total time needed for a recipe
     def _calculate_recipe_time(self, recipe) -> int:
-        """Calculate total time needed for recipe"""
         total_time = 0
         
-        # Try to get prep_time attribute
         if hasattr(recipe, 'prep_time') and recipe.prep_time:
             if self.includes_prep:
                 total_time += recipe.prep_time
         
-        # Try to get cooking_time enum and convert to minutes
         if hasattr(recipe, 'cooking_time'):
             cooking_time = recipe.cooking_time
             
-            # If it's an enum, get the value
             if hasattr(cooking_time, 'value'):
                 cooking_time_str = cooking_time.value.lower()
             else:
                 cooking_time_str = str(cooking_time).lower()
             
-            # Map cooking time categories to average minutes
             time_map = {
                 'less than 15': 10,
                 'less than 15 minutes': 10,
@@ -71,14 +55,13 @@ class TimeConstraint:
                     total_time += minutes
                     break
         
-        # Try to get cook_time attribute
         elif hasattr(recipe, 'cook_time') and recipe.cook_time:
             total_time += recipe.cook_time
         
         return total_time if total_time > 0 else None
     
+    # Get a human-readable description of the time constraint
     def get_time_description(self) -> str:
-        """Get human-readable description of time constraint"""
         if self.available_minutes < 15:
             return "Quick meal (< 15 min)"
         elif self.available_minutes <= 45:
@@ -86,13 +69,11 @@ class TimeConstraint:
         else:
             return f"Extended cooking ({self.available_minutes} min)"
     
+    # Check if the available time is for a quick cook
     def is_quick_cook(self) -> bool:
-        """Check if this is a quick cooking constraint (< 20 minutes)"""
         return self.available_minutes < 20
     
+    # User-friendly string for the time constraint
     def __str__(self) -> str:
         flex = " (flexible)" if self.flexibility else ""
         return f"{self.available_minutes} minutes available{flex}"
-    
-    def __repr__(self) -> str:
-        return f"TimeConstraint(available_minutes={self.available_minutes}, flexibility={self.flexibility})"

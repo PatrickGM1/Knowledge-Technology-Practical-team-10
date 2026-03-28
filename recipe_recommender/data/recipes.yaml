@@ -1,0 +1,2731 @@
+recipes:
+  - name: "Crème Brûlée"
+    cuisine: "French"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 70
+    skill_level: "medium"
+    cooking_methods: ["oven"]
+    budget_category: "moderate"
+    meal_type: "dinner"
+    servings: 6
+    prep_time_minutes: 15
+    cost: 4.50
+    tags: ["french", "dessert", "classic", "elegant"]
+    ingredients:
+      - name: "egg yolks"
+        quantity: 6
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "heavy cream"
+        quantity: 500
+        unit: "ml"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "sugar"
+        quantity: 100
+        unit: "g"
+        category: "other"
+      - name: "vanilla extract"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "bowl"
+      - "whisk"
+      - "ramekins"
+      - "oven"
+      - "baking tray"
+    instructions:
+      - "In a bowl, whisk egg yolks and sugar until well combined"
+      - "Add the heavy cream and vanilla extract to the mixture"
+      - "Pour mixture into individual ramekins"
+      - "Place ramekins in a baking tray filled with water (bain-marie)"
+      - "Bake in oven at 120°C (no fan) for 1 hour to 1 hour 10 minutes"
+      - "Leave in oven to cool gradually"
+      - "Before serving, sprinkle sugar on top and caramelize with a torch"
+    nutritional_info:
+      calories: 320
+      protein: 6
+      carbohydrates: 28
+      fat: 21
+      fiber: 0
+      sodium: 50
+
+  - name: "Clarified Butter Hollandaise"
+    cuisine: "French"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "medium"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 15
+    cost: 3.00
+    tags: ["sauce", "french", "classic"]
+    ingredients:
+      - name: "butter"
+        quantity: 200
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "egg yolk"
+        quantity: 3
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "lemon juice"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+      - name: "white wine vinegar"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.25
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "sauce pan"
+      - "bowl"
+      - "whisk"
+      - "sieve"
+    instructions:
+      - "Melt the butter in a pan"
+      - "Skim the foam from the top with a spoon"
+      - "Filter the melted butter through a sieve to get clear golden liquid"
+      - "Discard impurities that settled on the bottom"
+      - "In a sauce pan with boiling water, place a bowl on top"
+      - "Add egg yolks, lemon juice, and vinegar to the bowl"
+      - "Whisk while slowly adding the clarified butter"
+      - "Turn heat on and off to prevent eggs from overcooking"
+      - "Continue whisking until sauce is thick and emulsified"
+    nutritional_info:
+      calories: 280
+      protein: 3
+      carbohydrates: 2
+      fat: 30
+      fiber: 0
+      sodium: 180
+
+  - name: "Avocado Toast with Poached Eggs"
+    cuisine: "American"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 13
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "breakfast"
+    servings: 2
+    prep_time_minutes: 13
+    cost: 4.00
+    tags: ["breakfast", "healthy", "quick", "modern"]
+    ingredients:
+      - name: "toasted bread"
+        quantity: 2
+        unit: "slices"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "avocado"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "green onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "red onion"
+        quantity: 0.25
+        unit: "piece"
+        category: "vegetable"
+      - name: "tomato"
+        quantity: 0.5
+        unit: "piece"
+        category: "vegetable"
+      - name: "lime juice"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+      - name: "eggs"
+        quantity: 2
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "white wine vinegar"
+        quantity: 100
+        unit: "ml"
+        category: "other"
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.25
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "pot"
+      - "bowl"
+      - "spatula"
+    instructions:
+      - "Make guacamole: mash avocado with green onion, red onion, tomato, salt, pepper, and lime juice"
+      - "For poached eggs: bring 2L water with 100ml white wine vinegar to boil"
+      - "Create a vortex in the water with a spatula"
+      - "Crack egg into the vortex"
+      - "Cook for 3-4 minutes"
+      - "Toast the bread slices"
+      - "Spread guacamole on toasted bread"
+      - "Top with poached egg"
+    nutritional_info:
+      calories: 340
+      protein: 14
+      carbohydrates: 28
+      fat: 20
+      fiber: 8
+      sodium: 320
+
+  - name: "Fried Rice with Eggs and Shrimp"
+    cuisine: "Asian"
+    diet: "pescatarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 2
+    prep_time_minutes: 15
+    cost: 6.00
+    tags: ["asian", "quick", "easy", "seafood"]
+    ingredients:
+      - name: "cooked rice"
+        quantity: 300
+        unit: "g"
+        category: "grain"
+      - name: "eggs"
+        quantity: 2
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "shrimp"
+        quantity: 200
+        unit: "g"
+        category: "protein"
+        allergens: ["shellfish"]
+      - name: "spring onion"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+        preparation: "julienned"
+      - name: "soy sauce"
+        quantity: 2
+        unit: "tbsp"
+        category: "other"
+        allergens: ["soy", "gluten"]
+      - name: "oil"
+        quantity: 2
+        unit: "tbsp"
+        category: "other"
+      - name: "butter"
+        quantity: 1
+        unit: "tbsp"
+        category: "dairy"
+        allergens: ["dairy"]
+    equipment:
+      - "wok or large pan"
+      - "spatula"
+    instructions:
+      - "Cook the rice if not already cooked (steam method preferred)"
+      - "Heat oil in a hot pan or wok"
+      - "Add eggs and scramble"
+      - "Add the spring onion julienne and cook briefly"
+      - "Add the shrimp and cook until brown"
+      - "Add the cooked rice and stir-fry"
+      - "Add soy sauce and let rice absorb the flavor"
+      - "Finish with butter and egg, mixing well"
+    nutritional_info:
+      calories: 450
+      protein: 28
+      carbohydrates: 52
+      fat: 14
+      fiber: 2
+      sodium: 680
+
+  - name: "Simple Vinaigrette"
+    cuisine: "French"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 3
+    skill_level: "easy"
+    cooking_methods: ["blender"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 3
+    cost: 1.00
+    tags: ["simple", "quick", "vegan", "salad", "dressing"]
+    ingredients:
+      - name: "olive oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "other"
+      - name: "white wine vinegar"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+      - name: "salt"
+        quantity: 0.25
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.25
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "blender"
+      - "bowl"
+    instructions:
+      - "Add olive oil, white wine vinegar, salt, and pepper to blender"
+      - "Blend until everything is fully incorporated"
+      - "Serve with any salad"
+    nutritional_info:
+      calories: 90
+      protein: 0
+      carbohydrates: 0
+      fat: 10
+      fiber: 0
+      sodium: 60
+
+  - name: "Cacio e pepe"
+    cuisine: "Italian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 2
+    prep_time_minutes: 5
+    cost: 3.50
+    tags: ["italian", "pasta", "simple", "classic"]
+    ingredients:
+      - name: "pasta"
+        quantity: 200
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "pecorino cheese"
+        quantity: 50
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "black pepper"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+        optional: true
+    equipment:
+      - "pot"
+      - "pan"
+      - "grater"
+    instructions:
+      - "Boil salted water and cook pasta until al dente"
+      - "Reserve 1 cup of pasta water before draining"
+      - "Grate pecorino cheese finely"
+      - "Toast black pepper in a pan"
+      - "Add cooked pasta and pasta water to pan"
+      - "Toss with cheese and pepper until creamy"
+      - "Serve immediately"
+    nutritional_info:
+      calories: 450
+      protein: 18
+      carbohydrates: 65
+      fat: 12
+      fiber: 3
+      sodium: 400
+
+  - name: "Risotto allo zafferano"
+    cuisine: "Italian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 30
+    skill_level: "medium"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "dinner"
+    servings: 4
+    prep_time_minutes: 10
+    cost: 6.50
+    tags: ["italian", "risotto", "saffron", "creamy"]
+    ingredients:
+      - name: "arborio rice"
+        quantity: 300
+        unit: "g"
+        category: "grain"
+      - name: "vegetable broth"
+        quantity: 1
+        unit: "liter"
+        category: "other"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+        preparation: "finely chopped"
+      - name: "white wine"
+        quantity: 100
+        unit: "ml"
+        category: "other"
+        optional: true
+      - name: "saffron"
+        quantity: 0.5
+        unit: "g"
+        category: "spice"
+      - name: "butter"
+        quantity: 30
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "parmesan cheese"
+        quantity: 50
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+    equipment:
+      - "large pan"
+      - "wooden spoon"
+      - "ladle"
+    instructions:
+      - "Heat broth and keep it warm"
+      - "Sauté onion in butter until translucent"
+      - "Add rice and toast for 2 minutes"
+      - "Add wine and let it evaporate"
+      - "Add broth one ladle at a time, stirring constantly"
+      - "After 15 minutes, add saffron"
+      - "Continue cooking until rice is creamy (about 18-20 minutes total)"
+      - "Stir in butter and parmesan"
+      - "Let rest for 2 minutes before serving"
+    nutritional_info:
+      calories: 520
+      protein: 14
+      carbohydrates: 75
+      fat: 16
+      fiber: 2
+      sodium: 600
+
+  - name: "Saltimbocca alla romana"
+    cuisine: "Italian"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "easy"
+    cooking_methods: ["pan", "oven"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 10
+    cost: 5.50
+    tags: ["italian", "veal", "prosciutto", "quick"]
+    ingredients:
+      - name: "veal cutlets"
+        quantity: 4
+        unit: "pieces"
+        category: "protein"
+      - name: "prosciutto"
+        quantity: 4
+        unit: "slices"
+        category: "protein"
+      - name: "sage leaves"
+        quantity: 8
+        unit: "pieces"
+        category: "spice"
+      - name: "white wine"
+        quantity: 100
+        unit: "ml"
+        category: "other"
+      - name: "butter"
+        quantity: 30
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+        substitutes: ["olive oil"]
+      - name: "flour"
+        quantity: 2
+        unit: "tbsp"
+        category: "grain"
+        allergens: ["gluten"]
+        optional: true
+    equipment:
+      - "pan"
+      - "tongs"
+      - "toothpicks"
+    instructions:
+      - "Pound veal cutlets to even thickness"
+      - "Place prosciutto and sage on each cutlet, secure with toothpick"
+      - "Dust lightly with flour if using"
+      - "Heat butter in pan over medium-high heat"
+      - "Cook cutlets sage-side down for 2-3 minutes"
+      - "Flip and cook for another 2 minutes"
+      - "Remove cutlets and keep warm"
+      - "Deglaze pan with white wine"
+      - "Pour sauce over cutlets and serve"
+    nutritional_info:
+      calories: 320
+      protein: 35
+      carbohydrates: 5
+      fat: 15
+      fiber: 0.5
+      sodium: 550
+
+  - name: "Fritta di patate"
+    cuisine: "Italian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "premium"
+    meal_type: "snack"
+    servings: 4
+    prep_time_minutes: 8
+    cost: 9.00
+    tags: ["italian", "frittata", "potato", "eggs"]
+    ingredients:
+      - name: "potatoes"
+        quantity: 500
+        unit: "g"
+        category: "vegetable"
+        preparation: "thinly sliced"
+      - name: "eggs"
+        quantity: 6
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+        preparation: "sliced"
+        optional: true
+      - name: "olive oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "oil"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "large pan"
+      - "spatula"
+      - "bowl"
+    instructions:
+      - "Heat olive oil in pan"
+      - "Fry potato slices until golden and tender"
+      - "Beat eggs with salt and pepper"
+      - "Add cooked potatoes to eggs"
+      - "Pour mixture back into pan"
+      - "Cook until bottom is set"
+      - "Flip and cook other side until golden"
+      - "Serve hot or at room temperature"
+    nutritional_info:
+      calories: 280
+      protein: 14
+      carbohydrates: 25
+      fat: 14
+      fiber: 3
+      sodium: 420
+
+  - name: "Dark Chocolate Energy Bites"
+    cuisine: "American"
+    diet: "vegetarian"
+    dietary_restrictions: ["gluten-free", "diabetic-friendly"]
+    cooking_time_minutes: 10
+    skill_level: "easy"
+    cooking_methods: ["no-cook"]
+    budget_category: "moderate"
+    meal_type: "snack"
+    servings: 12
+    prep_time_minutes: 10
+    cost: 4.50
+    tags: ["healthy", "no-bake", "energy", "snack"]
+    ingredients:
+      - name: "rolled oats"
+        quantity: 200
+        unit: "g"
+        category: "grain"
+        dietary_flags: ["gluten-free"]
+      - name: "dark chocolate"
+        quantity: 100
+        unit: "g"
+        category: "sweetener"
+      - name: "almond butter"
+        quantity: 100
+        unit: "g"
+        category: "protein"
+        allergens: ["nuts"]
+        substitutes: ["sunflower seed butter", "peanut butter"]
+      - name: "honey"
+        quantity: 3
+        unit: "tbsp"
+        category: "sweetener"
+        substitutes: ["maple syrup", "agave"]
+      - name: "chia seeds"
+        quantity: 2
+        unit: "tbsp"
+        category: "other"
+        optional: true
+      - name: "vanilla extract"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "bowl"
+      - "spoon"
+      - "baking sheet"
+    instructions:
+      - "Mix all ingredients in a bowl"
+      - "Let mixture chill in refrigerator for 30 minutes"
+      - "Roll into bite-sized balls"
+      - "Store in refrigerator for up to 1 week"
+    nutritional_info:
+      calories: 180
+      protein: 6
+      carbohydrates: 20
+      fat: 9
+      fiber: 4
+      sodium: 25
+      sugar: 8
+
+  - name: "Trout Fillet Marinated in Sugar"
+    cuisine: "Romanian-inspired"
+    diet: "pescatarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 5
+    skill_level: "easy"
+    cooking_methods: ["marinated"]
+    budget_category: "moderate"
+    meal_type: "snack"
+    servings: 2
+    prep_time_minutes: 5
+    cost: 5.00
+    tags: ["fish", "marinated", "simple", "protein"]
+    ingredients:
+      - name: "trout fillet"
+        quantity: 250
+        unit: "g"
+        category: "protein"
+        preparation: "skin removed"
+        allergens: ["fish"]
+      - name: "sugar"
+        quantity: 1
+        unit: "tbsp"
+        category: "sweetener"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "bowl"
+      - "sealed container"
+    instructions:
+      - "Use a cleaned trout fillet with skin removed"
+      - "Rub the trout fillet with sugar and salt"
+      - "Place the fillet in a sealed container"
+      - "Marinate in the refrigerator for 2–3 hours"
+      - "Ready to eat"
+    nutritional_info:
+      calories: 280
+      protein: 42
+      carbohydrates: 4
+      fat: 10
+      fiber: 0
+      sodium: 600
+      sugar: 4
+
+  - name: "American-Style Pico de Gallo Salad"
+    cuisine: "American"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 10
+    skill_level: "easy"
+    cooking_methods: ["no-cook"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 2
+    prep_time_minutes: 10
+    cost: 2.00
+    tags: ["fresh", "salad", "quick", "healthy"]
+    ingredients:
+      - name: "tomatoes"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "red onion"
+        quantity: 0.5
+        unit: "piece"
+        category: "vegetable"
+      - name: "jalapeno"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+        optional: true
+      - name: "lemon juice"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "knife"
+      - "bowl"
+    instructions:
+      - "Dice the tomatoes"
+      - "Finely chop the red onion"
+      - "Chop the jalapeno if using"
+      - "Mix with lemon juice, salt, and black pepper to taste"
+      - "Serve immediately"
+    nutritional_info:
+      calories: 70
+      protein: 2
+      carbohydrates: 14
+      fat: 0.5
+      fiber: 3
+      sodium: 250
+      sugar: 7
+
+  - name: "Flatbread Taco with Minced Beef and Red Onion"
+    cuisine: "Mexican-inspired"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 15
+    skill_level: "easy"
+    cooking_methods: ["oven", "pan"]
+    budget_category: "low"
+    meal_type: "snack"
+    servings: 2
+    prep_time_minutes: 7
+    cost: 4.00
+    tags: ["quick", "taco", "beef", "simple"]
+    ingredients:
+      - name: "flatbread"
+        quantity: 2
+        unit: "pieces"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "ground beef"
+        quantity: 250
+        unit: "g"
+        category: "protein"
+      - name: "red onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+        preparation: "julienned"
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "mixed spices"
+        quantity: 1
+        unit: "tbsp"
+        category: "spice"
+        optional: true
+    equipment:
+      - "baking tray"
+      - "knife"
+    instructions:
+      - "Spread the ground beef evenly over the flatbread"
+      - "Add julienned red onion on top"
+      - "Season with salt and black pepper"
+      - "Add mixed spices and optional seasoning"
+      - "Bake until the meat is fully cooked"
+      - "Serve hot"
+    nutritional_info:
+      calories: 520
+      protein: 33
+      carbohydrates: 45
+      fat: 22
+      fiber: 4
+      sodium: 650
+      sugar: 3
+
+  - name: "Cessar Chicken Salad"
+    cuisine: "International"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 10
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 1
+    prep_time_minutes: 10
+    cost: 6.00
+    tags: ["salad", "chicken", "healthy", "protein"]
+    ingredients:
+      - name: "green lettuce"
+        quantity: 150
+        unit: "g"
+        category: "vegetable"
+      - name: "chicken breast"
+        quantity: 200
+        unit: "g"
+        category: "protein"
+        preparation: "pan-cooked"
+      - name: "cherry tomatoes"
+        quantity: 150
+        unit: "g"
+        category: "vegetable"
+      - name: "boiled egg"
+        quantity: 1
+        unit: "piece"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "parmesan cheese"
+        quantity: 25
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "croutons"
+        quantity: 30
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "mayonnaise sauce"
+        quantity: 2
+        unit: "tbsp"
+        category: "other"
+        allergens: ["eggs"]
+    equipment:
+      - "pan"
+      - "bowl"
+      - "knife"
+    instructions:
+      - "Cook the chicken breast in a pan according to preference"
+      - "Assemble the salad with lettuce, chicken, cherry tomatoes, boiled egg, parmesan, croutons, and mayonnaise sauce"
+    nutritional_info:
+      calories: 520
+      protein: 40
+      carbohydrates: 20
+      fat: 30
+      fiber: 4
+      sodium: 700
+      sugar: 5
+
+  - name: "Meal Replacement Protein Shake"
+    cuisine: "International"
+    diet: "vegetarian"
+    dietary_restrictions: ["lactose-free option"]
+    cooking_time_minutes: 5
+    skill_level: "easy"
+    cooking_methods: ["blender"]
+    budget_category: "low"
+    meal_type: "snack"
+    servings: 1
+    prep_time_minutes: 5
+    cost: 3.50
+    tags: ["protein", "shake", "quick", "healthy"]
+    ingredients:
+      - name: "milk"
+        quantity: 300
+        unit: "ml"
+        category: "dairy"
+        allergens: ["dairy"]
+        substitutes: ["almond milk", "soy milk", "oat milk"]
+      - name: "protein powder"
+        quantity: 30
+        unit: "g"
+        category: "protein"
+      - name: "rolled oats"
+        quantity: 30
+        unit: "g"
+        category: "grain"
+      - name: "peanut butter"
+        quantity: 1
+        unit: "tbsp"
+        category: "protein"
+        allergens: ["peanuts"]
+        substitutes: ["sunflower seed butter"]
+      - name: "banana"
+        quantity: 1
+        unit: "piece"
+        category: "fruit"
+      - name: "flavoring"
+        quantity: 1
+        unit: "tsp"
+        category: "other"
+        optional: true
+        substitutes: ["honey", "maple syrup"]
+    equipment:
+      - "blender"
+    instructions:
+      - "Add all ingredients to the blender"
+      - "Blend until smooth"
+      - "Serve immediately"
+    nutritional_info:
+      calories: 480
+      protein: 35
+      carbohydrates: 58
+      fat: 14
+      fiber: 7
+      sodium: 220
+      sugar: 12
+
+  - name: "Beef Wellington"
+    cuisine: "British"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 90
+    skill_level: "experienced"
+    cooking_methods: ["pan", "oven"]
+    budget_category: "premium"
+    meal_type: "dinner"
+    servings: 4
+    prep_time_minutes: 45
+    cost: 18.00
+    tags: ["beef", "elegant", "special occasion", "complex"]
+    ingredients:
+      - name: "beef fillet"
+        quantity: 800
+        unit: "g"
+        category: "protein"
+      - name: "mushroom champignon"
+        quantity: 400
+        unit: "g"
+        category: "vegetable"
+      - name: "crepes"
+        quantity: 4
+        unit: "pieces"
+        category: "grain"
+        allergens: ["eggs", "dairy", "gluten"]
+      - name: "spinach"
+        quantity: 150
+        unit: "g"
+        category: "vegetable"
+      - name: "prosciutto crudo"
+        quantity: 200
+        unit: "g"
+        category: "protein"
+      - name: "mustard"
+        quantity: 2
+        unit: "tbsp"
+        category: "spice"
+        allergens: ["mustard"]
+      - name: "puff pastry"
+        quantity: 500
+        unit: "g"
+        category: "grain"
+        allergens: ["dairy", "gluten"]
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "olive oil"
+        quantity: 2
+        unit: "tbsp"
+        category: "oil"
+      - name: "egg"
+        quantity: 1
+        unit: "piece"
+        category: "protein"
+        allergens: ["eggs"]
+        optional: true
+    equipment:
+      - "pan"
+      - "oven"
+      - "knife"
+      - "plastic wrap"
+      - "baking tray"
+    instructions:
+      - "Cook the beef fillet for 1 minute on each side in a hot pan"
+      - "Coat the beef with mustard and set aside to cool"
+      - "Thinly slice onions and cook them in a pan until soft"
+      - "Cube the mushrooms and add them to the pan with the onions"
+      - "Cook the mushroom and onion mixture until all moisture evaporates"
+      - "On a plastic wrap, place the prosciutto slices in a rectangular shape"
+      - "Layer the crepes on top of the prosciutto"
+      - "Spread the mushroom and onion mixture over the crepes"
+      - "Add fresh spinach leaves on top"
+      - "Place the beef fillet on top and roll everything tightly using the plastic wrap"
+      - "Refrigerate for 3 hours to set"
+      - "After 3 hours, remove the plastic wrap and wrap the beef in puff pastry"
+      - "Optional: brush with beaten egg for golden color"
+      - "Bake in oven at 185°C for 35 minutes"
+      - "Let rest for 5 minutes before slicing and serving"
+    nutritional_info:
+      calories: 620
+      protein: 45
+      carbohydrates: 35
+      fat: 32
+      fiber: 3
+      sodium: 850
+
+  - name: "Simple Potato Puree"
+    cuisine: "French"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 40
+    skill_level: "easy"
+    cooking_methods: ["oven"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 10
+    cost: 3.00
+    tags: ["potato", "side dish", "classic", "creamy"]
+    ingredients:
+      - name: "potatoes"
+        quantity: 800
+        unit: "g"
+        category: "vegetable"
+      - name: "salt"
+        quantity: 100
+        unit: "g"
+        category: "spice"
+      - name: "butter"
+        quantity: 100
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "warm milk"
+        quantity: 150
+        unit: "ml"
+        category: "dairy"
+        allergens: ["dairy"]
+    equipment:
+      - "oven"
+      - "baking tray"
+      - "sieve"
+      - "spoon"
+      - "bowl"
+    instructions:
+      - "Preheat oven to 180°C"
+      - "Spread salt on a baking tray to create a bed"
+      - "Place whole skinned potatoes on the salt bed"
+      - "Bake for 30-40 minutes until tender"
+      - "While still hot, cut potatoes in half"
+      - "Scoop out the potato flesh with a spoon"
+      - "Pass the hot potato through a sieve for smooth texture"
+      - "Add cold butter cubes to the sieved potato in a line"
+      - "Add warm milk gradually while mixing"
+      - "Continue mixing until smooth and creamy"
+      - "Serve immediately while hot"
+    nutritional_info:
+      calories: 280
+      protein: 5
+      carbohydrates: 38
+      fat: 12
+      fiber: 3
+      sodium: 650
+
+  - name: "Asparagus Cream Soup"
+    cuisine: "French"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 30
+    skill_level: "easy"
+    cooking_methods: ["pan", "blender"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 15
+    cost: 5.50
+    tags: ["soup", "creamy", "vegetables", "healthy"]
+    ingredients:
+      - name: "asparagus"
+        quantity: 500
+        unit: "g"
+        category: "vegetable"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "potatoes"
+        quantity: 300
+        unit: "g"
+        category: "vegetable"
+      - name: "olive oil"
+        quantity: 2
+        unit: "tbsp"
+        category: "oil"
+      - name: "water"
+        quantity: 1000
+        unit: "ml"
+        category: "other"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "butter"
+        quantity: 30
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "cooking cream"
+        quantity: 100
+        unit: "ml"
+        category: "dairy"
+        allergens: ["dairy"]
+    equipment:
+      - "sauce pan"
+      - "blender"
+      - "knife"
+    instructions:
+      - "Clean the asparagus and remove the hard woody parts at the bottom"
+      - "Clean and cube the onion and potatoes"
+      - "Heat olive oil in a sauce pan"
+      - "Add the cubed onion and cook until softened"
+      - "When the onion gets some color, add asparagus and potatoes"
+      - "Add water until everything is covered"
+      - "Boil until everything is soft (about 20-25 minutes)"
+      - "Use a blender to blend everything until smooth"
+      - "Add salt, pepper, butter, and cooking cream"
+      - "Stir well and heat through without boiling"
+      - "Serve hot"
+    nutritional_info:
+      calories: 180
+      protein: 6
+      carbohydrates: 18
+      fat: 10
+      fiber: 4
+      sodium: 550
+
+  - name: "Couscous with Vegetables and Peas Cream"
+    cuisine: "Mediterranean"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 35
+    skill_level: "medium"
+    cooking_methods: ["pan", "blender"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 20
+    cost: 4.50
+    tags: ["vegan", "vegetables", "healthy", "colorful"]
+    ingredients:
+      - name: "carrot"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "zucchini"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "tomatoes"
+        quantity: 3
+        unit: "pieces"
+        category: "vegetable"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "vegetable stock"
+        quantity: 500
+        unit: "ml"
+        category: "other"
+      - name: "peas"
+        quantity: 300
+        unit: "g"
+        category: "vegetable"
+      - name: "couscous"
+        quantity: 250
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "olive oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "oil"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "pan"
+      - "sauce pan"
+      - "blender"
+      - "knife"
+      - "bowl"
+    instructions:
+      - "Cube the carrot, zucchini, and dice the tomatoes (remove juice and seeds)"
+      - "Cut the onion thinly"
+      - "In a pan with boiling water, cook the cubed vegetables until tender"
+      - "Bring vegetable stock to a boil and add the couscous (250g)"
+      - "Cover and let the couscous absorb the liquid for 5 minutes"
+      - "In another sauce pan, cook the thinly sliced onion in a bit of olive oil"
+      - "Set the cooked onion aside"
+      - "Boil the peas (300g) in water for 3-4 minutes"
+      - "Transfer the peas immediately to iced water to stop cooking"
+      - "Add the peas to the cooked onion"
+      - "Blend the pea and onion mixture - if too thick, add some vegetable stock"
+      - "Add olive oil to the blended pea cream"
+      - "Season with salt and pepper to taste"
+      - "Fluff the couscous with a fork"
+      - "Mix the couscous with the cooked vegetables"
+      - "Serve the couscous and vegetables with the pea cream on top or on the side"
+    nutritional_info:
+      calories: 320
+      protein: 12
+      carbohydrates: 58
+      fat: 6
+      fiber: 8
+      sodium: 480
+
+  - name: "Hummus"
+    cuisine: "Middle Eastern"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 5
+    skill_level: "easy"
+    cooking_methods: ["blender"]
+    budget_category: "low"
+    meal_type: "snack"
+    servings: 6
+    prep_time_minutes: 5
+    cost: 2.50
+    tags: ["vegan", "healthy", "protein", "dip"]
+    ingredients:
+      - name: "chickpeas"
+        quantity: 400
+        unit: "g"
+        category: "protein"
+      - name: "olive oil"
+        quantity: 4
+        unit: "tbsp"
+        category: "oil"
+      - name: "lemon juice"
+        quantity: 3
+        unit: "tbsp"
+        category: "other"
+      - name: "water"
+        quantity: 50
+        unit: "ml"
+        category: "other"
+      - name: "garlic clove"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "tahini paste"
+        quantity: 3
+        unit: "tbsp"
+        category: "other"
+        allergens: ["sesame"]
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "blender"
+      - "bowl"
+    instructions:
+      - "If using canned chickpeas, drain and rinse them"
+      - "Add all ingredients to the blender: chickpeas, olive oil, lemon juice, water, garlic cloves, tahini paste, and salt"
+      - "Blend until smooth and creamy"
+      - "If too thick, add a bit more water or olive oil"
+      - "Taste and adjust seasoning if needed"
+      - "Serve with vegetables, pita bread, or crackers"
+    nutritional_info:
+      calories: 220
+      protein: 8
+      carbohydrates: 20
+      fat: 14
+      fiber: 6
+      sodium: 280
+
+  - name: "Storceag de peste"
+    cuisine: "Romanian"
+    diet: "pescatarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 60
+    skill_level: "medium"
+    cooking_methods: ["pan", "bowl"]
+    budget_category: "premium"
+    meal_type: "lunch"
+    servings: 6
+    prep_time_minutes: 30
+    cost: 12.00
+    tags: ["romanian", "delta", "fish soup", "traditional"]
+    ingredients:
+      - name: "sturgeon"
+        quantity: 1000
+        unit: "g"
+        category: "protein"
+        allergens: ["fish"]
+      - name: "potatoes"
+        quantity: 500
+        unit: "g"
+        category: "vegetable"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "carrots"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "celery root"
+        quantity: 150
+        unit: "g"
+        category: "vegetable"
+      - name: "tomatoes"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "lemon juice"
+        quantity: 4
+        unit: "tbsp"
+        category: "other"
+      - name: "egg yolks"
+        quantity: 4
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "sour cream"
+        quantity: 250
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "dill"
+        quantity: 2
+        unit: "tbsp"
+        category: "spice"
+      - name: "garlic"
+        quantity: 4
+        unit: "cloves"
+        category: "vegetable"
+      - name: "oil"
+        quantity: 2
+        unit: "tbsp"
+        category: "oil"
+      - name: "salt"
+        quantity: 2
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "large pot"
+      - "pan"
+      - "bowl"
+      - "knife"
+      - "grater"
+    instructions:
+      - "Chop onion, part of the carrots, and celery root; sauté lightly, then simmer in water"
+      - "Add potatoes after the root vegetables start to soften"
+      - "Clean the sturgeon, remove the skin if needed, and cut fillets into 2-3 cm cubes"
+      - "Season fish cubes with salt and lemon juice, then keep chilled"
+      - "Add fish bones and trimmings to the soup base for extra flavor while vegetables cook"
+      - "Peel and dice tomatoes, cook them in a pan until soft, then add them to the soup"
+      - "Adjust with more salt and lemon juice so the broth is clearly savory and slightly sour"
+      - "Add fish cubes and simmer gently for up to 10 minutes without overcooking"
+      - "Grate the remaining carrots, sauté briefly in a little oil, then add to the soup for color"
+      - "Turn off the heat and let the soup rest for 15 minutes"
+      - "In a bowl, mix egg yolks with sour cream and temper with hot soup, then stir into the pot"
+      - "Serve with dill on top, garlic sauce, and lemon slices on the side"
+    nutritional_info:
+      calories: 360
+      protein: 29
+      carbohydrates: 18
+      fat: 18
+      fiber: 3
+      sodium: 730
+
+  - name: "Suberek"
+    cuisine: "Romanian"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 60
+    skill_level: "medium"
+    cooking_methods: ["pan"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 40
+    cost: 5.00
+    tags: ["dobrogean", "tatar", "pastry", "fried", "traditional"]
+    ingredients:
+      - name: "all-purpose flour"
+        quantity: 400
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "water"
+        quantity: 180
+        unit: "ml"
+        category: "other"
+      - name: "egg"
+        quantity: 1
+        unit: "piece"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "minced lamb"
+        quantity: 400
+        unit: "g"
+        category: "protein"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "sunflower oil"
+        quantity: 200
+        unit: "ml"
+        category: "oil"
+    equipment:
+      - "bowl"
+      - "rolling pin"
+      - "large pan"
+      - "knife"
+    instructions:
+      - "Mix flour, egg, salt, and water into a soft dough; knead for 10 minutes and rest for 20 minutes"
+      - "Finely grate the onion and mix with minced lamb, salt, and black pepper"
+      - "Divide dough into balls, roll each one into a thin circle roughly 20 cm wide"
+      - "Place a spoonful of filling on one half of the circle"
+      - "Fold the other half over and press edges firmly to seal into a half-moon shape"
+      - "Heat oil in a large pan over medium heat"
+      - "Fry each suberek for 3-4 minutes per side until golden and crisp"
+      - "Drain on paper towels and serve immediately while hot"
+    nutritional_info:
+      calories: 480
+      protein: 22
+      carbohydrates: 38
+      fat: 24
+      fiber: 2
+      sodium: 420
+
+  - name: "Mamaliga"
+    cuisine: "Romanian"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 30
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "low"
+    meal_type: "dinner"
+    servings: 4
+    prep_time_minutes: 5
+    cost: 1.50
+    tags: ["romanian", "polenta", "traditional", "vegan", "staple"]
+    ingredients:
+      - name: "coarse cornmeal"
+        quantity: 300
+        unit: "g"
+        category: "grain"
+      - name: "water"
+        quantity: 1200
+        unit: "ml"
+        category: "other"
+      - name: "salt"
+        quantity: 1.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "large pot"
+      - "wooden spoon"
+    instructions:
+      - "Bring salted water to a rolling boil in a heavy-bottomed pot"
+      - "Pour cornmeal in a thin, steady stream while stirring constantly"
+      - "Reduce heat to low and cook for 20-25 minutes, stirring frequently"
+      - "Mamaliga is ready when it pulls away cleanly from the sides of the pot"
+      - "Turn out onto a wooden board and cut with a thread or knife"
+      - "Serve hot alongside sour cream, feta cheese, or fried eggs"
+    nutritional_info:
+      calories: 180
+      protein: 4
+      carbohydrates: 38
+      fat: 1
+      fiber: 3
+      sodium: 290
+
+  - name: "Papanasi"
+    cuisine: "Romanian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 30
+    skill_level: "medium"
+    cooking_methods: ["pan"]
+    budget_category: "low"
+    meal_type: "dessert"
+    servings: 4
+    prep_time_minutes: 20
+    cost: 4.00
+    tags: ["romanian", "dessert", "fried", "traditional", "cheese"]
+    ingredients:
+      - name: "cottage cheese"
+        quantity: 500
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "eggs"
+        quantity: 2
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "all-purpose flour"
+        quantity: 120
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "semolina"
+        quantity: 50
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "sugar"
+        quantity: 3
+        unit: "tbsp"
+        category: "other"
+      - name: "vanilla extract"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "baking soda"
+        quantity: 0.5
+        unit: "tsp"
+        category: "other"
+      - name: "sour cream"
+        quantity: 200
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "blueberry jam"
+        quantity: 100
+        unit: "g"
+        category: "other"
+      - name: "sunflower oil"
+        quantity: 150
+        unit: "ml"
+        category: "oil"
+    equipment:
+      - "bowl"
+      - "large pan"
+      - "slotted spoon"
+    instructions:
+      - "Drain cottage cheese well and mix with eggs, sugar, vanilla, baking soda, and semolina"
+      - "Add flour gradually until a soft, slightly sticky dough forms"
+      - "Wet hands and shape dough into round doughnuts and small balls"
+      - "Fry in hot oil over medium heat for 3-4 minutes per side until deep golden brown"
+      - "The small ball sits on top of the doughnut when served"
+      - "Place on paper towels to drain excess oil"
+      - "Serve warm topped generously with sour cream and blueberry jam"
+    nutritional_info:
+      calories: 420
+      protein: 16
+      carbohydrates: 48
+      fat: 19
+      fiber: 1
+      sodium: 210
+
+  - name: "Gulas"
+    cuisine: "Hungarian"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 90
+    skill_level: "medium"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 6
+    prep_time_minutes: 20
+    cost: 8.00
+    tags: ["hungarian", "soup", "beef", "paprika", "hearty"]
+    ingredients:
+      - name: "beef chuck"
+        quantity: 700
+        unit: "g"
+        category: "protein"
+      - name: "onion"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "garlic"
+        quantity: 3
+        unit: "cloves"
+        category: "vegetable"
+      - name: "carrots"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "bell pepper"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "potatoes"
+        quantity: 400
+        unit: "g"
+        category: "vegetable"
+      - name: "tomato paste"
+        quantity: 2
+        unit: "tbsp"
+        category: "other"
+      - name: "sweet paprika"
+        quantity: 2
+        unit: "tbsp"
+        category: "spice"
+      - name: "caraway seeds"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "bay leaf"
+        quantity: 2
+        unit: "pieces"
+        category: "spice"
+      - name: "oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "oil"
+      - name: "salt"
+        quantity: 1.5
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "large pot"
+      - "wooden spoon"
+      - "knife"
+    instructions:
+      - "Dice onion and sauté in oil over medium heat until golden"
+      - "Add garlic, caraway seeds, and paprika; stir for 1 minute off the heat to avoid burning"
+      - "Cut beef into 2-3 cm cubes and add to the pot; brown on all sides"
+      - "Add tomato paste, bay leaf, salt, pepper, and enough water to cover"
+      - "Simmer on low heat for 45 minutes until beef starts to turn tender"
+      - "Add diced carrots, bell pepper, and potatoes"
+      - "Continue cooking for another 25-30 minutes until all vegetables are soft"
+      - "Adjust seasoning and serve hot with bread or mamaliga"
+    nutritional_info:
+      calories: 380
+      protein: 28
+      carbohydrates: 24
+      fat: 18
+      fiber: 4
+      sodium: 640
+
+  - name: "Vareniky"
+    cuisine: "Ukrainian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 60
+    skill_level: "medium"
+    cooking_methods: ["pan"]
+    budget_category: "low"
+    meal_type: "dinner"
+    servings: 4
+    prep_time_minutes: 45
+    cost: 4.50
+    tags: ["ukrainian", "dumplings", "boiled", "potato", "traditional"]
+    ingredients:
+      - name: "all-purpose flour"
+        quantity: 400
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "warm water"
+        quantity: 200
+        unit: "ml"
+        category: "other"
+      - name: "egg"
+        quantity: 1
+        unit: "piece"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "potatoes"
+        quantity: 600
+        unit: "g"
+        category: "vegetable"
+      - name: "onion"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "butter"
+        quantity: 40
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "sour cream"
+        quantity: 150
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+    equipment:
+      - "bowl"
+      - "rolling pin"
+      - "large pot"
+      - "pan"
+    instructions:
+      - "Mix flour, egg, water, and salt into a smooth elastic dough; cover and rest for 30 minutes"
+      - "Boil potatoes until tender, drain and mash well"
+      - "Finely dice and sauté onion in butter until golden; mix half into the mashed potato filling"
+      - "Season filling with salt and pepper to taste"
+      - "Roll dough thinly and cut into circles roughly 8 cm wide"
+      - "Place a spoonful of potato filling in the center of each circle; fold and pinch edges tightly"
+      - "Boil in salted water for 3-4 minutes until they float and are cooked through"
+      - "Toss with the remaining caramelized onion and butter"
+      - "Serve hot with sour cream on the side"
+    nutritional_info:
+      calories: 380
+      protein: 10
+      carbohydrates: 60
+      fat: 12
+      fiber: 3
+      sodium: 480
+
+  - name: "Sarma"
+    cuisine: "Romanian"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 120
+    skill_level: "medium"
+    cooking_methods: ["oven", "pan"]
+    budget_category: "moderate"
+    meal_type: "dinner"
+    servings: 6
+    prep_time_minutes: 30
+    cost: 8.00
+    tags: ["romanian", "stuffed", "grape leaves", "traditional", "slow cook"]
+    ingredients:
+      - name: "grape leaves"
+        quantity: 30
+        unit: "pieces"
+        category: "vegetable"
+      - name: "minced pork"
+        quantity: 500
+        unit: "g"
+        category: "protein"
+      - name: "rice"
+        quantity: 100
+        unit: "g"
+        category: "grain"
+      - name: "onion"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "dill"
+        quantity: 2
+        unit: "tbsp"
+        category: "spice"
+      - name: "thyme"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "tomato juice"
+        quantity: 400
+        unit: "ml"
+        category: "other"
+      - name: "oil"
+        quantity: 2
+        unit: "tbsp"
+        category: "oil"
+      - name: "salt"
+        quantity: 1.5
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "large pot"
+      - "pan"
+      - "knife"
+    instructions:
+      - "If using fresh grape leaves, blanch them briefly; if brined, rinse and pat dry"
+      - "Finely dice onion and sauté in oil until soft; allow to cool"
+      - "Mix minced pork with rice, onion, dill, thyme, salt, and pepper"
+      - "Place a tablespoon of filling near the base of each leaf; fold sides in and roll tightly"
+      - "Line the pot with extra grape leaves to prevent burning"
+      - "Arrange rolls seam-side down in tight layers in the pot"
+      - "Pour tomato juice over and add water to just cover the rolls"
+      - "Simmer on low heat for 60-75 minutes until rice is cooked and meat is tender"
+      - "Serve hot with sour cream on the side"
+    nutritional_info:
+      calories: 320
+      protein: 18
+      carbohydrates: 28
+      fat: 14
+      fiber: 3
+      sodium: 520
+
+  - name: "Ciorba de vacuta"
+    cuisine: "Romanian"
+    diet: "omnivore"
+    dietary_restrictions: []
+    cooking_time_minutes: 90
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "moderate"
+    meal_type: "lunch"
+    servings: 6
+    prep_time_minutes: 20
+    cost: 7.00
+    tags: ["romanian", "soup", "beef", "traditional", "sour soup"]
+    ingredients:
+      - name: "beef shank"
+        quantity: 600
+        unit: "g"
+        category: "protein"
+      - name: "carrots"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "parsnip"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "celery root"
+        quantity: 100
+        unit: "g"
+        category: "vegetable"
+        allergens: ["celery"]
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "potatoes"
+        quantity: 300
+        unit: "g"
+        category: "vegetable"
+      - name: "tomatoes"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "lovage"
+        quantity: 2
+        unit: "tbsp"
+        category: "spice"
+      - name: "sour cream"
+        quantity: 150
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "egg yolks"
+        quantity: 2
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "lemon juice"
+        quantity: 3
+        unit: "tbsp"
+        category: "other"
+      - name: "salt"
+        quantity: 1.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "large pot"
+      - "bowl"
+      - "knife"
+    instructions:
+      - "Cover beef shank with cold water, bring to boil, and skim the foam off the surface"
+      - "Add whole onion, carrot, parsnip, and celery root; simmer on low for 45 minutes"
+      - "Remove the vegetables and meat; slice meat off the bone and return to the broth"
+      - "Dice potatoes and tomatoes and add to the pot; cook for 20 more minutes"
+      - "Add lemon juice and lovage; adjust salt to taste"
+      - "In a bowl, whisk egg yolks with sour cream; temper with a ladle of hot broth"
+      - "Stir the cream mixture back into the soup off the heat"
+      - "Serve with fresh lovage and crusty bread"
+    nutritional_info:
+      calories: 280
+      protein: 22
+      carbohydrates: 18
+      fat: 12
+      fiber: 3
+      sodium: 590
+
+  - name: "Sarmale cu nuca si ciuperci"
+    cuisine: "Romanian"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 120
+    skill_level: "medium"
+    cooking_methods: ["oven", "pan"]
+    budget_category: "low"
+    meal_type: "dinner"
+    servings: 6
+    prep_time_minutes: 30
+    cost: 6.00
+    tags: ["romanian", "vegan", "fasting", "stuffed", "cabbage", "traditional"]
+    ingredients:
+      - name: "pickled cabbage leaves"
+        quantity: 30
+        unit: "pieces"
+        category: "vegetable"
+      - name: "mushrooms"
+        quantity: 400
+        unit: "g"
+        category: "vegetable"
+      - name: "walnuts"
+        quantity: 150
+        unit: "g"
+        category: "other"
+        allergens: ["tree nuts"]
+      - name: "rice"
+        quantity: 150
+        unit: "g"
+        category: "grain"
+      - name: "onion"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "carrot"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "tomato juice"
+        quantity: 400
+        unit: "ml"
+        category: "other"
+      - name: "oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "oil"
+      - name: "dill"
+        quantity: 2
+        unit: "tbsp"
+        category: "spice"
+      - name: "thyme"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "large pot"
+      - "pan"
+      - "knife"
+    instructions:
+      - "Finely chop mushrooms and onion; sauté in oil until moisture evaporates"
+      - "Add grated carrot and cook for another 3 minutes"
+      - "Coarsely grind walnuts and add to the mushroom mixture along with rice"
+      - "Season with dill, thyme, salt, and pepper; mix the filling well"
+      - "Rinse pickled cabbage leaves and separate carefully"
+      - "Place a spoonful of filling on each leaf, fold sides in, and roll tightly"
+      - "Lay any leftover cabbage on the bottom of the pot; arrange rolls in layers"
+      - "Pour tomato juice over and add water to just cover; simmer on low for 70-80 minutes"
+      - "Serve with pickled chilies or extra dill on top"
+    nutritional_info:
+      calories: 260
+      protein: 8
+      carbohydrates: 34
+      fat: 12
+      fiber: 5
+      sodium: 540
+
+  - name: "Coltunasi de post"
+    cuisine: "Romanian"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 60
+    skill_level: "medium"
+    cooking_methods: ["pan"]
+    budget_category: "low"
+    meal_type: "dinner"
+    servings: 4
+    prep_time_minutes: 45
+    cost: 4.00
+    tags: ["romanian", "vegan", "fasting", "dumplings", "boiled", "traditional"]
+    ingredients:
+      - name: "all-purpose flour"
+        quantity: 400
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "water"
+        quantity: 200
+        unit: "ml"
+        category: "other"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "potatoes"
+        quantity: 400
+        unit: "g"
+        category: "vegetable"
+      - name: "mushrooms"
+        quantity: 200
+        unit: "g"
+        category: "vegetable"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "oil"
+        quantity: 2
+        unit: "tbsp"
+        category: "oil"
+    equipment:
+      - "bowl"
+      - "rolling pin"
+      - "large pot"
+      - "pan"
+      - "knife"
+    instructions:
+      - "Mix flour, salt, and water into a smooth elastic dough; rest covered for 30 minutes"
+      - "Boil potatoes until tender, drain and mash"
+      - "Finely chop mushrooms and onion; sauté together in oil until golden and dry"
+      - "Combine mashed potato with the mushroom mixture; season with salt and pepper"
+      - "Roll dough thin and cut circles roughly 8 cm in diameter"
+      - "Place filling in the center, fold each circle in half, and press edges firmly to seal"
+      - "Boil in well-salted water until dumplings float and skin is tender, about 4-5 minutes"
+      - "Drain and toss with a little oil to prevent sticking"
+      - "Serve with sour cream or onion fried in oil"
+    nutritional_info:
+      calories: 320
+      protein: 8
+      carbohydrates: 58
+      fat: 7
+      fiber: 4
+      sodium: 340
+
+  - name: "Salata de icre"
+    cuisine: "Romanian"
+    diet: "pescatarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 10
+    skill_level: "easy"
+    cooking_methods: ["bowl"]
+    budget_category: "moderate"
+    meal_type: "snack"
+    servings: 6
+    prep_time_minutes: 10
+    cost: 6.00
+    tags: ["romanian", "roe", "dip", "delta", "traditional"]
+    ingredients:
+      - name: "carp roe"
+        quantity: 200
+        unit: "g"
+        category: "protein"
+        allergens: ["fish"]
+      - name: "sunflower oil"
+        quantity: 150
+        unit: "ml"
+        category: "oil"
+      - name: "lemon juice"
+        quantity: 2
+        unit: "tbsp"
+        category: "other"
+      - name: "onion"
+        quantity: 0.5
+        unit: "piece"
+        category: "vegetable"
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "bowl"
+      - "hand mixer or blender"
+    instructions:
+      - "Place roe in a bowl and begin mixing with a hand mixer on medium speed"
+      - "Add oil in a very thin, steady drizzle while mixing continuously, emulsifying like mayonnaise"
+      - "Alternate adding oil and a few drops of lemon juice to keep the mixture stable"
+      - "Continue until all oil is incorporated and the salata is pale, creamy, and thick"
+      - "Season with salt and adjust lemon juice to taste"
+      - "Finely grate onion over the top or fold in for sharper flavor"
+      - "Chill for at least 30 minutes before serving with bread or flatbread"
+    nutritional_info:
+      calories: 180
+      protein: 6
+      carbohydrates: 2
+      fat: 17
+      fiber: 0
+      sodium: 320
+
+  - name: "Plachie de crap"
+    cuisine: "Romanian"
+    diet: "pescatarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 60
+    skill_level: "easy"
+    cooking_methods: ["oven", "pan"]
+    budget_category: "moderate"
+    meal_type: "dinner"
+    servings: 4
+    prep_time_minutes: 20
+    cost: 9.00
+    tags: ["romanian", "fish", "baked", "delta", "traditional", "carp"]
+    ingredients:
+      - name: "carp"
+        quantity: 1200
+        unit: "g"
+        category: "protein"
+        allergens: ["fish"]
+      - name: "onion"
+        quantity: 3
+        unit: "pieces"
+        category: "vegetable"
+      - name: "tomatoes"
+        quantity: 3
+        unit: "pieces"
+        category: "vegetable"
+      - name: "garlic"
+        quantity: 5
+        unit: "cloves"
+        category: "vegetable"
+      - name: "bell pepper"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "white wine"
+        quantity: 150
+        unit: "ml"
+        category: "other"
+      - name: "olive oil"
+        quantity: 4
+        unit: "tbsp"
+        category: "oil"
+      - name: "sweet paprika"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "dill"
+        quantity: 2
+        unit: "tbsp"
+        category: "spice"
+      - name: "salt"
+        quantity: 1.5
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "oven"
+      - "baking tray"
+      - "pan"
+      - "knife"
+    instructions:
+      - "Score the fish with deep diagonal cuts and season generously with salt and pepper"
+      - "Slice onion into rings and sauté in olive oil until soft and golden"
+      - "Add garlic and bell pepper; cook for 2 more minutes"
+      - "Arrange the onion mixture on the base of a baking tray to form a bed for the fish"
+      - "Place the carp on top and surround with sliced tomatoes"
+      - "Pour white wine over and drizzle with olive oil; sprinkle with paprika"
+      - "Bake in oven at 180°C for 35-40 minutes, basting with juices halfway through"
+      - "Scatter fresh dill over the fish in the last 5 minutes of cooking"
+      - "Serve directly from the tray with fresh bread"
+    nutritional_info:
+      calories: 310
+      protein: 28
+      carbohydrates: 12
+      fat: 14
+      fiber: 3
+      sodium: 480
+
+  - name: "Lasagna de vinete"
+    cuisine: "Romanian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 75
+    skill_level: "medium"
+    cooking_methods: ["oven", "pan"]
+    budget_category: "moderate"
+    meal_type: "dinner"
+    servings: 6
+    prep_time_minutes: 30
+    cost: 7.00
+    tags: ["romanian", "vegetarian", "eggplant", "baked", "layered"]
+    ingredients:
+      - name: "eggplant"
+        quantity: 2
+        unit: "pieces"
+        category: "vegetable"
+      - name: "tomatoes"
+        quantity: 4
+        unit: "pieces"
+        category: "vegetable"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "garlic"
+        quantity: 3
+        unit: "cloves"
+        category: "vegetable"
+      - name: "feta cheese"
+        quantity: 200
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "mozzarella"
+        quantity: 150
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "eggs"
+        quantity: 2
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "olive oil"
+        quantity: 4
+        unit: "tbsp"
+        category: "oil"
+      - name: "fresh basil"
+        quantity: 1
+        unit: "handful"
+        category: "spice"
+      - name: "salt"
+        quantity: 1.5
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "oven"
+      - "baking dish"
+      - "pan"
+      - "knife"
+      - "colander"
+    instructions:
+      - "Slice eggplant into 1 cm rounds, salt generously, and leave in a colander for 20 minutes to release moisture"
+      - "Rinse and pat dry; grill or pan-fry eggplant slices in olive oil until golden on both sides"
+      - "Dice onion and garlic; sauté in oil then add chopped tomatoes and cook into a thick sauce"
+      - "Season tomato sauce with salt, pepper, and torn basil"
+      - "Beat eggs with crumbled feta cheese to make the cheese layer"
+      - "Spoon a thin layer of tomato sauce on the base of the baking dish"
+      - "Add a layer of eggplant slices, then tomato sauce, then feta-egg mixture"
+      - "Repeat layers until ingredients are used, finishing with sauce and sliced mozzarella on top"
+      - "Bake at 190°C for 30-35 minutes until bubbling and golden"
+      - "Rest for 10 minutes before slicing and serving"
+    nutritional_info:
+      calories: 290
+      protein: 14
+      carbohydrates: 22
+      fat: 18
+      fiber: 5
+      sodium: 560
+
+  - name: "Mujdei dobrogean"
+    cuisine: "Romanian"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 5
+    skill_level: "easy"
+    cooking_methods: ["bowl"]
+    budget_category: "low"
+    meal_type: "snack"
+    servings: 4
+    prep_time_minutes: 5
+    cost: 1.00
+    tags: ["romanian", "dobrogean", "garlic", "sauce", "vegan", "condiment"]
+    ingredients:
+      - name: "garlic"
+        quantity: 8
+        unit: "cloves"
+        category: "vegetable"
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+      - name: "sunflower oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "oil"
+      - name: "cold water"
+        quantity: 4
+        unit: "tbsp"
+        category: "other"
+    equipment:
+      - "mortar and pestle"
+      - "bowl"
+    instructions:
+      - "Peel garlic cloves and place in a mortar with a pinch of salt"
+      - "Pound to a smooth paste, working in circular motions"
+      - "Add cold water one spoonful at a time while stirring to loosen the paste"
+      - "Stir in sunflower oil gradually to create a rustic emulsion"
+      - "Adjust salt and water balance; the final texture should be fluid but garlicky"
+      - "Serve alongside grilled fish, mamaliga, or storceag"
+    nutritional_info:
+      calories: 90
+      protein: 1
+      carbohydrates: 5
+      fat: 8
+      fiber: 0
+      sodium: 240
+
+  - name: "Syrniki"
+    cuisine: "Ukrainian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 25
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "low"
+    meal_type: "breakfast"
+    servings: 4
+    prep_time_minutes: 15
+    cost: 3.50
+    tags: ["ukrainian", "breakfast", "cottage cheese", "pancakes", "fried"]
+    ingredients:
+      - name: "cottage cheese"
+        quantity: 500
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "eggs"
+        quantity: 2
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "all-purpose flour"
+        quantity: 80
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "sugar"
+        quantity: 3
+        unit: "tbsp"
+        category: "other"
+      - name: "vanilla extract"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "baking powder"
+        quantity: 0.5
+        unit: "tsp"
+        category: "other"
+      - name: "sunflower oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "oil"
+      - name: "sour cream"
+        quantity: 150
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+    equipment:
+      - "bowl"
+      - "pan"
+      - "spatula"
+    instructions:
+      - "Drain cottage cheese of any excess liquid"
+      - "Mix cottage cheese with eggs, sugar, vanilla, and baking powder until smooth"
+      - "Add flour gradually and fold in until a soft dough forms, not sticky"
+      - "Flour hands and shape tablespoon-sized patties, about 1.5 cm thick"
+      - "Heat oil in a pan over medium-low heat"
+      - "Fry syrniki for 3-4 minutes per side until golden and cooked through"
+      - "Drain on paper towels and serve hot with sour cream and jam"
+    nutritional_info:
+      calories: 310
+      protein: 18
+      carbohydrates: 32
+      fat: 12
+      fiber: 1
+      sodium: 280
+
+  - name: "Plachie de peste"
+    cuisine: "Romanian"
+    diet: "pescatarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 60
+    skill_level: "easy"
+    cooking_methods: ["oven", "pan"]
+    budget_category: "moderate"
+    meal_type: "dinner"
+    servings: 4
+    prep_time_minutes: 20
+    cost: 10.00
+    tags: ["romanian", "fish", "baked", "delta", "traditional"]
+    ingredients:
+      - name: "mixed freshwater fish fillets"
+        quantity: 900
+        unit: "g"
+        category: "protein"
+        allergens: ["fish"]
+      - name: "onion"
+        quantity: 3
+        unit: "pieces"
+        category: "vegetable"
+      - name: "tomatoes"
+        quantity: 3
+        unit: "pieces"
+        category: "vegetable"
+      - name: "garlic"
+        quantity: 4
+        unit: "cloves"
+        category: "vegetable"
+      - name: "white wine"
+        quantity: 150
+        unit: "ml"
+        category: "other"
+      - name: "oil"
+        quantity: 3
+        unit: "tbsp"
+        category: "oil"
+      - name: "dill"
+        quantity: 2
+        unit: "tbsp"
+        category: "spice"
+      - name: "sweet paprika"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "salt"
+        quantity: 1.5
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "oven"
+      - "baking tray"
+      - "pan"
+    instructions:
+      - "Slice onion into thin rings and sauté in oil until soft and lightly caramelized"
+      - "Add garlic and cook for 1 more minute"
+      - "Spread the onion and garlic as a base layer in the baking tray"
+      - "Season fish fillets with salt, pepper, and paprika; place on top of the onion layer"
+      - "Cover fish with sliced tomatoes and pour white wine over the tray"
+      - "Drizzle with remaining oil and bake at 180°C for 30-35 minutes"
+      - "Scatter fresh dill over the top in the last 5 minutes"
+      - "Serve directly from the tray with mamaliga or fresh bread"
+    nutritional_info:
+      calories: 280
+      protein: 26
+      carbohydrates: 10
+      fat: 13
+      fiber: 2
+      sodium: 460
+
+  - name: "Ciulama de ciuperci"
+    cuisine: "Romanian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 30
+    skill_level: "easy"
+    cooking_methods: ["pan"]
+    budget_category: "low"
+    meal_type: "lunch"
+    servings: 4
+    prep_time_minutes: 10
+    cost: 5.00
+    tags: ["romanian", "vegetarian", "mushroom", "cream", "stew", "traditional"]
+    ingredients:
+      - name: "mushrooms"
+        quantity: 600
+        unit: "g"
+        category: "vegetable"
+      - name: "onion"
+        quantity: 1
+        unit: "piece"
+        category: "vegetable"
+      - name: "butter"
+        quantity: 40
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "all-purpose flour"
+        quantity: 3
+        unit: "tbsp"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "milk"
+        quantity: 300
+        unit: "ml"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "sour cream"
+        quantity: 150
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "oil"
+        quantity: 2
+        unit: "tbsp"
+        category: "oil"
+      - name: "dill"
+        quantity: 2
+        unit: "tbsp"
+        category: "spice"
+      - name: "salt"
+        quantity: 1
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "pan"
+      - "wooden spoon"
+      - "knife"
+    instructions:
+      - "Slice mushrooms and finely dice onion"
+      - "Sauté onion in butter and oil over medium heat until softened"
+      - "Add mushrooms and cook until all moisture has evaporated, about 10 minutes"
+      - "Sprinkle flour over the mushrooms and stir well to coat"
+      - "Pour milk in gradually while stirring constantly to avoid lumps"
+      - "Simmer for 5 minutes until the sauce thickens"
+      - "Stir in sour cream and season with salt and pepper"
+      - "Finish with freshly chopped dill and serve over mamaliga or with bread"
+    nutritional_info:
+      calories: 220
+      protein: 7
+      carbohydrates: 18
+      fat: 14
+      fiber: 2
+      sodium: 380
+
+  - name: "Zacusca"
+    cuisine: "Romanian"
+    diet: "vegan"
+    dietary_restrictions: []
+    cooking_time_minutes: 120
+    skill_level: "medium"
+    cooking_methods: ["oven", "pan"]
+    budget_category: "low"
+    meal_type: "snack"
+    servings: 10
+    prep_time_minutes: 30
+    cost: 5.00
+    tags: ["romanian", "vegan", "spread", "roasted", "traditional", "preserve"]
+    ingredients:
+      - name: "eggplant"
+        quantity: 1000
+        unit: "g"
+        category: "vegetable"
+      - name: "red bell peppers"
+        quantity: 800
+        unit: "g"
+        category: "vegetable"
+      - name: "onion"
+        quantity: 3
+        unit: "pieces"
+        category: "vegetable"
+      - name: "tomatoes"
+        quantity: 600
+        unit: "g"
+        category: "vegetable"
+      - name: "sunflower oil"
+        quantity: 100
+        unit: "ml"
+        category: "oil"
+      - name: "bay leaf"
+        quantity: 2
+        unit: "pieces"
+        category: "spice"
+      - name: "salt"
+        quantity: 2
+        unit: "tsp"
+        category: "spice"
+      - name: "black pepper"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "oven"
+      - "large pot"
+      - "colander"
+      - "knife"
+      - "wooden spoon"
+    instructions:
+      - "Roast eggplants and red bell peppers directly on a gas flame or in the oven at 220°C until charred and soft"
+      - "Place in a colander to drain and cool; peel and discard skins and seeds"
+      - "Finely chop the roasted vegetables or pass through a meat grinder for a smoother texture"
+      - "Finely dice onion and sauté in oil over medium heat until golden"
+      - "Dice tomatoes and cook them down in the same pan until they reduce to a thick paste"
+      - "Add the roasted vegetables, bay leaves, salt, and pepper to the pot"
+      - "Cook everything together over low heat for 45-60 minutes, stirring frequently until thick"
+      - "Taste and adjust seasoning; remove bay leaves"
+      - "Serve at room temperature on bread, or store in sterilized jars"
+    nutritional_info:
+      calories: 110
+      protein: 2
+      carbohydrates: 14
+      fat: 6
+      fiber: 4
+      sodium: 290
+
+  - name: "Placinta dobrogeana"
+    cuisine: "Romanian"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 45
+    skill_level: "medium"
+    cooking_methods: ["oven"]
+    budget_category: "low"
+    meal_type: "breakfast"
+    servings: 8
+    prep_time_minutes: 20
+    cost: 5.00
+    tags: ["romanian", "dobrogean", "pastry", "filo", "cheese", "traditional", "baked"]
+    ingredients:
+      - name: "filo pastry sheets"
+        quantity: 400
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "feta cheese"
+        quantity: 400
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "eggs"
+        quantity: 4
+        unit: "pieces"
+        category: "protein"
+        allergens: ["eggs"]
+      - name: "milk"
+        quantity: 150
+        unit: "ml"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "melted butter"
+        quantity: 80
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "salt"
+        quantity: 0.5
+        unit: "tsp"
+        category: "spice"
+    equipment:
+      - "oven"
+      - "baking tray"
+      - "bowl"
+      - "pastry brush"
+    instructions:
+      - "Crumble feta into a bowl; beat in eggs and milk to make the filling"
+      - "Season lightly with salt, keeping in mind feta is already salty"
+      - "Brush the baking tray generously with melted butter"
+      - "Layer 3-4 filo sheets on the tray, brushing each one with butter"
+      - "Spread half the feta filling evenly over the filo"
+      - "Add another 3-4 buttered filo layers, then spread the remaining filling"
+      - "Top with the final 3-4 buttered filo sheets and tuck the edges under neatly"
+      - "Score the top lightly into portions with a sharp knife"
+      - "Bake at 180°C for 35-40 minutes until deeply golden and crisp"
+      - "Allow to cool slightly before cutting and serving warm"
+    nutritional_info:
+      calories: 310
+      protein: 12
+      carbohydrates: 28
+      fat: 17
+      fiber: 1
+      sodium: 520
+
+  - name: "Sarailie"
+    cuisine: "Turkish"
+    diet: "vegetarian"
+    dietary_restrictions: []
+    cooking_time_minutes: 60
+    skill_level: "medium"
+    cooking_methods: ["oven"]
+    budget_category: "moderate"
+    meal_type: "dessert"
+    servings: 12
+    prep_time_minutes: 30
+    cost: 7.00
+    tags: ["turkish", "tatar", "dobrogean", "baklava", "dessert", "rolled", "traditional", "sweet"]
+    ingredients:
+      - name: "filo pastry sheets"
+        quantity: 400
+        unit: "g"
+        category: "grain"
+        allergens: ["gluten"]
+      - name: "walnuts"
+        quantity: 300
+        unit: "g"
+        category: "other"
+        allergens: ["tree nuts"]
+      - name: "clarified butter"
+        quantity: 100
+        unit: "g"
+        category: "dairy"
+        allergens: ["dairy"]
+      - name: "sugar"
+        quantity: 250
+        unit: "g"
+        category: "other"
+      - name: "water"
+        quantity: 200
+        unit: "ml"
+        category: "other"
+      - name: "lemon juice"
+        quantity: 1
+        unit: "tbsp"
+        category: "other"
+    equipment:
+      - "oven"
+      - "baking tray"
+      - "sauce pan"
+      - "pastry brush"
+      - "sharp knife"
+    instructions:
+      - "Pulse walnuts coarsely in a blender; they should be crunchy crumbs, not a paste"
+      - "Lay one filo sheet flat and brush generously with clarified butter"
+      - "Spread a thin even layer of walnut crumbs over the entire surface"
+      - "Roll the filo tightly from one end into a compact cylinder"
+      - "Repeat for all remaining sheets; arrange rolls snugly in a buttered baking tray"
+      - "Score each roll into 4-5 cm pieces with a sharp knife without cutting all the way through"
+      - "Drizzle remaining butter over the tray and bake at 175°C for 35-40 minutes until golden"
+      - "While baking, make syrup: dissolve sugar in water, bring to boil, add lemon juice, simmer 10 minutes"
+      - "Remove tray from oven and immediately pour hot syrup evenly over the hot rolls"
+      - "Allow sarailie to absorb the syrup at room temperature for at least 2 hours before serving"
+    nutritional_info:
+      calories: 280
+      protein: 5
+      carbohydrates: 32
+      fat: 15
+      fiber: 2
+      sodium: 60
