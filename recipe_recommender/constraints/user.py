@@ -27,7 +27,6 @@ class User:
     preferred_cooking_methods: List[str] = field(default_factory=list)
     serving_size: int = 2
     
-    # String representation for debugging
     def has_dietary_restriction(self, restriction: str) -> bool:
         return restriction.lower() in [r.lower() for r in self.dietary_restrictions]
     
