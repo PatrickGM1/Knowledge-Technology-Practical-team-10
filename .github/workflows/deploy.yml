@@ -1,0 +1,49 @@
+name: Deploy ktp.guba.dev
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            APP_DIR=/var/www/ktp
+
+            # --- Pull latest code ---
+            mkdir -p "$APP_DIR"
+
+            if [ ! -d "$APP_DIR/.git" ]; then
+              git init "$APP_DIR"
+              git -C "$APP_DIR" remote add origin https://github.com/PatrickGM1/Knowledge-Technology-Practical-team-10.git
+            fi
+
+            git config --global --add safe.directory "$APP_DIR"
+            git -C "$APP_DIR" remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/PatrickGM1/Knowledge-Technology-Practical-team-10.git
+            git -C "$APP_DIR" fetch --all
+            git -C "$APP_DIR" reset --hard origin/main
+
+            # --- Python deps ---
+            if ! command -v python3 &>/dev/null; then
+              apt-get update && apt-get install -y python3 python3-pip python3-venv
+            fi
+
+            python3 -m venv "$APP_DIR/.venv"
+            "$APP_DIR/.venv/bin/pip" install --quiet -r "$APP_DIR/recipe_recommender/requirements.txt"
+
+            # --- Install systemd service if missing ---
+            if [ ! -f /etc/systemd/system/ktp.service ]; then
+              cp "$APP_DIR/ktp.service" /etc/systemd/system/ktp.service
+              systemctl daemon-reload
+              systemctl enable ktp
+            fi
+
+            # --- Restart app ---
+            systemctl restart ktp
+            systemctl --no-pager status ktp
